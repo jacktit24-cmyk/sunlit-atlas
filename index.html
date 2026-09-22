@@ -883,7 +883,7 @@ window.TRIP.meta = {
   subtitle: "Bangkok · Doha · Miami · Jacksonville · Lima · Machu Picchu · home again",
   traveler: "Toby Jack Tait",
   travelerShort: "Jack",
-  routeLine: ["BKK", "DOH", "MIA", "JAX", "MIA", "LIM", "CUZ", "LIM", "MIA", "DOH", "BKK"],
+  routeLine: ["UTH", "BKK", "DOH", "MIA", "JAX", "MIA", "LIM", "CUZ", "LIM", "MIA", "DOH", "BKK"],
 
   // Master departure: Qatar Airways QR837, Bangkok Suvarnabhumi
   // Source: QATAR UPDATED Booking RECEIPT new flights 6.29.26.pdf (doc-qatar-updated)
@@ -900,9 +900,10 @@ window.TRIP.meta = {
   // documents on 12 Jul 2026. Used only for "% of prep elapsed".
   planningStart: "2026-04-04T00:00:00+07:00", // first bookings made (Chase + Qatar, 4 Apr 2026)
 
-  tripDays: 34,
-  flightLegs: 8,
-  airlines: ["Qatar Airways", "American Airlines", "LATAM Airlines Peru"],
+  tripDays: 34,          // international trip proper, 28 Sep to 31 Oct
+  doorToDoorDays: 36,    // Udon Thani departure 26 Sep to Bangkok return 31 Oct
+  flightLegs: 9,
+  airlines: ["Thai Lion Air", "Qatar Airways", "American Airlines", "LATAM Airlines Peru"],
   countries: ["Thailand", "Qatar (transit)", "United States", "Peru"],
   highlight: { label: "Machu Picchu", date: "2026-10-21" },
   qatarBookingRef: "866YAF",
@@ -911,6 +912,8 @@ window.TRIP.meta = {
 
 /* ---- Places: coordinates for the route atlas + local zones ---- */
 window.TRIP.places = {
+  UTH: { id: "UTH", name: "Udon Thani",     airport: "Udon Thani International",    country: "Thailand", lat: 17.386,  lon: 102.788, tz: "Asia/Bangkok",      tzShort: "ICT", utc: "+07:00", elevationM: 176 },
+  DMK: { id: "DMK", name: "Bangkok",        airport: "Don Mueang International",    country: "Thailand", lat: 13.913,  lon: 100.607, tz: "Asia/Bangkok",      tzShort: "ICT", utc: "+07:00", elevationM: 3 },
   BKK: { id: "BKK", name: "Bangkok",        airport: "Suvarnabhumi International",  country: "Thailand", lat: 13.690,  lon: 100.750, tz: "Asia/Bangkok",      tzShort: "ICT", utc: "+07:00", elevationM: 2 },
   DOH: { id: "DOH", name: "Doha",           airport: "Hamad International",         country: "Qatar",    lat: 25.273,  lon: 51.608,  tz: "Asia/Qatar",        tzShort: "AST", utc: "+03:00", elevationM: 4 },
   MIA: { id: "MIA", name: "Miami",          airport: "Miami International",         country: "USA",      lat: 25.795,  lon: -80.290, tz: "America/New_York",  tzShort: "EDT", utc: "-04:00", elevationM: 3 },
@@ -941,16 +944,17 @@ window.TRIP.prepPhases = [
   { id: "work-planning",   minDays: 31,  name: "Work planning",          message: "One month out. Line up the work calendar, warn colleagues about travel days, and confirm every hotel." },
   { id: "packing",         minDays: 22,  name: "Packing preparation",    message: "Three weeks out. The packing board goes live; buy anything still missing locally." },
   { id: "final-confirm",   minDays: 15,  name: "Final confirmations",    message: "Two weeks remain. Shift from planning to execution: reconfirm flights, hotels, transfers and documents." },
-  { id: "departure-week",  minDays: 8,   name: "Departure week",         message: "Departure week has arrived. Pack deliberately, charge everything, and keep the passport where you can see it." },
-  { id: "final-72",        minDays: 4,   name: "Final 72 hours",         message: "Seventy-two hours. Check in online, verify seats 11K and 03K, and stage the bags." },
-  { id: "final-48",        minDays: 2,   name: "Final 48 hours",         message: "Forty-eight hours. Qatar online check-in is open. Confirm the ride to Suvarnabhumi for the night of 27 September." },
-  { id: "final-24",        minDays: 1,   name: "Final 24 hours",         message: "One day. Tomorrow at 02:30 the journey begins. Sleep early; the airport run leaves tonight." },
-  { id: "departure-day",   minDays: 0,   name: "Departure day",          message: "Today is departure day. QR837 leaves Bangkok at 02:30. Godspeed." }
+  { id: "final-fortnight", minDays: 8,   name: "Final fortnight",        message: "Inside the last two weeks. Reconfirm every booking, print the paper set, and start the packing board in earnest." },
+  { id: "departure-week",  minDays: 4,   name: "Departure week",         message: "Departure week has arrived. Pack deliberately, charge everything, and keep the passport where you can see it. SL605 leaves Udon Thani Saturday 12:55." },
+  { id: "final-72",        minDays: 3,   name: "Final 72 hours",         message: "Seventy-two hours. Check in online, verify the seats, and stage the bags for the Saturday flight to Bangkok." },
+  { id: "final-48",        minDays: 2,   name: "Final 48 hours",         message: "Forty-eight hours. Fly to Bangkok today or tomorrow, settle into the Siam Mandarina, and book the shuttle for Sunday 23:00." },
+  { id: "final-24",        minDays: 1,   name: "Final 24 hours",         message: "One day. Tomorrow at 02:30 the journey begins. Confirm the hotel shuttle, sleep early, bags by the door." },
+  { id: "departure-day",   minDays: 0,   name: "Departure day",          message: "Today is departure day. QR837 leaves Suvarnabhumi at 02:30. Godspeed." }
 ];
 
 /* ---- Trip phases (during travel), matched by date in the zone given ---- */
 window.TRIP.tripPhases = [
-  { id: "outbound",     from: "2026-09-27", to: "2026-09-29", name: "Outbound crossing",  message: "You are currently traveling to the next chapter: Bangkok to Miami, westward through Doha." },
+  { id: "outbound",     from: "2026-09-26", to: "2026-09-29", name: "Outbound crossing",  message: "You are currently traveling to the next chapter: Udon Thani to Bangkok, then westward to Miami through Doha." },
   { id: "florida",      from: "2026-09-29", to: "2026-10-17", name: "Florida chapter",    message: "Florida phase underway. Family, work, and the Atlantic light of Jacksonville." },
   { id: "peru-caravan", from: "2026-10-17", to: "2026-10-25", name: "Peru caravan",       message: "The Andes chapter. Lima, Cusco, the Sacred Valley, and the citadel itself." },
   { id: "lima",         from: "2026-10-25", to: "2026-10-28", name: "Lima free days",     message: "Free days in Lima with family. Miraflores, Barranco, one last dinner together." },
@@ -977,7 +981,7 @@ window.TRIP.usOrderingWindow = {
   detail: "Anything for the Peru leg can be ordered from US retailers to the family home in Jacksonville between 29 Sep and about 12 Oct. This is usually cheaper and faster than shipping internationally to Thailand."
 };
 
-window.TRIP.dataVersion = "1.0.0 · reconstructed 12 Jul 2026 from 13 source documents";
+window.TRIP.dataVersion = "1.1.0 · updated 22 Sep 2026 (SL605 Udon Thani leg, Siam Mandarina Bangkok, AA4024 schedule change) · reconstructed 12 Jul 2026 from the source folder";
 
 
 /* ===== assets/js/data/flights.js ===== */
@@ -991,6 +995,25 @@ window.TRIP.dataVersion = "1.0.0 · reconstructed 12 Jul 2026 from 13 source doc
 window.TRIP = window.TRIP || {};
 
 window.TRIP.flights = [
+  /* ---------------- POSITIONING: HOME TO BANGKOK ---------------- */
+  {
+    id: "F0", seq: 0, group: "positioning", status: "confirmed",
+    airline: "Thai Lion Air", code: "SL", flightNo: "SL605", operatedBy: "Thai Lion Air",
+    from: "UTH", to: "DMK",
+    dep: "2026-09-26T12:55:00+07:00", arr: "2026-09-26T14:10:00+07:00",
+    durationMin: 75, overnight: false, dateChange: false,
+    cabin: "Economy", seat: "03D", seatConfidence: "confirmed",
+    aircraft: null, aircraftConfidence: "unknown",
+    bookingRef: "UBKKTC", ticket: "3102165055848",
+    baggage: { checked: "25 kg", carryOn: "standard cabin allowance" },
+    fare: "THB 3,015 total (fare THB 2,515 + fees) on Visa ending 1111",
+    checkinNote: "Ticket valid 26 Sep only (NVB/NVA both 26 Sep). Domestic flight: at Udon Thani airport by ~11:00 is comfortable. Bring passport or Thai ID; the receipt is not a boarding pass.",
+    sources: ["doc-lion-uth"], confidence: "confirmed",
+    notes: [
+      "The journey now truly starts in Udon Thani: booked 22 Sep, six days before the big departure.",
+      "Lands at DON MUEANG (DMK), not Suvarnabhumi. The Siam Mandarina sits by Suvarnabhumi on the other side of the city: plan a 45 to 75 minute Grab or taxi across, longer in Friday-grade traffic."
+    ]
+  },
   /* ---------------- OUTBOUND ---------------- */
   {
     id: "F1", seq: 1, group: "outbound", status: "confirmed",
@@ -1005,7 +1028,7 @@ window.TRIP.flights = [
     checkinNote: "Qatar online check-in opens 48 h before departure (24 h for US-bound sectors). Airport arrival 3 h before is Qatar's own guidance.",
     fare: "Part of THB 146,265 round trip (AmEx ending 1001)",
     sources: ["doc-qatar-updated"], confidence: "confirmed",
-    notes: ["Departure is 02:30 in the small hours of Monday morning. The ride to Suvarnabhumi effectively happens Sunday night, 27 September."]
+    notes: ["Departure is 02:30 in the small hours of Monday morning. The Siam Mandarina shuttle run to Suvarnabhumi effectively happens Sunday night, 27 September, around 23:00."]
   },
   {
     id: "F2", seq: 2, group: "outbound", status: "confirmed",
@@ -1024,19 +1047,22 @@ window.TRIP.flights = [
     notes: ["15 h 15 m westbound daylight crossing. Landing 16:40 local, the same calendar day you left.", "US entry formalities + immigration at MIA on arrival."]
   },
   {
-    id: "F3", seq: 3, group: "to-jax", status: "confirmed",
-    airline: "American Airlines", code: "AA", flightNo: "AA3140", operatedBy: "American Airlines",
+    id: "F3", seq: 3, group: "to-jax", status: "rebooked",
+    airline: "American Airlines", code: "AA", flightNo: "AA4024", operatedBy: "American Airlines",
     from: "MIA", to: "JAX",
-    dep: "2026-09-29T08:30:00-04:00", arr: "2026-09-29T09:49:00-04:00",
-    durationMin: 79, overnight: false, dateChange: false,
+    dep: "2026-09-29T08:03:00-04:00", arr: "2026-09-29T09:26:00-04:00",
+    durationMin: 83, overnight: false, dateChange: false,
     cabin: "First", seat: null, seatConfidence: "not-assigned",
-    aircraft: "Airbus A319", aircraftConfidence: "confirmed",
-    bookingRef: "ANEDSD", tripId: "Chase Travel trip 1015761780",
+    aircraft: null, aircraftConfidence: "unknown",
+    bookingRef: "ANEDSD", tripId: "Chase Travel trip 1015761780 · agency ref WFZHEJ",
     baggage: { checked: "Checked bags included", carryOn: "Carry-on included" },
     fare: "$463.40 billed to Visa ending 6195",
-    checkinNote: "AA check-in opens 24 h before departure. Booked via Chase Travel; seat requests go through American directly.",
-    sources: ["doc-aa-mia-jax"], confidence: "confirmed",
-    notes: ["Short morning hop up the Florida coast after the Fairfield overnight."]
+    checkinNote: "SCHEDULE CHANGED 22 Sep 2026: was AA3140 at 08:30, now AA4024 at 08:03, landing 09:26. Same confirmation, 27 minutes earlier. AA check-in opens 24 h before departure; changes allowed up to 48 h out; fare is non-refundable (travel credit only).",
+    sources: ["doc-aa-mia-jax", "doc-aa-change-jpeg"], confidence: "confirmed",
+    notes: [
+      "American's minor schedule change of 22 Sep moved the flight 27 minutes earlier and renumbered it AA4024. Leave the Fairfield by about 06:00.",
+      "Equipment not shown on the change notice; the original booking was an A319."
+    ]
   },
   /* ---------------- TO PERU ---------------- */
   {
@@ -1164,6 +1190,7 @@ window.TRIP.flights = [
 
 /* ---- Journeys: how legs chain together for layover math + display ---- */
 window.TRIP.journeys = [
+  { id: "J0", name: "Udon Thani to Bangkok", date: "2026-09-26", legs: ["F0"], note: "Thai Lion positioning hop into Don Mueang; two Siam Mandarina nights follow" },
   { id: "J1", name: "Bangkok to Miami",   date: "2026-09-28", legs: ["F1", "F2"], note: "One ticket, through-checked" },
   { id: "J2", name: "Miami to Jacksonville", date: "2026-09-29", legs: ["F3"], note: "Separate Chase Travel booking" },
   { id: "J3", name: "Jacksonville to Lima",  date: "2026-10-17", legs: ["F4", "F5"], note: "One booking, family travels together" },
@@ -1196,6 +1223,29 @@ window.TRIP.parentsTravel = {
 window.TRIP = window.TRIP || {};
 
 window.TRIP.hotels = [
+  {
+    id: "H0", status: "confirmed",
+    name: "Siam Mandarina Bangkok Suvarnabhumi Airport Hotel (Free Shuttle)",
+    shortName: "Siam Mandarina Bangkok",
+    place: "BKK", city: "Bang Phli, Samut Prakan (Suvarnabhumi airport side)",
+    address: "99 Moo 6, Kingkaew Road, Rachateva, Bangplee, Bang Phli, Samut Prakan 10540, Thailand",
+    phone: "Expedia support +1-866-230-3837 (property contact is on the booking confirmation)",
+    checkIn: "2026-09-26", checkInTime: "from 09:00",
+    checkOut: "2026-09-28", checkOutTime: "noon (in practice the airport shuttle leaves ~23:00 on the 27th for the 02:30 QR837)",
+    nights: 2,
+    room: "Executive Suite with Airport View, non-smoking",
+    guests: 2,
+    confirmation: "61b3d7aa-54af-42d2-94a6-58c89dfba41d",
+    expediaItinerary: "73550166195050",
+    bookedBy: "Jack via Expedia",
+    cancellation: "NON-REFUNDABLE. Changes and cancellations are charged; no refund for early check-out.",
+    sources: ["doc-siam-mandarina"], confidence: "confirmed",
+    notes: [
+      "The pre-departure base: two airport-side nights before the 02:30 Monday Qatar flight, booked 22 Sep for $270.14 on AmEx ending 1001.",
+      "Free airport shuttle, but the property wants transfer pickups arranged 24 h in advance using the contact details on the confirmation. Book the ~23:00 Sunday run to Suvarnabhumi the moment you check in.",
+      "Arrival day catch: SL605 lands at DON MUEANG, the other airport. Cross town by Grab or taxi (45 to 75 minutes); the free shuttle serves Suvarnabhumi."
+    ]
+  },
   {
     id: "H1", status: "confirmed",
     name: "Fairfield by Marriott Inn & Suites Miami Airport South",
@@ -1325,13 +1375,31 @@ window.TRIP = window.TRIP || {};
 
 window.TRIP.transport = [
   {
-    id: "T1", status: "to-arrange", date: "2026-09-27",
-    name: "Night ride to Suvarnabhumi",
-    from: "Home, Bangkok", to: "BKK Terminal (international departures)",
-    window: "Leave home ~22:30-23:00 Sun 27 Sep for the 02:30 departure (3 h airport arrival guidance)",
-    mode: "Taxi / Grab / arranged car",
-    sources: [], confidence: "estimated",
-    notes: ["The parents' sheet says 'Need Uber' on departure days. Book a car in advance; late-night availability in Bangkok is good but not worth gambling the whole trip on."]
+    id: "T0", status: "to-arrange", date: "2026-09-26",
+    name: "Morning ride to Udon Thani airport",
+    from: "Home, Udon Thani", to: "UTH (domestic departures)",
+    window: "Leave ~10:15 Sat 26 Sep; at the airport ~11:00 for the 12:55 SL605 with a 25 kg bag to check",
+    mode: "Car / Grab / family drop-off",
+    sources: ["doc-lion-uth"], confidence: "estimated",
+    notes: ["Domestic check-in counters typically close 45 minutes before departure; an hour and a half of buffer keeps it calm."]
+  },
+  {
+    id: "T1", status: "to-arrange", date: "2026-09-26",
+    name: "Cross-town: Don Mueang to the Siam Mandarina",
+    from: "DMK arrivals (14:10 landing)", to: "Siam Mandarina, Kingkaew Road, Bang Phli (Suvarnabhumi side)",
+    window: "Saturday afternoon; 45-75 min by tollway, longer in heavy traffic",
+    mode: "Grab / metered taxi from the official rank",
+    sources: ["doc-lion-uth", "doc-siam-mandarina"], confidence: "estimated",
+    notes: ["SL605 lands at DON MUEANG; the hotel sits by SUVARNABHUMI, across the city. The hotel's free shuttle serves Suvarnabhumi, so plan a paid ride for this leg (or ask the property whether its transfer service covers DMK when you call 24 h ahead)."]
+  },
+  {
+    id: "T11", status: "to-arrange", date: "2026-09-27",
+    name: "Hotel shuttle to Suvarnabhumi, Sunday night",
+    from: "Siam Mandarina", to: "BKK international departures",
+    window: "Leave ~23:00 Sun 27 Sep; at BKK ~23:15-23:30 for the 02:30 QR837 (3 h guidance)",
+    mode: "Siam Mandarina free airport shuttle (arrange 24 h in advance) or a 10-minute Grab as backup",
+    sources: ["doc-siam-mandarina"], confidence: "estimated",
+    notes: ["The property requires transfer pickups to be arranged 24 h ahead via the contact on the booking confirmation. Book this run at check-in on Saturday."]
   },
   {
     id: "T2", status: "to-arrange", date: "2026-09-28",
@@ -1344,19 +1412,19 @@ window.TRIP.transport = [
   },
   {
     id: "T3", status: "to-arrange", date: "2026-09-29",
-    name: "Fairfield to MIA for AA3140",
+    name: "Fairfield to MIA for AA4024",
     from: "Fairfield Miami Airport South", to: "MIA (domestic)",
-    window: "Leave ~06:30 for the 08:30 departure",
+    window: "Leave ~06:00 for the 08:03 departure (moved 27 min earlier by the 22 Sep schedule change)",
     mode: "Hotel shuttle / taxi",
-    sources: [], confidence: "estimated", notes: []
+    sources: ["doc-aa-change-jpeg"], confidence: "estimated", notes: []
   },
   {
     id: "T4", status: "family", date: "2026-09-29",
     name: "JAX pickup",
-    from: "JAX arrivals (09:49 landing)", to: "Parents' home, Jacksonville",
+    from: "JAX arrivals (09:26 landing, AA4024)", to: "Parents' home, Jacksonville",
     mode: "Parents collect by car",
-    sources: ["doc-old-itinerary"], confidence: "estimated",
-    notes: ["Confirm with the family closer to the date."]
+    sources: ["doc-old-itinerary", "doc-aa-change-jpeg"], confidence: "estimated",
+    notes: ["Confirm with the family closer to the date. New landing time is 23 minutes earlier than originally booked."]
   },
   {
     id: "T5", status: "family", date: "2026-10-17",
@@ -1427,12 +1495,26 @@ window.TRIP = window.TRIP || {};
 
 window.TRIP.days = [
   {
-    date: "2026-09-27", dayNo: 0, phase: "outbound", place: "BKK",
-    title: "The night before", sub: "Bangkok",
+    date: "2026-09-26", dayNo: -1, dnLabel: "Prelude", phase: "outbound", place: "BKK",
+    title: "Udon Thani to Bangkok", sub: "The journey leaves home: SL605 south, then the airport-side hotel",
     travelDay: true,
     segments: [
-      { kind: "warning", text: "Tonight is effectively departure night: leave home around 22:30-23:00 for the 02:30 flight.", ref: "T1" },
-      { kind: "transfer", text: "Night ride to Suvarnabhumi", ref: "T1" }
+      { kind: "transfer", ref: "T0", text: "Morning ride to Udon Thani airport (~10:15; 25 kg bag to check)" },
+      { kind: "flight", ref: "F0", text: "SL605 Udon Thani 12:55 to Bangkok Don Mueang 14:10, Economy 03D" },
+      { kind: "warning", text: "Landing at DON MUEANG, hotel by SUVARNABHUMI: cross town by Grab or taxi, 45-75 minutes.", ref: "T1" },
+      { kind: "hotel", ref: "H0", text: "Siam Mandarina Bangkok Suvarnabhumi, 2 nights, Executive Suite with Airport View" },
+      { kind: "warning", text: "At check-in, book the free hotel shuttle for ~23:00 Sunday night (the property wants 24 h notice)." }
+    ],
+    sleep: "Siam Mandarina Bangkok"
+  },
+  {
+    date: "2026-09-27", dayNo: 0, phase: "outbound", place: "BKK",
+    title: "The night before", sub: "A quiet Bangkok Sunday, then the 23:00 shuttle",
+    travelDay: true,
+    segments: [
+      { kind: "free", text: "Rest day at the Siam Mandarina: pool, repack, chargers, early dinner. Qatar online check-in is open." },
+      { kind: "warning", text: "Tonight is effectively departure night: the shuttle leaves ~23:00 for the 02:30 flight.", ref: "T11" },
+      { kind: "transfer", text: "Siam Mandarina shuttle to Suvarnabhumi (booked 24 h ahead)", ref: "T11" }
     ],
     sleep: "In the air (QR837)"
   },
@@ -1454,8 +1536,8 @@ window.TRIP.days = [
     title: "Miami to Jacksonville", sub: "Arrive at the family home",
     travelDay: true,
     segments: [
-      { kind: "transfer", ref: "T3", text: "Early ride to MIA (~06:30)" },
-      { kind: "flight", ref: "F3", text: "AA3140 Miami 08:30 to Jacksonville 09:49, First" },
+      { kind: "transfer", ref: "T3", text: "Early ride to MIA (~06:00; the flight moved 27 minutes earlier)" },
+      { kind: "flight", ref: "F3", text: "AA4024 Miami 08:03 to Jacksonville 09:26, First (schedule change of 22 Sep; was AA3140 at 08:30)" },
       { kind: "transfer", ref: "T4", text: "Parents collect at JAX" },
       { kind: "home", ref: "H2", text: "Arrive parents' home, the base for the next 18 nights" }
     ],
@@ -1626,17 +1708,18 @@ window.TRIP.destinations = [
   {
     id: "bangkok", place: "BKK", order: 1,
     name: "Bangkok", role: "Departure",
-    dates: "Home until 28 Sep · return 31 Oct",
-    nights: null,
+    dates: "Udon Thani home until 26 Sep · Bangkok 26-28 Sep · return 31 Oct",
+    nights: 2,
     palette: { accent: "#3ecfa8", accent2: "#0e6b58", glow: "rgba(62,207,168,.14)" },
     coords: "13.7563° N, 100.5018° E",
     tzNote: "ICT, UTC+7, no daylight saving",
-    hero: "The journey opens at 02:30 under the lights of Suvarnabhumi: a night departure west across two continents.",
+    hero: "The journey now opens in Udon Thani: SL605 south on Saturday, two airport-side nights at the Siam Mandarina, then the 02:30 Monday departure under the lights of Suvarnabhumi.",
     weather: { label: "Late September (seasonal guidance)", temp: "25-33 °C", note: "Tail of the monsoon: hot, humid, heavy evening showers possible. An umbrella for the airport run is not a joke." },
     facts: [
-      "QR837 departs 02:30 on Mon 28 Sep; the airport run leaves Sunday night",
-      "Qatar guidance: at the airport 3 h before departure",
-      "2 checked pieces at 32 kg each on the Qatar ticket",
+      "Sat 26 Sep: SL605 Udon Thani 12:55 to DON MUEANG 14:10, then a 45-75 min cross-town ride to the hotel by Suvarnabhumi",
+      "Siam Mandarina, 2 nights, free BKK shuttle: book the ~23:00 Sunday run 24 h ahead",
+      "QR837 departs 02:30 on Mon 28 Sep; Qatar guidance is at the airport 3 h before",
+      "2 checked pieces at 32 kg each on the Qatar ticket (25 kg on the Thai Lion hop)",
       "Returning 31 Oct at 06:40: submit the Thailand Digital Arrival Card (TDAC) online within 72 h before landing"
     ],
     tasksHint: "thailand",
@@ -1860,21 +1943,25 @@ window.TRIP.tasks = [
     detail: "The reissued e-ticket of 29 Jun moved the return: QR778 now departs Miami THU 29 OCT 20:15 (not the 28th) and QR838 Doha 20:25 on 30 Oct, landing Bangkok 06:40 on the 31st. Log into qatarairways.com with ref 866YAF and confirm both legs and seats 03K and 11A show exactly this." },
   { id: "fl-monitor-schedule", cat: "flights", priority: "high", due: "2026-09-21",
     title: "Re-check all flights for schedule changes",
-    detail: "Qatar already changed this itinerary once (28 Jun). A week before departure, re-verify all four Qatar legs, both AA bookings (ANEDSD, MBBZJB) and LATAM (LYZZCQ) against the airline sites, not the PDFs." },
+    detail: "Qatar changed this itinerary once (28 Jun) and American just did it again (22 Sep: AA3140 became AA4024 at 08:03, already recorded here). Re-verify the four Qatar legs, both AA bookings (ANEDSD, MBBZJB), LATAM (LYZZCQ) and Thai Lion SL605 (UBKKTC) against the airline sites, not the PDFs." },
   { id: "fl-seats-aa", cat: "flights", priority: "high", due: "2026-08-31",
     title: "Seat assignments on the AA and LATAM legs",
     detail: "The Chase confirmations carry no seat numbers. Pull up ANEDSD and MBBZJB on aa.com and LYZZCQ on latam.com and pick seats; the fares include seat selection." },
   { id: "fl-apps", cat: "flights", priority: "normal", due: "2026-09-14",
     title: "Install airline apps and load the bookings",
     detail: "Qatar Airways, American, and LATAM apps, each with its booking attached: 866YAF, ANEDSD, MBBZJB, LYZZCQ. Boarding passes and change alerts land there first." },
+  { id: "fl-checkin-lion", cat: "flights", priority: "critical", due: "2026-09-26",
+    openFrom: "2026-09-24",
+    title: "Check in: Thai Lion SL605 to Bangkok",
+    detail: "Saturday 26 Sep, Udon Thani 12:55 to Don Mueang 14:10, seat 03D already assigned, 25 kg checked bag (ref UBKKTC). Check in via the Thai Lion app or website the day before, or at the counter by 12:10 at the latest. The e-ticket receipt is not a boarding pass; carry the passport." },
   { id: "fl-checkin-out", cat: "flights", priority: "critical", due: "2026-09-27",
     openFrom: "2026-09-25",
     title: "Online check-in: outbound Qatar",
-    detail: "Qatar online check-in opens 48 h out (24 h for US-bound). For the 02:30 departure on 28 Sep that means from the 26th. Seats 11K and 03K are already reserved; check in, and aim to be at BKK by 23:30 on the 27th." },
+    detail: "Qatar online check-in opens 48 h out (24 h for US-bound). For the 02:30 departure on 28 Sep that means from the 26th. Seats 11K and 03K are already reserved; check in from the Siam Mandarina, and the 23:00 Sunday shuttle puts you at BKK by 23:30." },
   { id: "fl-checkin-aa1", cat: "flights", priority: "high", due: "2026-09-29",
     openFrom: "2026-09-28",
-    title: "Check in: AA3140 Miami to Jacksonville",
-    detail: "Opens 24 h before the 08:30 departure. Do it from the Fairfield after landing on the 28th." },
+    title: "Check in: AA4024 Miami to Jacksonville",
+    detail: "Opens 24 h before the NEW 08:03 departure (schedule change of 22 Sep; was AA3140 at 08:30). Do it from the Fairfield after landing on the 28th, and reconfirm the seat carried over." },
   { id: "fl-checkin-aa2", cat: "flights", priority: "high", due: "2026-10-17",
     openFrom: "2026-10-16",
     title: "Check in: AA3955 + AA1307 to Lima",
@@ -1910,16 +1997,20 @@ window.TRIP.tasks = [
     detail: "Free cancellation on conf 76989687 ends 23:59 hotel time on 26 Oct. Nothing to do if the plan holds; this is the last exit if anything changes." },
 
   /* ---------------- TRANSPORT ---------------- */
+  { id: "tr-uth-run", cat: "transport", priority: "high", due: "2026-09-26",
+    openFrom: "2026-09-22",
+    title: "Arrange the Saturday ride to Udon Thani airport",
+    detail: "SL605 departs 12:55 on Sat 26 Sep with a 25 kg bag to check. Leave home ~10:15, at UTH by ~11:00. Family drop-off or Grab; lock it in the day before." },
   { id: "tr-bkk-run", cat: "transport", priority: "critical", due: "2026-09-26",
     openFrom: "2026-09-20",
-    title: "Book the night ride to Suvarnabhumi (27 Sep, ~22:30)",
-    detail: "The one transfer that can sink the whole trip. Pre-book a car for Sunday night 27 Sep; target BKK by 23:30 for the 02:30 departure." },
+    title: "Book the Siam Mandarina shuttle for Sunday ~23:00",
+    detail: "The one transfer that can sink the whole trip, now solved by the hotel's free Suvarnabhumi shuttle, BUT the property wants pickups arranged 24 h in advance. Book the ~23:00 Sunday run at check-in on Saturday (target BKK by 23:30 for the 02:30 QR837), and keep Grab as the 10-minute backup. Separately: the Saturday arrival is at DON MUEANG, so plan a paid cross-town ride to the hotel." },
   { id: "tr-lima-transfer", cat: "transport", priority: "high", due: "2026-10-10",
     title: "Arrange the Lima airport pickup (17 Oct, 20:10 arrival)",
     detail: "Night arrival at Jorge Chávez with the parents. Pre-book a hotel car or use the official taxi counters; ask the caravan operator whether a meet-and-greet is included." },
   { id: "tr-jax-pickup", cat: "transport", priority: "normal", due: "2026-09-25",
-    title: "Confirm JAX pickup with the parents (29 Sep, 09:49)",
-    detail: "A text message task. Also confirm who drives everyone to JAX on 17 Oct (the parents' sheet says 'Need Uber')." },
+    title: "Confirm JAX pickup with the parents (29 Sep, now 09:26)",
+    detail: "A text message task, with news: the flight is now AA4024 landing 09:26, twenty-three minutes earlier. Also confirm who drives everyone to JAX on 17 Oct (the parents' sheet says 'Need Uber')." },
   { id: "tr-miami-shuttles", cat: "transport", priority: "normal", due: "2026-10-24",
     openFrom: "2026-10-15",
     title: "Miami hotel shuttles, both directions",
@@ -2133,6 +2224,49 @@ window.TRIP.sourceFolder = "Jack's desktop (original travel folder, offline)";
 
 window.TRIP.documents = [
   {
+    id: "doc-lion-uth",
+    file: "Electronic ticket receipt, September 26 for MR TOBY TAIT.pdf",
+    category: "Flights", authority: "primary", current: true, sensitivity: "high",
+    docDate: "2026-09-22", fileDate: "2026-09-22",
+    what: "Thai Lion Air e-ticket for the newly booked positioning flight from home to Bangkok, issued six days before the big departure.",
+    keyFacts: [
+      "SL605 · Sat 26 Sep · Udon Thani (UTH) 12:55 to Bangkok DON MUEANG (DMK) Terminal 2, 14:10",
+      "Economy, seat 03D · 25 kg checked baggage · ticket valid 26 Sep only",
+      "Booking ref UBKKTC · ticket 3102165055848 · THB 3,015 on Visa ending 1111",
+      "Receipt is not a boarding pass; photo ID required at the airport"
+    ],
+    masked: ["booking reference", "ticket number", "card digits"]
+  },
+  {
+    id: "doc-siam-mandarina",
+    file: "Bangkok Hotel Reservation.pdf",
+    category: "Hotels", authority: "primary", current: true, sensitivity: "medium",
+    docDate: "2026-09-22", fileDate: "2026-09-22",
+    what: "Expedia confirmation for the pre-departure Bangkok base: two airport-side nights before the 02:30 Monday Qatar flight.",
+    keyFacts: [
+      "Siam Mandarina Bangkok Suvarnabhumi Airport Hotel (Free Shuttle) · Bang Phli, Samut Prakan",
+      "Sat 26 Sep (check-in from 09:00) to Mon 28 Sep · Executive Suite with Airport View · 2 adults",
+      "Confirmation 61b3d7aa-54af-42d2-94a6-58c89dfba41d · Expedia itinerary 73550166195050",
+      "$270.14 total on AmEx ending 1001 · NON-REFUNDABLE",
+      "Free airport shuttle; transfer pickups must be arranged 24 h in advance with the property"
+    ],
+    masked: ["confirmation", "itinerary number", "card digits"]
+  },
+  {
+    id: "doc-aa-change-jpeg",
+    file: "American Airlines MIA to JAX flight change 9.22.26.jpeg",
+    category: "Flights", authority: "primary", current: true, sensitivity: "medium",
+    docDate: "2026-09-22", fileDate: "2026-09-22",
+    what: "Chase Travel screenshot of American's minor schedule change on the Miami to Jacksonville hop. Supersedes the timing in the April booking confirmation.",
+    keyFacts: [
+      "AA4024 (was AA3140) · Tue 29 Sep · MIA 08:03 to JAX 09:26 · non-stop 1 h 23 m · First",
+      "Airline conf ANEDSD unchanged · agency ref WFZHEJ · $463.40",
+      "Changes allowed up to 48 h before departure; fare non-refundable (travel credit)",
+      "Equipment not shown on the notice"
+    ],
+    masked: ["confirmation", "agency reference"]
+  },
+  {
     id: "doc-qatar-updated",
     file: "QATAR UPDATED Booking RECEIPT new flights 6.29.26.pdf",
     category: "Flights", authority: "primary", current: true, sensitivity: "high",
@@ -2190,9 +2324,9 @@ window.TRIP.documents = [
     category: "Flights", authority: "primary", current: true, sensitivity: "medium",
     docDate: "2026-04-04", fileDate: "2026-04-06",
     misnamed: "Filename says LATAM; the document is an AMERICAN AIRLINES booking via Chase Travel.",
-    what: "Chase Travel confirmation for the Miami to Jacksonville hop.",
+    what: "Chase Travel confirmation for the Miami to Jacksonville hop. Still the booking of record, but its TIMING is superseded by the 22 Sep schedule-change screenshot (AA4024 at 08:03).",
     keyFacts: [
-      "AA3140 · Tue 29 Sep · MIA 08:30 to JAX 09:49 · A319 · First",
+      "AA3140 · Tue 29 Sep · MIA 08:30 to JAX 09:49 · A319 · First (times SUPERSEDED 22 Sep: now AA4024, 08:03 to 09:26)",
       "Airline conf ANEDSD · Chase trip 1015761780 · $463.40 · Visa ending 6195",
       "Traveler: Toby Jack Tait · booked from William's Chase account ('Hi WILLIAM')"
     ],
@@ -2302,6 +2436,15 @@ window.TRIP.documents = [
     docDate: "2026-04-06", fileDate: "2026-04-06",
     what: "Byte-identical duplicate of Peru and Chile.xlsx (same size, same content, different filename). Kept untouched in the source folder per the file-safety rules.",
     keyFacts: ["Exact duplicate; no unique information"],
+    masked: []
+  },
+  {
+    id: "doc-stray-index",
+    file: "index V1.html",
+    category: "Non-travel", authority: "duplicate", current: false, sensitivity: "low",
+    docDate: "2026-07-12", fileDate: "2026-07-12",
+    what: "A stray copy of the Version 1 dashboard's index page that was saved into the travel folder on 12 Jul. Not a travel document and carries no booking facts; catalogued for completeness and left untouched.",
+    keyFacts: ["No itinerary information; ignore"],
     masked: []
   }
 ];
@@ -2437,6 +2580,25 @@ window.TRIP.conflicts = [
     action: "Adjust the Prepare tab's work tasks against the real JLL calendar.",
     confidence: "estimated",
     sources: []
+  },
+  {
+    id: "C14", state: "resolved", severity: "minor",
+    title: "AA Miami to Jacksonville: booked times vs the 22 Sep schedule change",
+    conflict: "The April Chase confirmation sells AA3140 departing 08:30 and landing 09:49. American's schedule-change notice of 22 Sep (screenshot saved in the folder) shows the same reservation as AA4024 departing 08:03 and landing 09:26.",
+    chosen: "AA4024, 08:03 to 09:26, shown everywhere; the April times are marked superseded on the old document's card.",
+    why: "Newest carrier-issued notice on the same confirmation (ANEDSD) wins; the notice also adds agency ref WFZHEJ. Equipment is no longer asserted because the notice does not state it.",
+    action: "At check-in on the 28th, confirm the First seat carried over to AA4024.",
+    confidence: "confirmed",
+    sources: ["doc-aa-change-jpeg", "doc-aa-mia-jax"]
+  },
+  {
+    id: "C15", state: "resolved", severity: "minor",
+    title: "Where the journey starts: Bangkok assumption vs Udon Thani reality",
+    conflict: "Every earlier version framed the trip as starting from a Bangkok home ('leave home ~22:30 for Suvarnabhumi'). The Thai Lion ticket and the Siam Mandarina booking of 22 Sep establish that Jack actually starts in Udon Thani, flies to Don Mueang on 26 Sep, and stages two nights beside Suvarnabhumi.",
+    chosen: "The itinerary now opens in Udon Thani: SL605 on the 26th, two Siam Mandarina nights, hotel shuttle to BKK late on the 27th. The countdown target stays QR837 (the master departure).",
+    why: "Two primary documents beat an unstated assumption. The old framing was never sourced; it was the reconstruction's default.",
+    confidence: "confirmed",
+    sources: ["doc-lion-uth", "doc-siam-mandarina"]
   }
 ];
 
@@ -2455,8 +2617,8 @@ window.TRIP.workPlan = {
   disclaimer: "No work schedule document exists in the travel folder. This plan is inferred from the trip's shape and is a suggestion, not a record. Adjust against the real JLL calendar.",
   timezoneNote: "While in Florida you sit IN US Eastern time: the easiest month of the year for US-facing work. Bangkok colleagues are 11 h ahead.",
   blocks: [
-    { from: "2026-09-25", to: "2026-09-26", kind: "limited", label: "Wind-down in Bangkok", note: "Close the laptop by Friday noon; the weekend is packing and the night flight." },
-    { from: "2026-09-27", to: "2026-09-29", kind: "travel",  label: "Transit: BKK to MIA to JAX", note: "Unreachable across 3 flights and 11 time zones." },
+    { from: "2026-09-24", to: "2026-09-26", kind: "limited", label: "Wind-down in Udon Thani", note: "Close the laptop by Friday noon; Saturday is the flight to Bangkok and the airport hotel." },
+    { from: "2026-09-26", to: "2026-09-29", kind: "travel",  label: "Transit: UTH to BKK to MIA to JAX", note: "Unreachable across 4 flights and 11 time zones." },
     { from: "2026-09-29", to: "2026-09-30", kind: "jetlag",  label: "Arrival + jet lag buffer", note: "Suggested: no client-facing commitments until Thu 1 Oct." },
     { from: "2026-10-01", to: "2026-10-16", kind: "work",    label: "Work-from-Jacksonville", note: "12 clean weekdays on US Eastern time (Oct 1-2, 5-9, 12-16); weekends Oct 3-4 and 10-11 are family days." },
     { from: "2026-10-17", to: "2026-10-28", kind: "vacation",label: "Peru with the family", note: "Out of office. Connectivity thin to nonexistent Oct 18-24 (Andes caravan)." },
@@ -2506,7 +2668,7 @@ window.U = (function () {
   /* Known sensitive tokens (booking refs, tickets, confirmations,
      trip ids). maskKnown() hides them inside any prose unless the
      user has chosen Reveal. */
-  var SENSITIVE = ["866YAF", "157 2135167224", "MBBZJB", "ANEDSD", "LYZZCQ", "LFSOJH", "72830827", "76989687", "1015761780", "1015761550", "1015761997"];
+  var SENSITIVE = ["866YAF", "157 2135167224", "MBBZJB", "ANEDSD", "LYZZCQ", "LFSOJH", "72830827", "76989687", "1015761780", "1015761550", "1015761997", "UBKKTC", "3102165055848", "WFZHEJ", "61b3d7aa-54af-42d2-94a6-58c89dfba41d", "73550166195050"];
   function maskKnown(text) {
     var reveal = window.Store && Store.settings && Store.settings().revealSensitive;
     if (reveal || text == null) return text;
@@ -2831,7 +2993,7 @@ window.Engine = (function () {
   function positionNow() {
     var n = T.now(), fl = activeFlights().slice().sort(function (a, b) { return T.parse(a.dep) - T.parse(b.dep); });
     if (!fl.length) return { at: "BKK", inFlight: false };
-    if (n < T.parse(fl[0].dep)) return { at: "BKK", inFlight: false, label: "Home in Bangkok" };
+    if (n < T.parse(fl[0].dep)) return { at: fl[0].from, inFlight: false, label: "Home in " + placeOf(fl[0].from).name };
     for (var i = 0; i < fl.length; i++) {
       var dep = T.parse(fl[i].dep), arr = T.parse(fl[i].arr);
       if (n >= dep && n <= arr) {
@@ -3005,6 +3167,7 @@ window.Views.home = function (root) {
   /* ---- stamps: earned when their date has passed (Bangkok calendar) ---- */
   var today = T.todayYmd("Asia/Bangkok");
   var stamps = [
+    { label: "UDON THANI",    date: "2026-09-26", c: "var(--jade)",  rot: 5,  round: false },
     { label: "BKK OUT",       date: "2026-09-28", c: "var(--jade)",  rot: -4, round: false },
     { label: "DOHA TRANSIT",  date: "2026-09-28", c: "var(--coral)", rot: 3,  round: true },
     { label: "USA ENTRY",     date: "2026-09-28", c: "var(--sky)",   rot: -2, round: false },
@@ -3048,8 +3211,8 @@ window.Views.home = function (root) {
 
     /* ------- STAT TILES ------- */
     '<section class="section"><div class="grid g4">' +
-      '<div class="card stat"><div class="k">' + I.clock + "dates</div><div class='v'>28 Sep – 31 Oct</div><div class='s'>34 days · " + U.esc(M.travelerShort) + " departs BKK 02:30</div></div>" +
-      '<div class="card stat"><div class="k">' + I.plane + 'flight legs</div><div class="v">8 confirmed</div><div class="s">Qatar · American · LATAM, business/first throughout</div></div>' +
+      '<div class="card stat"><div class="k">' + I.clock + "dates</div><div class='v'>26 Sep – 31 Oct</div><div class='s'>36 days door to door · QR837 lifts off 28 Sep 02:30</div></div>" +
+      '<div class="card stat"><div class="k">' + I.plane + 'flight legs</div><div class="v">9 confirmed</div><div class="s">Thai Lion · Qatar · American · LATAM</div></div>' +
       '<div class="card stat"><div class="k">' + I.globe + 'countries</div><div class="v">TH · QA · US · PE</div><div class="s">plus the parents’ Chile leg, for reference</div></div>' +
       '<div class="card stat"><div class="k">' + I.star + 'highlight</div><div class="v">Machu Picchu</div><div class="s">Wed 21 Oct · ' + Math.max(0, T.daysUntil("2026-10-21")) + " days away</div></div>" +
     "</div></section>" +
@@ -3081,7 +3244,7 @@ window.Views.home = function (root) {
           var tone = t.state === "overdue" ? "danger" : (t.state === "due-today" || t.state === "due-soon") ? "warn" : "dim";
           var when = t.state === "overdue" ? "overdue" : t.daysLeft === 0 ? "due today" : t.daysLeft != null ? "in " + t.daysLeft + " d" : "open";
           return '<div class="action-row">' + (t.priority === "critical" ? I.warn : I.check) +
-            '<div><div class="t">' + U.esc(t.title) + '</div><div class="d">' + U.esc(t.detail.slice(0, 110)) + "…</div></div>" +
+            '<div><div class="t">' + U.esc(t.title) + '</div><div class="d">' + U.esc(U.maskKnown(t.detail).slice(0, 110)) + "…</div></div>" +
             '<div class="when"><span class="pill ' + tone + '">' + when + "</span></div></div>";
         }).join("") : '<div class="empty">' + I.check + "<p>Nothing urgent. Enjoy the quiet.</p></div>") +
         '<p style="margin:14px 0 0"><a class="btn small" href="#/prepare">Full preparation board ' + I.list + "</a></p>" +
@@ -3183,10 +3346,10 @@ window.Views.itinerary = function (root) {
   };
   var PHASE_NAME = { outbound: "Outbound", florida: "Florida", "peru-caravan": "Peru caravan", lima: "Lima", "return": "Return", complete: "Home" };
 
-  /* ---- calendar strip: 27 Sep – 31 Oct ---- */
+  /* ---- calendar strip: 26 Sep – 31 Oct ---- */
   function calCells() {
-    var out = [], d = new Date(Date.UTC(2026, 8, 27));
-    for (var i = 0; i < 35; i++) {
+    var out = [], d = new Date(Date.UTC(2026, 8, 26));
+    for (var i = 0; i < 36; i++) {
       var ymd = d.toISOString().slice(0, 10);
       var rec = Engine.dayFor(ymd);
       out.push({
@@ -3228,8 +3391,8 @@ window.Views.itinerary = function (root) {
     var dateLabel = day.span
       ? T.fmtYmd(day.date) + " – " + T.fmtYmd(day.span.to)
       : T.fmtYmd(day.date, { weekday: "long", day: "numeric", month: "long" });
-    var dn = day.span ? day.span.label : "Day " + day.dayNo;
-    if (day.dayNo === 0) dn = "Day 0";
+    var dn = day.dnLabel || (day.span ? day.span.label : "Day " + day.dayNo);
+    if (!day.dnLabel && day.dayNo === 0) dn = "Day 0";
     return '<div class="dayblock' + (isToday ? " today" : "") + (day.star ? " star" : "") + '">' +
       '<div class="dayhead"><span class="dn">' + U.esc(dn) + '</span><span class="dt">' + dateLabel + "</span>" +
       "<h3>" + U.esc(day.title) + "</h3>" +
@@ -3349,7 +3512,7 @@ window.Views.flights = function (root, params) {
     if (f.depConfidence === "derived" || f.arrConfidence === "derived") {
       warn = '<div class="notebox warn">' + I.warn + " Some times on this leg are DERIVED from stated anchors (JAX 10:06, 4 h 15 m layover, LIM 20:10), not printed on the confirmation. Exact times appear at check-in.</div>";
     }
-    if (f.status === "rebooked") {
+    if (f.status === "rebooked" && f.replaces) {
       warn += '<div class="notebox" style="border-color:rgba(143,125,221,.5)">' + I.transfer + " Replaces cancelled " + U.esc(Engine.flightById(f.replaces) ? Engine.flightById(f.replaces).flightNo : f.replaces) + " after Qatar's schedule change of 28 Jun. Verify in Manage Booking before travel.</div>";
     }
 
@@ -3390,7 +3553,7 @@ window.Views.flights = function (root, params) {
       '<button class="btn small" id="reveal-toggle">' + (reveal ? I.eyeOff + " Hide references" : I.eye + " Reveal references") + "</button></div>" +
 
       '<div class="notebox" style="margin-bottom:18px">' + I.ticket +
-        " 8 live legs across three carriers. Qatar round trip on one ticket (2 × 32 kg checked); the AA and LATAM legs are separate Chase Travel bookings, so bags are re-checked in Miami and Lima. Booking references are masked by default; reveal only when you need them." +
+        " 9 live legs across four carriers, opening with the Thai Lion hop from Udon Thani. Qatar round trip on one ticket (2 × 32 kg checked); the AA and LATAM legs are separate Chase Travel bookings, so bags are re-checked in Bangkok, Miami and Lima. Booking references are masked by default; reveal only when you need them." +
       "</div>" +
 
       '<div class="grid" style="gap:22px">' + active.map(passCard).join("") + "</div>" +
@@ -3478,6 +3641,7 @@ window.Views = window.Views || {};
 
   /* ---- Jack's route + parents' route ---- */
   var ROUTE = [
+    { from: "UTH", to: "BKK", leg: "F0" },
     { from: "BKK", to: "DOH", leg: "F1" }, { from: "DOH", to: "MIA", leg: "F2" },
     { from: "MIA", to: "JAX", leg: "F3" }, { from: "JAX", to: "MIA", leg: "F4" },
     { from: "MIA", to: "LIM", leg: "F5" }, { from: "LIM", to: "CUZ", leg: null },
@@ -3500,7 +3664,8 @@ window.Views = window.Views || {};
 
   /* Node info shown in the popover */
   var NODE_INFO = {
-    BKK: { arrive: "home", depart: "28 Sep 02:30", stay: "Home · returns 31 Oct 06:40", hotel: "Home", extra: "QR837 out · QR838 back" },
+    UTH: { arrive: "home", depart: "26 Sep 12:55 (SL605)", stay: "Home base until the journey opens", hotel: "Home", extra: "Thai Lion to Don Mueang, 25 kg bag" },
+    BKK: { arrive: "26 Sep 14:10 (into DMK)", depart: "28 Sep 02:30", stay: "2 nights at the Siam Mandarina · returns 31 Oct 06:40", hotel: "Siam Mandarina (free BKK shuttle)", extra: "Lands Don Mueang, departs Suvarnabhumi · QR837 out · QR838 back" },
     DOH: { arrive: "28 Sep 05:05 + 30 Oct 16:50", depart: "08:25 / 20:25", stay: "Transit only: 3 h 20 m + 3 h 35 m", hotel: "Al Mourjan lounge", extra: "QR837→QR777 · QR778→QR838" },
     MIA: { arrive: "28 Sep 16:40 + 28 Oct 20:35", depart: "29 Sep + 29 Oct", stay: "2 gateway nights", hotel: "Fairfield (Sep) · Airport Marriott (Oct)", extra: "US entry point, both directions" },
     JAX: { arrive: "29 Sep 09:49", depart: "17 Oct 10:06", stay: "18 nights", hotel: "Parents' home", extra: "Work + family chapter" },
@@ -3518,7 +3683,7 @@ window.Views = window.Views || {};
     var today = T.todayYmd("Asia/Bangkok");
 
     function nodeVisited(code) {
-      var firstDates = { BKK: "2026-09-28", DOH: "2026-09-28", MIA: "2026-09-28", JAX: "2026-09-29", LIM: "2026-10-17", CUZ: "2026-10-18", MAP: "2026-10-21", VAP: "2026-11-04", SCL: "2026-11-04" };
+      var firstDates = { UTH: "2026-09-26", BKK: "2026-09-26", DOH: "2026-09-28", MIA: "2026-09-28", JAX: "2026-09-29", LIM: "2026-10-17", CUZ: "2026-10-18", MAP: "2026-10-21", VAP: "2026-11-04", SCL: "2026-11-04" };
       return today >= (firstDates[code] || "2099-01-01");
     }
 
@@ -3545,10 +3710,10 @@ window.Views = window.Views || {};
     function nodesSvg() {
       /* Machu Picchu sits 75 km from Cusco: at atlas scale that is 2 px,
          so it lives inside the CUZ node (see its popover + sub-label). */
-      var codes = ["BKK", "DOH", "MIA", "JAX", "LIM", "CUZ"];
+      var codes = ["UTH", "BKK", "DOH", "MIA", "JAX", "LIM", "CUZ"];
       if (showParents) codes = codes.concat(["VAP", "SCL"]);
-      var LABEL_OFF = { BKK: [10, -8], DOH: [8, -12], MIA: [10, 16], JAX: [10, -10], LIM: [-52, -8], CUZ: [12, 2], VAP: [-78, 14], SCL: [12, 14] };
-      var SUB = { CUZ: "CUSCO + MACHU PICCHU" };
+      var LABEL_OFF = { UTH: [-58, -10], BKK: [12, 12], DOH: [8, -12], MIA: [10, 16], JAX: [10, -10], LIM: [-52, -8], CUZ: [12, 2], VAP: [-78, 14], SCL: [12, 14] };
+      var SUB = { CUZ: "CUSCO + MACHU PICCHU", UTH: "UDON THANI · HOME", BKK: "TWO AIRPORTS" };
       return codes.map(function (c) {
         var p = P[c], off = LABEL_OFF[c] || [10, -8];
         return '<g class="mapnode" data-node="' + c + '">' +
@@ -3790,7 +3955,7 @@ window.Views.prepare = function (root) {
       return '<div class="task ' + t.state + '">' +
         '<input type="checkbox" class="cb" id="cb-' + t.id + '" data-task="' + t.id + '"' + (t.state === "done" ? " checked" : "") + " aria-label=\"" + U.esc(t.title) + "\">" +
         '<div style="flex:1"><label class="t" for="cb-' + t.id + '">' + (t.priority === "critical" ? '<span style="color:var(--danger);font-family:var(--disp);font-size:.56rem;letter-spacing:.2em;border:1px solid rgba(228,96,78,.5);border-radius:4px;padding:1px 6px;margin-right:8px;vertical-align:2px">CRITICAL</span>' : "") + U.esc(t.title) + "</label>" +
-        '<div class="d">' + U.esc(t.detail) + "</div></div>" +
+        '<div class="d">' + U.esc(U.maskKnown(t.detail)) + "</div></div>" +
         '<div class="due">' + (t.state !== "done" ? '<span class="pill ' + pillTone + '">' + pillText + "</span>" : '<span class="pill ok">done</span>') +
         (t.due ? '<div class="dt">' + T.fmtYmd(t.due, { weekday: "short", day: "numeric", month: "short" }) + "</div>" : "") + "</div></div>";
     }
@@ -4015,7 +4180,7 @@ window.Views.documents = function (root) {
     '<button class="btn small" id="reveal-toggle">' + (reveal ? I.eyeOff + " Hide sensitive values" : I.eye + " Reveal sensitive values") + "</button></div>" +
 
     '<div class="notebox" style="margin-bottom:18px">' + I.doc +
-      " 13 files in the read-only source folder, classified by CONTENT (two 'Latam' files are actually American Airlines bookings). Booking references and confirmation numbers are masked until revealed. The originals and their extraction copies stay on Jack's PC; every document's key facts are summarized below." +
+      " 16 travel documents in the read-only source folder (plus one stray html copy), classified by CONTENT (two 'Latam' files are actually American Airlines bookings). Newest additions, 22 Sep: the Thai Lion ticket, the Siam Mandarina booking, and the AA schedule-change screenshot. Booking references and confirmation numbers are masked until revealed. The originals and their extraction copies stay on Jack's PC; every document's key facts are summarized below." +
     "</div>" +
 
     '<div class="grid g2">' + docs.map(docCard).join("") + "</div>" +
@@ -4154,7 +4319,7 @@ window.Views.today = function (root, params) {
         '<div class="card pad"><div class="kicker dim">what matters today</div>' +
           (acts.length ? acts.map(function (t) {
             return '<div class="action-row">' + (t.priority === "critical" ? I.warn : I.check) +
-              '<div><div class="t">' + U.esc(t.title) + '</div><div class="d">' + U.esc(t.detail.slice(0, 100)) + "…</div></div></div>";
+              '<div><div class="t">' + U.esc(t.title) + '</div><div class="d">' + U.esc(U.maskKnown(t.detail).slice(0, 100)) + "…</div></div></div>";
           }).join("") : '<div class="empty">' + I.check + "<p>Clear. Anticipation is the only task.</p></div>") +
         "</div>" +
       "</div>" +
@@ -4198,9 +4363,9 @@ window.Views.today = function (root, params) {
     function leaveBy(f) {
       if (!f) return null;
       var dep = T.parse(f.dep);
-      var intl = !(f.from === "MIA" && f.to === "JAX");
-      var bufferMin = intl ? 180 : 120;
-      var rideMin = f.from === "BKK" ? 60 : f.from === "LIM" ? 60 : 25;
+      var domestic = (f.from === "MIA" && f.to === "JAX") || (f.from === "UTH" && f.to === "DMK");
+      var bufferMin = domestic ? 120 : 180;
+      var rideMin = f.from === "BKK" ? 15 : f.from === "UTH" ? 40 : f.from === "LIM" ? 60 : 25;
       return new Date(dep.getTime() - (bufferMin + rideMin) * 60000);
     }
     var lv = leaveBy(nf);
