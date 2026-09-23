@@ -5730,6 +5730,10 @@ window.Steps = (function () {
       if (!hiddenByFlight[fid]) hiddenByFlight[fid] = hiddenKinds(fid);
       return !hiddenByFlight[fid][s.kind];
     });
+    /* ticking a later moment done means everything timed before it is behind you too */
+    var doneAts = built.steps.filter(function (s) { return !s.window && stepDone(s.id); }).map(function (s) { return s.at.getTime(); });
+    var maxDone = doneAts.length ? Math.max.apply(null, doneAts) : null;
+    if (maxDone != null) visible = visible.filter(function (s) { return s.window || s.at.getTime() >= maxDone; });
     var live = visible.filter(function (s) { return s.until > now; });
     var inFlight = Engine.activeFlights().filter(function (f) { return T.parse(f.dep) <= now && now < T.parse(f.arr) && !stageDone(f.id, "landed"); })[0] || null;
 
