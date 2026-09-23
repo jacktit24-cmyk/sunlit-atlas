@@ -6,10 +6,15 @@
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#f6eeda">
 <meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Sunlit Atlas">
+<meta name="application-name" content="Sunlit Atlas">
 <title>PERU + USA 2026 · The Sunlit Atlas</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23f6eeda' stroke='%23c25b3a' stroke-width='5'/%3E%3Ccircle cx='50' cy='50' r='14' fill='%23f2c14e' stroke='%23a86414' stroke-width='3'/%3E%3Cg stroke='%23a86414' stroke-width='4' stroke-linecap='round'%3E%3Cpath d='M50 12v12M50 76v12M12 50h12M76 50h12M24 24l8 8M68 68l8 8M76 24l-8 8M32 68l-8 8'/%3E%3C/g%3E%3C/svg%3E">
-</head>
-<body>
 <style>
 /* ==========================================================================
    THE SUNLIT ATLAS — Peru + USA 2026 travel command center · VERSION 2
@@ -846,29 +851,117 @@ footer.site .mono { font-size: .68rem; }
 :focus-visible { outline: 2.5px solid var(--terra); outline-offset: 2px; border-radius: 4px; }
 button, input, select { font: inherit; color: inherit; }
 
+/* ==========================================================================
+   WALLET · tickets and reservations for one hand on a phone
+   (document chips are shared with Itinerary, Flights and Today)
+   ========================================================================== */
+.docrow { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+.docchip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--ui); font-weight: 700; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--terra-deep); border: 1.5px solid var(--line-strong); border-radius: 100px;
+  padding: 4px 10px 3px; background: var(--ink1); white-space: nowrap;
+  transition: transform .15s ease, border-color .15s ease;
+}
+.docchip:hover { border-color: var(--terra); text-decoration: none; transform: translateY(-1px); }
+.docchip .ic { width: .95em; height: .95em; }
+.docchip .kind { font-family: var(--mono); font-size: .55rem; letter-spacing: .08em; color: var(--faint); }
+.btn .kind { font-family: var(--mono); font-size: .58rem; letter-spacing: .06em; opacity: .8; }
+
+.wsummary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center; margin-bottom: 18px; padding: 16px 12px; }
+@media (max-width: 480px) { .wsummary { grid-template-columns: repeat(2, 1fr); row-gap: 16px; } }
+.wsum b { display: block; font-family: var(--disp); font-size: 1.5rem; line-height: 1.1; color: var(--paper); }
+.wsum span { font-family: var(--ui); font-weight: 700; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+.wsum.ok b { color: var(--ok); }
+.wsum.warn b { color: var(--warn); }
+
+.wlist { display: grid; gap: 16px; }
+.wcard { padding: 16px 18px 16px 22px; position: relative; overflow: hidden; }
+.wcard::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--sky); }
+.wcard.stay::before { background: var(--green); }
+.wcard.next { border-color: var(--terra); box-shadow: 0 0 0 3px rgba(194, 91, 58, .18), var(--shadow); }
+.wcard.live { border-color: var(--danger); }
+.whead { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.wkick { font-family: var(--ui); font-weight: 700; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--terra); display: inline-flex; gap: 6px; align-items: center; }
+.wkick .ic { width: 1.1em; height: 1.1em; }
+.whead .pill:first-of-type { margin-left: auto; }
+.wcard h3 { font-size: 1.15rem; margin: 6px 0 2px; letter-spacing: .02em; }
+.wsub { color: var(--faint); font-size: .8rem; }
+.wlegs { margin-top: 10px; display: grid; gap: 8px; }
+.wleg { border: 1.5px dashed var(--line-strong); border-radius: var(--rad-sm); padding: 10px 12px; background: var(--ink2); }
+.wl-top { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.wl-no { font-family: var(--mono); font-weight: 600; color: var(--terra-deep); letter-spacing: .08em; }
+.wl-air { font-family: var(--ui); font-weight: 700; font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+.wl-route { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; margin-top: 8px; }
+.wl-pt b { font-family: var(--disp); font-size: 1.5rem; line-height: 1; display: block; }
+.wl-pt span { font-family: var(--mono); font-size: 1rem; color: var(--paper-dim); display: block; margin-top: 3px; font-variant-numeric: tabular-nums; }
+.wl-pt small { color: var(--faint); font-size: .68rem; display: block; line-height: 1.3; }
+.wl-pt.r { text-align: right; }
+.wl-pt .plus { font-style: normal; color: var(--warn); font-size: .68rem; margin-left: 4px; font-family: var(--ui); font-weight: 700; }
+.wl-arrow { text-align: center; color: var(--faint); font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; }
+.wl-arrow .ic { display: block; margin: 0 auto 2px; width: 1.25em; height: 1.25em; color: var(--sky); }
+.wl-meta { color: var(--faint); font-size: .78rem; margin-top: 8px; }
+.wrefs { margin-top: 10px; display: grid; gap: 5px; }
+.wref { display: flex; gap: 12px; align-items: baseline; font-size: .86rem; }
+.wref .k { font-family: var(--ui); font-weight: 700; font-size: .56rem; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); width: 104px; flex: none; }
+.wref .v { color: var(--paper-dim); min-width: 0; overflow-wrap: anywhere; }
+.wref .v.masked { font-family: var(--mono); color: var(--paper); font-size: .9rem; }
+.wnote { color: var(--faint); font-size: .8rem; margin-top: 8px; font-family: var(--hand); }
+.wmore { margin-top: 8px; }
+.wmore summary { cursor: pointer; font-family: var(--ui); font-weight: 700; font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--terra-deep); list-style: none; }
+.wmore summary::-webkit-details-marker { display: none; }
+.wmore summary::before { content: "+ "; }
+.wmore[open] summary::before { content: "− "; }
+.wmore ul { padding-left: 18px; margin: 6px 0 0; color: var(--paper-dim); font-size: .82rem; }
+.wmore li { margin: 4px 0; }
+.wbtns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+@media (max-width: 480px) { .wbtns .btn { flex: 1 1 46%; justify-content: center; } }
+.wlines .big-list .v a { font-family: var(--mono); }
+.wdocs .drow { display: flex; gap: 12px; align-items: center; padding: 10px 0; border-top: 1px dashed var(--line-strong); font-size: .88rem; }
+.wdocs .drow:first-child { border-top: 0; }
+.wdocs .drow > .ic { color: var(--terra); width: 1.3em; height: 1.3em; }
+.wdocs .drow > div { min-width: 0; flex: 1; }
+.wdocs .drow .fn { color: var(--faint); font-size: .7rem; font-family: var(--mono); overflow-wrap: anywhere; }
+.wdocs .drow .btn { margin-left: auto; }
+.tdm .wbtns { margin-top: 12px; }
+
+/* add-to-home-screen / install hint (shared build only) */
+.a2hs {
+  position: fixed; left: 12px; right: 12px; bottom: calc(76px + env(safe-area-inset-bottom)); z-index: 80;
+  background: var(--ink1); border: 1.5px solid var(--terra); border-radius: 12px; padding: 12px 14px;
+  box-shadow: var(--shadow); font-size: .86rem; display: flex; gap: 10px; align-items: center; color: var(--paper-dim);
+}
+.a2hs b { color: var(--paper); }
+.a2hs .x { margin-left: auto; flex: none; }
+@media (min-width: 701px) { .a2hs { bottom: 20px; left: auto; max-width: 440px; } }
+
 /* shared-view: commit to the sunlit theme regardless of viewer theme */
 :root { color-scheme: light; }
 </style>
-
+</head>
+<body>
 <div class="sky" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
 <div id="app">
   <div id="chrome"></div>
   <main id="main" aria-live="polite">
+    <noscript><div style="padding:60px 20px;text-align:center;font-family:Georgia,serif">This atlas needs JavaScript.</div></noscript>
     <div class="empty" style="padding-top:90px">Unfolding the atlas…</div>
   </main>
 
   <footer class="site">
     <span>PERU + USA 2026 · The Sunlit Atlas · shared view</span>
-    <span class="mono">reconstructed from 13 booking documents · all times zone-exact · derived and estimated values are labeled</span>
-    <span class="mono">checklist ticks may not persist in this shared view · the full dashboard lives on Jack's PC</span>
+    <span class="mono">reconstructed from 16 travel documents · updated 23 Sep 2026 · all times zone-exact · derived and estimated values are labeled</span>
+    <span class="mono">tickets and reservations open from the Wallet tab and stay on this device for offline use</span>
   </footer>
 </div>
 
 <nav class="bottomnav" id="bottomnav" aria-label="Sections"></nav>
 
 <script>
+window.SHARE_BUILD = true;
+
 /* ===== assets/js/data/trip.js ===== */
 /* ============================================================
    TRIP.JS — core trip metadata for the Peru + USA 2026 journey
@@ -2449,6 +2542,49 @@ window.TRIP.documents = [
   }
 ];
 
+/* ---- Hosted copies for the shared / mobile build ----
+   The share build copies each original (read-only source folder) into an
+   unguessable vault folder under these clean filenames, so the itinerary
+   can open the real ticket or confirmation on a phone. Locally, the same
+   documents open straight from the source folder. Filenames deliberately
+   carry no booking references. */
+window.TRIP.vaultBase = "vault-082b3cc503";
+window.TRIP.hostedFiles = {
+  "doc-lion-uth":          "thai-lion-sl605-eticket-2026-09-26.pdf",
+  "doc-siam-mandarina":    "siam-mandarina-bangkok-expedia-confirmation.pdf",
+  "doc-aa-change-jpeg":    "aa-mia-jax-schedule-change-2026-09-22.jpeg",
+  "doc-qatar-updated":     "qatar-reissued-eticket-2026-06-29.pdf",
+  "doc-qatar-cancel":      "qatar-schedule-change-thread-2026-06-29.pdf",
+  "doc-qatar-original":    "qatar-original-eticket-2026-04-04.pdf",
+  "doc-qatar-confirm":     "qatar-booking-confirmation-2026-04-04.pdf",
+  "doc-aa-mia-jax":        "aa-mia-jax-chase-confirmation.pdf",
+  "doc-aa-jax-lim":        "aa-jax-lim-chase-confirmation.pdf",
+  "doc-latam-lim-mia":     "latam-lim-mia-chase-confirmation.pdf",
+  "doc-fairfield":         "fairfield-miami-airport-confirmation.pdf",
+  "doc-miami-marriott":    "miami-airport-marriott-confirmation.pdf",
+  "doc-revised-itinerary": "jack-itinerary-2026-revised.xlsx",
+  "doc-old-itinerary":     "jack-itinerary-2026-original.xlsx",
+  "doc-parents-sheet":     "peru-and-chile-parents-sheet.xlsx"
+};
+/* Short labels for document chips on itinerary and flight cards */
+window.TRIP.docLabels = {
+  "doc-lion-uth": "Thai Lion e-ticket",
+  "doc-siam-mandarina": "Siam Mandarina confirmation",
+  "doc-aa-change-jpeg": "AA schedule change",
+  "doc-qatar-updated": "Qatar e-ticket",
+  "doc-qatar-cancel": "Qatar change thread",
+  "doc-qatar-original": "Original Qatar ticket",
+  "doc-qatar-confirm": "Qatar booking email",
+  "doc-aa-mia-jax": "AA confirmation",
+  "doc-aa-jax-lim": "AA confirmation",
+  "doc-latam-lim-mia": "LATAM confirmation",
+  "doc-fairfield": "Fairfield confirmation",
+  "doc-miami-marriott": "Marriott confirmation",
+  "doc-revised-itinerary": "Itinerary workbook",
+  "doc-old-itinerary": "Original workbook",
+  "doc-parents-sheet": "Parents' sheet"
+};
+
 
 /* ===== assets/js/data/conflicts.js ===== */
 /* ============================================================
@@ -2677,6 +2813,41 @@ window.U = (function () {
     return out;
   }
 
+  /* ---- document links: hosted vault copy in the shared build,
+     the original file on disk in the local builds ---- */
+  function docById(id) {
+    var list = (window.TRIP && window.TRIP.documents) || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
+    return null;
+  }
+  function docHref(doc) {
+    if (!doc) return null;
+    var hosted = window.TRIP.hostedFiles && window.TRIP.hostedFiles[doc.id];
+    if (window.SHARE_BUILD) return hosted ? window.TRIP.vaultBase + "/" + hosted : null;
+    return "file:///" + (window.TRIP.sourceFolder + "\\" + doc.file).replace(/\\/g, "/").split("/").map(encodeURIComponent).join("/").replace(/%3A/g, ":");
+  }
+  function docKind(doc) {
+    var f = (doc && doc.file || "").toLowerCase();
+    if (/\.pdf$/.test(f)) return "PDF";
+    if (/\.(jpe?g|png)$/.test(f)) return "IMAGE";
+    if (/\.xlsx?$/.test(f)) return "EXCEL";
+    return "FILE";
+  }
+  /* For an array of source doc ids, the openable links (skips docs with no copy) */
+  function docLinks(sources) {
+    var out = [];
+    (sources || []).forEach(function (id) {
+      var d = docById(id), href = docHref(d);
+      if (d && href) out.push({ id: id, doc: d, href: href, label: (window.TRIP.docLabels && window.TRIP.docLabels[id]) || d.file, kind: docKind(d) });
+    });
+    return out;
+  }
+  function docChips(sources) {
+    return docLinks(sources).map(function (l) {
+      return '<a class="docchip" href="' + esc(l.href) + '" target="_blank" rel="noopener">' + I.doc + " " + esc(l.label) + '<span class="kind">' + l.kind + "</span></a>";
+    }).join("");
+  }
+
   function pad2(n) { return (n < 10 ? "0" : "") + n; }
 
   function minsToH(mins) {
@@ -2725,7 +2896,8 @@ window.U = (function () {
   I.globe    = svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-2.5 2.7-3.8 5.8-3.8 9s1.3 6.3 3.8 9c2.5-2.7 3.8-5.8 3.8-9S14.5 5.7 12 3Z"/>');
   I.ticket   = svg('<path d="M4 8a2 2 0 0 0 2-2h12a2 2 0 0 0 2 2v3a2 2 0 0 0 0 2v3a2 2 0 0 0-2 2H6a2 2 0 0 0-2-2v-3a2 2 0 0 0 0-2V8Z"/><path d="M14 6v12" stroke-dasharray="2.5 2.5"/>');
 
-  return { esc: esc, el: el, mask: mask, maskKnown: maskKnown, sensitive: SENSITIVE, pad2: pad2, minsToH: minsToH, pct: pct, icons: I };
+  return { esc: esc, el: el, mask: mask, maskKnown: maskKnown, sensitive: SENSITIVE, pad2: pad2, minsToH: minsToH, pct: pct, icons: I,
+    docById: docById, docHref: docHref, docKind: docKind, docLinks: docLinks, docChips: docChips };
 })();
 
 
@@ -3375,15 +3547,22 @@ window.Views.itinerary = function (root) {
   }
 
   function segRow(day, s) {
-    var extra = "";
+    var extra = "", docs = "";
     if (s.ref && s.ref[0] === "F") {
       var f = Engine.flightById(s.ref);
-      if (f) extra = ' <a class="more" href="#/flights?f=' + f.id + '">detail</a>';
+      if (f) {
+        extra = ' <a class="more" href="#/flights?f=' + f.id + '">detail</a>';
+        if (s.kind === "flight") docs = U.docChips(f.sources);
+      }
     }
-    if (s.ref && s.ref[0] === "H") extra = ' <a class="more" href="#/journey">chapter</a>';
+    if (s.ref && s.ref[0] === "H") {
+      extra = ' <a class="more" href="#/journey">chapter</a>';
+      var h = Engine.hotelById(s.ref);
+      if (h && h.status === "confirmed") docs = U.docChips(h.sources);
+    }
     var est = day.estimated && (s.kind === "caravan" || s.kind === "hotel") ? '<span class="est">estimated</span>' : "";
     return '<div class="seg k-' + s.kind + '">' + (KIND_ICON[s.kind] || I.pin) +
-      '<div class="tx">' + U.esc(U.maskKnown(s.text)) + est + "</div>" + extra + "</div>";
+      '<div class="tx">' + U.esc(U.maskKnown(s.text)) + est + (docs ? '<div class="docrow">' + docs + "</div>" : "") + "</div>" + extra + "</div>";
   }
 
   function dayBlock(day) {
@@ -3536,7 +3715,8 @@ window.Views.flights = function (root, params) {
         '<div class="srow"><span class="k">ref</span><span class="v">' + sens(f.bookingRef) + "</span></div>" +
         (f.ticket ? '<div class="srow"><span class="k">ticket</span><span class="v">' + sens(f.ticket) + "</span></div>" : "") +
         (f.tripId ? '<div class="srow"><span class="k">via</span><span class="v">' + sens(f.tripId) + "</span></div>" : "") +
-        '<div class="srow"><span class="k">source</span><span class="v"><a href="#/documents">' + (f.sources && f.sources.length ? f.sources.length + " doc" + (f.sources.length > 1 ? "s" : "") : "—") + "</a></span></div>" +
+        '<div class="srow"><span class="k">papers</span><span class="v"><a href="#/documents">' + (f.sources && f.sources.length ? f.sources.length + " doc" + (f.sources.length > 1 ? "s" : "") : "—") + "</a></span></div>" +
+        (U.docLinks(f.sources).length ? '<div class="docrow">' + U.docChips(f.sources) + "</div>" : "") +
         '<div class="barcode" aria-hidden="true"></div>' +
       "</div>" +
     "</article>";
@@ -4106,10 +4286,6 @@ window.Views.documents = function (root) {
   var I = U.icons;
   var reveal = Store.settings().revealSensitive;
 
-  function fileUrl(name) {
-    return "file:///" + (window.TRIP.sourceFolder + "\\" + name).replace(/\\/g, "/").split("/").map(encodeURIComponent).join("/").replace(/%3A/g, ":");
-  }
-
   var AUTH_PILL = {
     primary: '<span class="pill ok">primary source</span>',
     derived: '<span class="pill info">derived summary</span>',
@@ -4130,7 +4306,9 @@ window.Views.documents = function (root) {
         return "<li>" + U.esc(U.maskKnown(k)) + "</li>";
       }).join("") + "</ul>" +
       '<div class="row">' +
-        '<span class="pill dim">' + I.doc + " original PDF stays on Jack's desktop</span>" +
+        (U.docHref(d)
+          ? '<a class="btn small" href="' + U.esc(U.docHref(d)) + '" target="_blank" rel="noopener">' + I.doc + (window.SHARE_BUILD ? " Open hosted copy" : " Open original") + "</a>"
+          : '<span class="pill dim">' + I.doc + " not hosted · duplicate or non-travel file</span>") +
         '<span class="coords">doc date ' + U.esc(d.docDate) + " · saved " + U.esc(d.fileDate) + "</span>" +
         (d.masked && d.masked.length && !reveal ? '<span class="sensitive-note">masked: ' + U.esc(d.masked.join(", ")) + "</span>" : "") +
       "</div></article>";
@@ -4180,7 +4358,10 @@ window.Views.documents = function (root) {
     '<button class="btn small" id="reveal-toggle">' + (reveal ? I.eyeOff + " Hide sensitive values" : I.eye + " Reveal sensitive values") + "</button></div>" +
 
     '<div class="notebox" style="margin-bottom:18px">' + I.doc +
-      " 16 travel documents in the read-only source folder (plus one stray html copy), classified by CONTENT (two 'Latam' files are actually American Airlines bookings). Newest additions, 22 Sep: the Thai Lion ticket, the Siam Mandarina booking, and the AA schedule-change screenshot. Booking references and confirmation numbers are masked until revealed. The originals and their extraction copies stay on Jack's PC; every document's key facts are summarized below." +
+      " 16 travel documents in the read-only source folder (plus one stray html copy), classified by CONTENT (two 'Latam' files are actually American Airlines bookings). Newest additions, 22 Sep: the Thai Lion ticket, the Siam Mandarina booking, and the AA schedule-change screenshot. Booking references and confirmation numbers are masked until revealed. " +
+      (window.SHARE_BUILD
+        ? "Every document opens as a hosted copy from this page's own vault folder, and once loaded on a device it stays available offline; the originals remain untouched on Jack's PC."
+        : "Extraction copies live inside this dashboard's <span class='mono'>extraction\\</span> folder; the originals were never modified.") +
     "</div>" +
 
     '<div class="grid g2">' + docs.map(docCard).join("") + "</div>" +
@@ -4302,8 +4483,10 @@ window.Views.today = function (root, params) {
           (isTravel ? '<span class="pill danger">travel day</span>' : "") +
           '<span class="pill ' + (rd.onSchedule ? "ok" : "warn") + '">' + (rd.onSchedule ? "on schedule" : "attention needed") + "</span>" +
         "</div>" +
-        (isTravel || w.mode !== "pre" ? '<p style="margin:16px 0 0"><button class="btn primary" id="tdm-open">' + I.planeUp + " Travel-day focus mode</button></p>" :
-          '<p style="margin:16px 0 0"><button class="btn" id="tdm-open">' + I.planeUp + " Preview travel-day mode</button></p>") +
+        '<p style="margin:16px 0 0;display:flex;gap:10px;flex-wrap:wrap">' +
+          (isTravel || w.mode !== "pre" ? '<button class="btn primary" id="tdm-open">' + I.planeUp + " Travel-day focus mode</button>" :
+            '<button class="btn" id="tdm-open">' + I.planeUp + " Preview travel-day mode</button>") +
+          '<a class="btn" href="#/wallet">' + I.ticket + " Tickets + reservations</a></p>" +
       "</div>" +
 
       '<div class="grid g2" style="margin-top:18px">' +
@@ -4370,6 +4553,12 @@ window.Views.today = function (root, params) {
     }
     var lv = leaveBy(nf);
 
+    function docBtns(sources) {
+      return U.docLinks(sources).map(function (l, i) {
+        return '<a class="btn small' + (i === 0 ? " primary" : "") + '" href="' + U.esc(l.href) + '" target="_blank" rel="noopener">' + I.doc + " " + (i === 0 ? "Open " : "") + U.esc(l.label) + "</a>";
+      }).join("");
+    }
+
     overlay.innerHTML =
       '<div class="tdm-in">' +
         '<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">' +
@@ -4393,6 +4582,7 @@ window.Views.today = function (root, params) {
             '<div class="biglabel">terminal</div>' +
             '<div class="bigv" style="color:var(--paper-dim)">check the airport display on the day (not stated on the ticket)</div>' +
             '<div style="margin-top:10px"><span class="mono" style="color:var(--faint);font-size:.8rem">boards from ' + U.esc(Engine.placeOf(nf.from).airport || nf.from) + " · in <span id='tdm-in'>…</span></span></div>" +
+            (U.docLinks(nf.sources).length ? '<div class="wbtns">' + docBtns(nf.sources) + "</div>" : "") +
           "</div>"
         : '<div class="bigcard"><div class="biglabel">no flights remain</div><div class="bigv">The journey is complete.</div></div>') +
 
@@ -4404,6 +4594,7 @@ window.Views.today = function (root, params) {
             (ht.phone ? '<div class="mono" style="margin-top:6px">' + U.esc(ht.phone) + "</div>" : "") +
             '<div class="biglabel" style="margin-top:10px">confirmation</div>' +
             '<div class="bigv masked">' + (Store.settings().revealSensitive ? U.esc(ht.confirmation || "—") : U.mask(ht.confirmation || "")) + "</div>" +
+            (ht.status === "confirmed" && U.docLinks(ht.sources).length ? '<div class="wbtns">' + docBtns(ht.sources) + "</div>" : "") +
           "</div>" : "") +
 
         '<div style="margin:20px 0 60px">' +
@@ -4424,8 +4615,10 @@ window.Views.today = function (root, params) {
       document.body.style.overflow = "";
       if (params) delete params.tdm;
       App.offTick(tickTDM);
+      window.removeEventListener("hashchange", close);
     }
     overlay.querySelector("#tdm-close").addEventListener("click", close);
+    window.addEventListener("hashchange", close);
     overlay.querySelectorAll("[data-pack]").forEach(function (cb) {
       cb.addEventListener("change", function () {
         Store.setChecked("packing", cb.getAttribute("data-pack"), cb.checked);
@@ -4454,6 +4647,248 @@ window.Views.today = function (root, params) {
 };
 
 
+/* ===== assets/js/ui/wallet.js ===== */
+/* ============================================================
+   WALLET.JS — every ticket and reservation in date order, built
+   for one hand on a phone. Each card opens the real e-ticket or
+   confirmation (hosted vault copies in the shared build, the
+   originals on disk locally), calls the property, or drops the
+   address into Maps. Reports whether the documents are saved
+   offline on this device.
+   ============================================================ */
+window.Views = window.Views || {};
+
+window.Views.wallet = function (root, params) {
+  "use strict";
+  var I = U.icons;
+  var reveal = Store.settings().revealSensitive;
+  var now = T.now();
+
+  function sens(v) {
+    if (v == null || v === "") return "—";
+    return reveal ? U.esc(v) : U.esc(U.mask(v));
+  }
+  function uniq(arr) {
+    var out = [];
+    arr.forEach(function (x) { if (x != null && x !== "" && out.indexOf(x) < 0) out.push(x); });
+    return out;
+  }
+  function telHref(s) {
+    if (!s) return null;
+    var m = String(s).match(/\+?\d[\d\s().-]{6,}\d/);
+    return m ? "tel:" + m[0].replace(/[^\d+]/g, "") : null;
+  }
+  function mapsHref(h) {
+    return "https://maps.apple.com/?q=" + encodeURIComponent(h.address || (h.name + ", " + h.city));
+  }
+  /* first document = primary button "Open …", the rest = plain buttons */
+  function docButtons(sources) {
+    return U.docLinks(sources).map(function (l, i) {
+      return '<a class="btn small' + (i === 0 ? " primary" : "") + '" href="' + U.esc(l.href) + '" target="_blank" rel="noopener">' +
+        I.doc + " " + (i === 0 ? "Open " : "") + U.esc(l.label) + ' <span class="kind">' + l.kind + "</span></a>";
+    }).join("");
+  }
+  function notesBlock(label, items) {
+    var list = items.filter(Boolean);
+    if (!list.length) return "";
+    return '<details class="wmore"><summary>' + U.esc(label) + " (" + list.length + ")</summary><ul>" +
+      list.map(function (n) { return "<li>" + U.esc(reveal ? n : U.maskKnown(n)) + "</li>"; }).join("") + "</ul></details>";
+  }
+
+  /* ---------------- flight journeys ---------------- */
+  function legRow(f) {
+    var pf = Engine.placeOf(f.from), pt = Engine.placeOf(f.to);
+    var dep = T.parse(f.dep), arr = f.arr ? T.parse(f.arr) : null;
+    var plus = arr && T.dateInZone(dep, pf.tz) !== T.dateInZone(arr, pt.tz);
+    return '<div class="wleg">' +
+      '<div class="wl-top"><span class="wl-no">' + U.esc(f.flightNo) + '</span><span class="wl-air">' + U.esc(f.airline) + "</span>" +
+        (f.status === "rebooked" ? '<span class="pill violet">rebooked</span>' : "") +
+        (f.depConfidence === "derived" || f.arrConfidence === "derived" ? '<span class="pill warn">time derived</span>' : "") + "</div>" +
+      '<div class="wl-route">' +
+        '<div class="wl-pt"><b>' + f.from + "</b><span>" + T.fmtTime(dep, pf.tz) + "</span><small>" + T.fmtDay(dep, pf.tz) + " · " + U.esc(pf.name) + "</small></div>" +
+        '<div class="wl-arrow">' + I.plane + "<small>" + (f.durationMin ? U.minsToH(f.durationMin) : "") + "</small></div>" +
+        '<div class="wl-pt r"><b>' + f.to + "</b><span>" + (arr ? T.fmtTime(arr, pt.tz) : "—") + (plus ? '<em class="plus">+1</em>' : "") + "</span><small>" + (arr ? T.fmtDay(arr, pt.tz) + " · " : "") + U.esc(pt.name) + "</small></div>" +
+      "</div>" +
+      '<div class="wl-meta">' + U.esc(f.cabin || "") + " · " + (f.seat ? "seat " + U.esc(f.seat) : "seat at check-in") +
+        (f.baggage ? " · " + U.esc(f.baggage.checked) : "") +
+        (f.layoverBeforeMin ? " · " + U.minsToH(f.layoverBeforeMin) + " layover before, at " + U.esc(f.layoverBeforeAt) : "") + "</div>" +
+    "</div>";
+  }
+
+  function journeyCard(j) {
+    var legs = j.legs.map(Engine.flightById).filter(Boolean);
+    if (!legs.length) return null;
+    var first = legs[0];
+    var pf = Engine.placeOf(first.from);
+    var key = T.parse(first.dep);
+    var lastArr = legs[legs.length - 1].arr ? T.parse(legs[legs.length - 1].arr) : key;
+    var refs = uniq(legs.map(function (f) { return f.bookingRef; }));
+    var tickets = uniq(legs.map(function (f) { return f.ticket; }));
+    var vias = uniq(legs.map(function (f) { return f.tripId; }));
+    var sources = uniq([].concat.apply([], legs.map(function (f) { return f.sources || []; })));
+    var rebooked = legs.some(function (f) { return f.status === "rebooked"; });
+    var live = now >= key && now <= lastArr;
+    var html = '<article class="wcard flight' + (live ? " live" : "") + '" id="w-' + j.id + '" data-key="' + key.toISOString() + '">' +
+      '<div class="whead"><span class="wkick">' + I.plane + " flight · " + T.fmtDay(key, pf.tz) + "</span>" +
+        (live ? '<span class="pill danger">in progress</span>' : rebooked ? '<span class="pill violet">rebooked · confirmed</span>' : '<span class="pill ok">confirmed</span>') + "</div>" +
+      "<h3>" + U.esc(j.name) + "</h3>" +
+      '<div class="wlegs">' + legs.map(legRow).join("") + "</div>" +
+      '<div class="wrefs">' +
+        refs.map(function (r) { return '<div class="wref"><span class="k">booking ref</span><span class="v masked">' + sens(r) + "</span></div>"; }).join("") +
+        tickets.map(function (r) { return '<div class="wref"><span class="k">ticket</span><span class="v masked">' + sens(r) + "</span></div>"; }).join("") +
+        vias.map(function (r) { return '<div class="wref"><span class="k">booked via</span><span class="v masked">' + U.esc(reveal ? r : U.maskKnown(r)) + "</span></div>"; }).join("") +
+      "</div>" +
+      (j.note ? '<div class="wnote">' + U.esc(j.note) + "</div>" : "") +
+      notesBlock("check-in notes", legs.map(function (f) { return f.checkinNote; }).concat([].concat.apply([], legs.map(function (f) { return f.notes || []; })))) +
+      '<div class="wbtns">' + docButtons(sources) + '<a class="btn small" href="#/flights?f=' + first.id + '">' + I.list + " Boarding pass view</a></div>" +
+    "</article>";
+    return { key: key, html: html };
+  }
+
+  /* ---------------- stays ---------------- */
+  function hotelCard(h) {
+    var key = new Date(h.checkIn + "T20:00:00Z"); /* evening of check-in day, sorts after that day's flights */
+    var tz = Engine.placeOf(h.place) ? Engine.placeOf(h.place).tz : "Asia/Bangkok";
+    var todayLocal = T.todayYmd(tz);
+    var here = todayLocal >= h.checkIn && todayLocal < h.checkOut;
+    var tone = h.status === "confirmed" ? "ok" : h.status === "family" ? "info" : "warn";
+    var label = h.status === "confirmed" ? "confirmed" : h.status === "family" ? "family home" : h.status === "operator" ? "via operator" : "no confirmation on file";
+    var tel = telHref(h.phone);
+    var conf = h.confirmation;
+    var confHtml = !conf ? "" : (conf === "TBC" || conf === "via operator") ? U.esc(conf) : sens(conf);
+    var html = '<article class="wcard stay' + (here ? " live" : "") + '" id="w-' + h.id + '" data-key="' + key.toISOString() + '">' +
+      '<div class="whead"><span class="wkick">' + I.bed + " stay · " + T.fmtYmd(h.checkIn) + " → " + T.fmtYmd(h.checkOut) + " · " + h.nights + " night" + (h.nights > 1 ? "s" : "") + "</span>" +
+        (here ? '<span class="pill danger">tonight</span>' : '<span class="pill ' + tone + '">' + label + "</span>") + "</div>" +
+      "<h3>" + U.esc(h.shortName || h.name) + "</h3>" +
+      (h.shortName && h.shortName !== h.name ? '<div class="wsub">' + U.esc(h.name) + "</div>" : "") +
+      '<div class="wrefs">' +
+        (h.address ? '<div class="wref"><span class="k">address</span><span class="v">' + U.esc(h.address) + "</span></div>" : "") +
+        (h.phone ? '<div class="wref"><span class="k">phone</span><span class="v">' + U.esc(h.phone) + "</span></div>" : "") +
+        (h.checkInTime ? '<div class="wref"><span class="k">check-in</span><span class="v">' + U.esc(h.checkInTime) + "</span></div>" : "") +
+        (h.checkOutTime ? '<div class="wref"><span class="k">check-out</span><span class="v">' + U.esc(h.checkOutTime) + "</span></div>" : "") +
+        (h.room ? '<div class="wref"><span class="k">room</span><span class="v">' + U.esc(h.room) + (h.guests ? " · " + h.guests + " guest" + (h.guests > 1 ? "s" : "") : "") + "</span></div>" : "") +
+        (confHtml ? '<div class="wref"><span class="k">confirmation</span><span class="v masked">' + confHtml + "</span></div>" : "") +
+        (h.expediaItinerary ? '<div class="wref"><span class="k">Expedia itinerary</span><span class="v masked">' + sens(h.expediaItinerary) + "</span></div>" : "") +
+        (h.bookedBy && h.bookedBy !== "n/a" ? '<div class="wref"><span class="k">booked by</span><span class="v">' + U.esc(h.bookedBy) + "</span></div>" : "") +
+        (h.cancellation ? '<div class="wref"><span class="k">cancellation</span><span class="v">' + U.esc(h.cancellation) + "</span></div>" : "") +
+        (h.parking ? '<div class="wref"><span class="k">parking</span><span class="v">' + U.esc(h.parking) + "</span></div>" : "") +
+        (h.nightsNote ? '<div class="wref"><span class="k">note</span><span class="v">' + U.esc(h.nightsNote) + "</span></div>" : "") +
+      "</div>" +
+      (h.perNight ? '<div class="wnote">' + h.perNight.map(function (p) { return T.fmtYmd(p.date) + " " + U.esc(p.where); }).join(" · ") + "</div>" : "") +
+      notesBlock("notes", h.notes || []) +
+      '<div class="wbtns">' +
+        (h.status === "confirmed" ? docButtons(h.sources) : "") +
+        (h.address && h.status !== "family" ? '<a class="btn small" href="' + mapsHref(h) + '" target="_blank" rel="noopener">' + I.pin + " Map</a>" : "") +
+        (tel ? '<a class="btn small" href="' + tel + '">' + I.phone + " Call</a>" : "") +
+      "</div>" +
+    "</article>";
+    return { key: key, html: html };
+  }
+
+  /* ---------------- assemble ---------------- */
+  var items = [];
+  window.TRIP.journeys.forEach(function (j) { var c = journeyCard(j); if (c) items.push(c); });
+  window.TRIP.hotels.forEach(function (h) { items.push(hotelCard(h)); });
+  items.sort(function (a, b) { return a.key - b.key; });
+
+  var activeLegs = Engine.activeFlights().length;
+  var allDocLinks = U.docLinks(window.TRIP.documents.map(function (d) { return d.id; }));
+
+  var LINES = [
+    { who: "Qatar Airways", tel: "+974 4023 0000" },
+    { who: "American Airlines", tel: "+1 800 433 7300" },
+    { who: "LATAM", tel: "+1 866 435 9526" },
+    { who: "Marriott / Bonvoy", tel: "+1 800 228 9290" },
+    { who: "Fairfield Miami Airport South", tel: "+1 786 456 2100" },
+    { who: "Expedia support (Siam Mandarina booking)", tel: "+1 866 230 3837" },
+    { who: "US Embassy Lima", tel: "+51 1 618 2000" },
+    { who: "Emergency: USA 911 · Peru 105 · Thailand 191", tel: null }
+  ];
+
+  root.innerHTML =
+    '<div class="view"><section class="section">' +
+      '<div class="section-head"><h2>Wallet</h2><div class="rule"></div>' +
+      '<button class="btn small" id="reveal-toggle">' + (reveal ? I.eyeOff + " Hide references" : I.eye + " Reveal references") + "</button></div>" +
+
+      '<div class="card wsummary">' +
+        '<div class="wsum"><b>' + activeLegs + "</b><span>flight legs</span></div>" +
+        '<div class="wsum"><b>' + window.TRIP.hotels.length + "</b><span>stays</span></div>" +
+        '<div class="wsum"><b>' + allDocLinks.length + "</b><span>documents</span></div>" +
+        '<div class="wsum" id="w-offline"><b>…</b><span>offline copy</span></div>' +
+      "</div>" +
+
+      '<div class="notebox" style="margin-bottom:18px">' + I.ticket +
+        " Tickets and reservations in the order you will need them. Tap <b>Open</b> to see the actual e-ticket or confirmation" +
+        (window.SHARE_BUILD ? "; once this page has loaded on a device, those documents are kept on it for offline use." : "; locally these open the original files from the travel folder.") +
+        " Booking references stay masked until you reveal them." +
+      "</div>" +
+
+      '<div class="wlist" id="wlist">' + items.map(function (it) { return it.html; }).join("") + "</div>" +
+
+      '<div class="section-head" style="margin-top:36px"><h2>Lines that answer</h2><div class="rule"></div>' +
+      '<span style="color:var(--faint);font-size:.78rem">verify numbers before travel · tap to call</span></div>' +
+      '<div class="card pad wlines"><div class="big-list">' + LINES.map(function (l) {
+        var href = telHref(l.tel);
+        return '<div class="row"><div class="k">' + U.esc(l.who) + '</div><div class="v">' + (href ? '<a href="' + href + '">' + U.esc(l.tel) + "</a>" : "") + "</div></div>";
+      }).join("") + "</div></div>" +
+
+      '<div class="section-head" style="margin-top:36px"><h2>Every document</h2><div class="rule"></div>' +
+      '<span style="color:var(--faint);font-size:.78rem">' + allDocLinks.length + " files · newest bookings first in the library</span></div>" +
+      '<div class="card pad wdocs">' + allDocLinks.map(function (l) {
+        return '<div class="drow">' + I.doc + '<div><div>' + U.esc(l.label) + ' <span class="pill dim">' + l.kind + "</span></div>" +
+          '<div class="fn">' + U.esc(U.maskKnown(l.doc.file)) + " · " + U.esc(l.doc.docDate) + "</div></div>" +
+          '<a class="btn small" href="' + U.esc(l.href) + '" target="_blank" rel="noopener">Open</a></div>';
+      }).join("") + "</div>" +
+      '<p style="margin-top:14px"><a class="btn small" href="#/documents">' + I.list + " Full document library, conflicts and emergency card</a></p>" +
+    "</section></div>";
+
+  /* mark the next upcoming card */
+  var cards = root.querySelectorAll(".wcard");
+  for (var i = 0; i < cards.length; i++) {
+    if (cards[i].classList.contains("live")) break;
+    if (new Date(cards[i].getAttribute("data-key")) > now) {
+      cards[i].classList.add("next");
+      var head = cards[i].querySelector(".whead");
+      if (head) head.insertAdjacentHTML("beforeend", '<span class="pill gold">next up</span>');
+      break;
+    }
+  }
+
+  /* offline status of the hosted documents (shared build on http/https only) */
+  function offlineProbe(cb) {
+    if (!window.SHARE_BUILD || !("caches" in window) || !allDocLinks.length) return cb(null);
+    var checks = allDocLinks.map(function (l) {
+      return caches.match(new URL(l.href, location.href).href).then(function (r) { return !!r; }, function () { return false; });
+    });
+    Promise.all(checks).then(function (arr) { cb({ saved: arr.filter(Boolean).length, total: arr.length }); }, function () { cb(null); });
+  }
+  function paintOffline(st) {
+    var el = document.getElementById("w-offline");
+    if (!el) return;
+    if (!st) { el.innerHTML = "<b>n/a</b><span>" + (window.SHARE_BUILD ? "offline copy" : "local originals") + "</span>"; return; }
+    var online = navigator.onLine !== false;
+    if (st.saved === st.total) { el.className = "wsum ok"; el.innerHTML = "<b>saved</b><span>" + st.total + " docs on this device</span>"; }
+    else if (st.saved === 0) { el.className = "wsum warn"; el.innerHTML = "<b>" + (online ? "saving…" : "none") + "</b><span>" + (online ? "documents downloading" : "open once while online") + "</span>"; }
+    else { el.className = "wsum warn"; el.innerHTML = "<b>" + st.saved + "/" + st.total + "</b><span>saved offline</span>"; }
+  }
+  offlineProbe(function (st) {
+    paintOffline(st);
+    if (st && st.saved < st.total) setTimeout(function () { offlineProbe(paintOffline); }, 6000);
+  });
+
+  var rt = document.getElementById("reveal-toggle");
+  if (rt) rt.addEventListener("click", function () {
+    Store.setSetting("revealSensitive", !reveal);
+    window.Views.wallet(root, params);
+  });
+
+  if (params && params.w) {
+    var target = document.getElementById("w-" + params.w);
+    if (target) setTimeout(function () { target.scrollIntoView({ behavior: "smooth", block: "start" }); }, 60);
+  }
+};
+
+
 /* ===== assets/js/app.js ===== */
 /* ============================================================
    APP.JS — shell: hash router, masthead, tabs, tick loop.
@@ -4465,6 +4900,7 @@ window.App = (function () {
   var TABS = [
     { id: "home",      label: "Command",   icon: I.compass },
     { id: "itinerary", label: "Itinerary", icon: I.list },
+    { id: "wallet",    label: "Wallet",    icon: I.ticket },
     { id: "map",       label: "Atlas",     icon: I.globe },
     { id: "journey",   label: "Journey",   icon: I.mountain },
     { id: "flights",   label: "Flights",   icon: I.plane },
@@ -4472,7 +4908,7 @@ window.App = (function () {
     { id: "documents", label: "Documents", icon: I.doc },
     { id: "today",     label: "Today",     icon: I.sun }
   ];
-  var MOBILE_TABS = ["home", "itinerary", "prepare", "today", "map"];
+  var MOBILE_TABS = ["home", "itinerary", "wallet", "prepare", "today"];
 
   var tickHandlers = [];
   function onTick(fn) { if (tickHandlers.indexOf(fn) < 0) tickHandlers.push(fn); }
@@ -4575,6 +5011,37 @@ window.App = (function () {
 })();
 
 </script>
+<script>
 
+(function () {
+  "use strict";
+  if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+    window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
+  }
+  var KEY = "sunlit2026.a2hsDismissed";
+  function dismissed() { try { return localStorage.getItem(KEY) === "1"; } catch (e) { return false; } }
+  function dismiss() { try { localStorage.setItem(KEY, "1"); } catch (e) {} var b = document.getElementById("a2hs"); if (b) b.remove(); }
+  function standalone() { return window.navigator.standalone === true || (window.matchMedia && matchMedia("(display-mode: standalone)").matches); }
+  function show(html) {
+    if (dismissed() || standalone() || document.getElementById("a2hs")) return null;
+    var bar = document.createElement("div"); bar.className = "a2hs"; bar.id = "a2hs";
+    bar.innerHTML = html + '<button class="btn small x" id="a2hs-x" aria-label="dismiss">✕</button>';
+    document.body.appendChild(bar);
+    document.getElementById("a2hs-x").addEventListener("click", dismiss);
+    return bar;
+  }
+  var isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  window.addEventListener("load", function () {
+    if (isIOS) setTimeout(function () { show("<span><b>Keep it on your iPhone:</b> tap the Share button (square with an arrow), then <b>Add to Home Screen</b>. It then opens full-screen and works offline, documents included.</span>"); }, 1500);
+  });
+  var deferred = null;
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault(); deferred = e;
+    var bar = show("<span><b>Install the atlas</b> as an app: full-screen, offline, on your home screen.</span><button class='btn small primary' id='a2hs-go'>Install</button>");
+    if (bar) document.getElementById("a2hs-go").addEventListener("click", function () { deferred.prompt(); deferred.userChoice.then(function () { dismiss(); }); });
+  });
+})();
+
+</script>
 </body>
 </html>
