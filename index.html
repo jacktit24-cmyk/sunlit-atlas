@@ -935,6 +935,82 @@ button, input, select { font: inherit; color: inherit; }
 .a2hs .x { margin-left: auto; flex: none; }
 @media (min-width: 701px) { .a2hs { bottom: 20px; left: auto; max-width: 440px; } }
 
+/* ==========================================================================
+   NOW · the live journey assistant
+   ========================================================================== */
+.section.now { margin-top: 18px; }
+.nowhead { padding: 18px 20px 16px; overflow: hidden; }
+.nh-top { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+.nowclock { font-family: var(--mono); font-size: clamp(2.4rem, 9vw, 3.6rem); line-height: 1; font-variant-numeric: tabular-nums; margin-top: 4px; color: var(--paper); }
+.nowdate { color: var(--faint); font-size: .82rem; margin-top: 6px; }
+.nh-prog { margin-left: auto; display: grid; grid-template-columns: auto auto; gap: 2px 10px; align-items: baseline; text-align: right; }
+.nh-prog b { font-family: var(--disp); font-size: 1.25rem; color: var(--terra); }
+.nh-prog span { font-family: var(--ui); font-weight: 700; font-size: .56rem; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); text-align: left; }
+.pbar { height: 7px; border-radius: 5px; background: var(--ink3); border: 1px solid var(--line); overflow: hidden; margin-top: 14px; }
+.pbar .fill { height: 100%; background: linear-gradient(90deg, var(--sky), var(--terra)); border-radius: 4px; }
+.zonenote { margin-top: 12px; border: 1.5px dashed var(--line-strong); border-radius: var(--rad-sm); padding: 9px 12px; font-size: .8rem; color: var(--paper-dim); display: flex; gap: 8px; align-items: flex-start; background: var(--ink2); }
+.zonenote .ic { color: var(--terra); margin-top: 2px; }
+.nh-btns { margin-top: 12px; }
+
+.nextcard { padding: 20px 22px 18px 24px; position: relative; overflow: hidden; border-color: var(--terra); }
+.nextcard::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--terra); }
+.nextcard.k-hotel-prep::before, .nextcard.k-hotel-checkin::before, .nextcard.k-hotel-checkout::before { background: var(--green); }
+.nextcard.k-day::before { background: var(--gold); }
+.nextcard.overdue { border-color: var(--danger); }
+.nextcard.overdue::before { background: var(--danger); }
+.nextcard .nk { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.nextcard .nk .ic { color: var(--terra); width: 1.3em; height: 1.3em; }
+.nextcard h2 { font-size: 1.35rem; margin: 8px 0 4px; letter-spacing: .01em; line-height: 1.2; }
+.cdbig { font-family: var(--mono); font-size: clamp(1.7rem, 7vw, 2.6rem); font-variant-numeric: tabular-nums; color: var(--terra-deep); margin: 6px 0 4px; line-height: 1.1; }
+.nextcard.overdue .cdbig { color: var(--danger); font-size: 1.2rem; }
+.nextcard .when { font-family: var(--mono); font-size: .74rem; color: var(--paper-dim); letter-spacing: .04em; }
+.nextcard .when .dev { color: var(--faint); }
+.nextcard .det { color: var(--paper-dim); font-size: .92rem; margin: 10px 0 0; }
+
+.legcard .lg-head { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 6px; }
+.legcard .lg-route { font-family: var(--mono); font-size: .86rem; color: var(--paper-dim); margin-top: 6px; }
+.legcard .lg-route b { font-family: var(--disp); font-size: 1.15rem; color: var(--paper); }
+.stagegrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px; }
+@media (min-width: 701px) { .stagegrid { grid-template-columns: repeat(4, 1fr); } }
+.stage {
+  font-family: var(--ui); font-weight: 700; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--paper-dim); background: var(--ink1); border: 1.5px solid var(--line-strong); border-radius: 10px;
+  padding: 11px 10px; cursor: pointer; text-align: left; display: flex; gap: 6px; align-items: center; line-height: 1.25;
+}
+.stage .ic { color: #fff7ea; width: 1.1em; height: 1.1em; }
+.stage.done { background: var(--green); border-color: var(--green); color: #f3f8ee; }
+.stage:hover { border-color: var(--terra); }
+.tl { margin-top: 8px; display: grid; }
+.tlrow { display: grid; grid-template-columns: 52px 22px 1fr auto; gap: 8px; align-items: center; padding: 8px 0; border-top: 1px dashed var(--line); font-size: .86rem; }
+.tlrow:first-child { border-top: 0; }
+.tlrow .t { font-family: var(--mono); font-size: .78rem; color: var(--paper-dim); font-variant-numeric: tabular-nums; }
+.tlrow .ic-w .ic { color: var(--terra); }
+.tlrow .in { font-family: var(--mono); font-size: .7rem; color: var(--faint); white-space: nowrap; }
+.tlrow.done { opacity: .5; }
+.tlrow.done .tx { text-decoration: line-through; }
+.tlrow.next { background: var(--gold-soft); border-radius: 8px; padding-left: 6px; padding-right: 6px; margin: 0 -6px; }
+.tlrow.next .in { color: var(--terra-deep); font-weight: 700; }
+
+.ulist { margin-top: 6px; }
+.uday { font-family: var(--ui); font-weight: 700; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--terra); margin: 12px 0 2px; }
+.urow { display: grid; grid-template-columns: 52px 22px 1fr auto; gap: 8px; align-items: center; padding: 9px 0; border-top: 1px dashed var(--line); font-size: .88rem; cursor: pointer; }
+.urow .t { font-family: var(--mono); font-size: .78rem; color: var(--paper-dim); }
+.urow .ic-w .ic { color: var(--sky); }
+.urow .in { font-family: var(--mono); font-size: .7rem; color: var(--faint); white-space: nowrap; }
+
+.staycard h3 { font-size: 1.15rem; margin: 6px 0 2px; }
+.thinkcard ul.tips { padding-left: 18px; margin: 8px 0 0; }
+.thinkcard ul.tips li { margin: 8px 0; color: var(--paper-dim); font-size: .9rem; }
+.thinkcard .notebox { margin-top: 10px; }
+.est { color: var(--warn); font-family: var(--ui); font-weight: 700; font-size: .55rem; letter-spacing: .16em; text-transform: uppercase; margin-left: 6px; border: 1.5px dashed rgba(168, 114, 15, .5); border-radius: 4px; padding: 1px 5px; }
+
+/* NOW · open windows strip */
+.opennow { display: grid; gap: 6px; margin: 12px 0 0; }
+.onrow { display: flex; gap: 10px; align-items: center; border: 1.5px dashed var(--line-strong); border-radius: var(--rad-sm); padding: 8px 10px 8px 12px; background: var(--ink2); font-size: .84rem; color: var(--paper-dim); }
+.onrow .ic-w .ic { color: var(--sky); width: 1.15em; height: 1.15em; }
+.onrow .tx { flex: 1; min-width: 0; }
+.onrow .btn { padding: 4px 8px; }
+
 /* shared-view: commit to the sunlit theme regardless of viewer theme */
 :root { color-scheme: light; }
 </style>
@@ -2771,6 +2847,135 @@ window.TRIP.workPlan = {
 };
 
 
+/* ===== assets/js/data/assist.js ===== */
+/* ============================================================
+   ASSIST.JS — the journey assistant's knowledge pack.
+   Timing rules the step engine (core/steps.js) uses, plus the
+   airport / airline / hotel / border facts the Now screen shows
+   at the moment they matter. Every fact carries a confidence:
+     "primary"   printed on a booking document in the source folder
+     "official"  read on the operator's or a government site
+     "estimated" a planning heuristic; the UI labels it
+   Nothing here overrides the booking data in flights.js/hotels.js.
+   ============================================================ */
+window.TRIP = window.TRIP || {};
+
+window.TRIP.assist = {
+  updated: "2026-09-23",
+
+  /* ---- planning heuristics used for every countdown (estimated) ---- */
+  airportBufferMin: { intl: 180, dom: 120 },      // be at the airport this long before departure
+  arrivalProcessMin: { intl: 75, dom: 25 },       // immigration + bags after landing
+  rideMin: { UTH: 40, BKK: 15, DMK: 60, MIA: 25, JAX: 45, LIM: 60, DOH: 0 },   // door to terminal from where Jack sleeps
+  walkToGateMin: { UTH: 5, DMK: 10, BKK: 25, DOH: 20, MIA: 15, JAX: 10, LIM: 15 },
+
+  /* ---- airline timing rules (minutes unless stated) ---- */
+  airlines: {
+    SL: {
+      name: "Thai Lion Air", onlineCheckinOpensH: 24,
+      checkinClosesMin_dom: 45, gateClosesMin_dom: 20, boardingStartsMin_dom: 35,
+      checkinClosesMin_intl: 60, gateClosesMin_intl: 20, boardingStartsMin_intl: 40,
+      baggage: "25 kg checked on this fare (printed on the ticket)",
+      loungeRule: "No lounge on an Economy fare",
+      notes: ["The e-ticket receipt is not a boarding pass: present it with a passport or government photo ID at check-in (printed on the receipt)."],
+      confidence: "estimated", sources: ["doc-lion-uth"]
+    },
+    QR: {
+      name: "Qatar Airways", onlineCheckinOpensH: 48, onlineCheckinOpensH_usBound: 24,
+      checkinClosesMin_intl: 60, gateClosesMin_intl: 20, boardingStartsMin_intl: 50,
+      baggage: "Business: 2 pieces x 32 kg checked; 2 pieces, 7 kg total cabin (per the e-ticket)",
+      loungeRule: "Business ticket: Al Mourjan Business Lounge in Doha; contract or Qatar lounge at outstations",
+      notes: ["Qatar's own guidance printed with the booking: online check-in opens 48 h before departure (24 h for US-bound sectors); be at the airport 3 h before."],
+      confidence: "primary", sources: ["doc-qatar-updated"]
+    },
+    AA: {
+      name: "American Airlines", onlineCheckinOpensH: 24,
+      checkinClosesMin_dom: 45, gateClosesMin_dom: 15, boardingStartsMin_dom: 35,
+      checkinClosesMin_intl: 60, gateClosesMin_intl: 15, boardingStartsMin_intl: 45,
+      baggage: "Checked bags included on both AA bookings (Chase Travel confirmations)",
+      loungeRule: "Admirals Club access depends on the fare and route; confirm at the club desk",
+      notes: ["AA check-in opens 24 h before departure; changes allowed up to 48 h out (Chase Travel confirmation)."],
+      confidence: "primary", sources: ["doc-aa-mia-jax", "doc-aa-jax-lim"]
+    },
+    LA: {
+      name: "LATAM Airlines", onlineCheckinOpensH: 48,
+      checkinClosesMin_intl: 60, gateClosesMin_intl: 15, boardingStartsMin_intl: 45,
+      baggage: "Checked bags included (Chase Travel confirmation)",
+      loungeRule: "Premium Business: LATAM lounge at the departure airport where one exists",
+      notes: ["LATAM online check-in opens 48 h before departure (Chase Travel confirmation)."],
+      confidence: "primary", sources: ["doc-latam-lim-mia"]
+    }
+  },
+
+  /* ---- airports: what to know on the day (filled from research; primary facts first) ---- */
+  airports: {
+    UTH: { name: "Udon Thani International", departure: { tips: ["Domestic terminal; the receipt plus passport gets you through check-in (printed on the Thai Lion receipt)."] } },
+    DMK: { name: "Don Mueang International", arrival: { tips: ["SL605 lands at Terminal 2 (domestic), printed on the ticket. The Siam Mandarina sits by the OTHER airport: budget 45 to 75 minutes by Grab or the official taxi rank."] } },
+    BKK: { name: "Suvarnabhumi International", departure: { tips: ["Qatar's guidance: at the airport 3 h before the 02:30 departure, so the ~23:00 hotel shuttle is the plan."] } },
+    DOH: { name: "Hamad International", transit: { tips: ["Same-terminal international transfer; follow Transfer signage to transfer security, then Al Mourjan Business Lounge."] } },
+    MIA: { name: "Miami International", arrival: { tips: ["US immigration and customs happen here on both entries (28 Sep from Doha, 28 Oct from Lima)."] } },
+    JAX: { name: "Jacksonville International", departure: { tips: ["Bags check through to Lima on the 17 Oct booking; the family flies together."] } },
+    LIM: { name: "Jorge Chávez International", arrival: { tips: ["Night arrival: use a pre-arranged car or the official taxi counters, never a curb hail."] } }
+  },
+
+  /* ---- hotels: the arrival playbook for each stay ---- */
+  hotels: {
+    H0: {
+      phone: null, phoneNote: "The property's own contact is on the Expedia booking confirmation; Expedia support +1-866-230-3837 (printed on the confirmation).",
+      shuttle: { available: true, howToRequest: "Contact the property 24 h before arrival using the contact information on the booking confirmation (Expedia terms). Book the ~23:00 Sunday run to Suvarnabhumi at check-in.", coversAirports: "Suvarnabhumi (free). Don Mueang is a paid cross-town ride." },
+      checkIn: "from 09:00 (check-in ends anytime); minimum age 15", checkOut: "noon",
+      nameOnBooking: "Reserved for Jack Tait, 2 adults", confidence: "primary", sources: ["doc-siam-mandarina"]
+    },
+    H1: {
+      phone: "+1-786-456-2100",
+      shuttle: { available: null, howToRequest: "Ask the hotel whether the airport shuttle runs in the evening; otherwise a 10-minute ride from MIA.", coversAirports: "MIA" },
+      checkIn: "15:00", checkOut: "12:00",
+      nameOnBooking: "Booked by William Tait (Marriott Bonvoy); Visa guarantee", confidence: "primary", sources: ["doc-fairfield"]
+    },
+    H3: {
+      phone: null, shuttle: { available: null, howToRequest: "No confirmation document exists; arrange the airport car with the hotel or the caravan operator." },
+      checkIn: "evening after the 20:10 landing", checkOut: "morning of 28 Oct",
+      nameOnBooking: "unconfirmed", confidence: "estimated", sources: []
+    },
+    H5: {
+      phone: null,
+      shuttle: { available: null, howToRequest: "Full-service airport hotel; ask for the shuttle at the MIA hotel courtesy phone or call the property.", coversAirports: "MIA" },
+      checkIn: "after the 20:35 landing on 28 Oct", checkOut: "12:00",
+      nameOnBooking: "Reservation under WILLIAM TAIT (Marriott Rewards redemption, 37,000 points, 2 guests). Ask Dad to add Jack's name, or carry the confirmation email plus matching-surname ID.",
+      parking: "Valet 32 USD daily; on-site 5 USD hourly, 28 USD daily (printed on the confirmation)",
+      cancellation: "Free until 23:59 hotel time on 26 Oct 2026", confidence: "primary", sources: ["doc-miami-marriott"]
+    }
+  },
+
+  /* ---- borders ---- */
+  entry: {
+    thailandReturn: { text: "Submit the Thailand Digital Arrival Card (TDAC) online within the 72 hours before landing at Suvarnabhumi on 31 Oct (foreign passport holders).", url: "https://tdac.immigration.go.th", confidence: "estimated" },
+    usaEntry: { text: "US immigration at MIA on 28 Sep and 28 Oct. If you carry a US passport, the CBP Mobile Passport Control app can shorten the queue; otherwise have the ESTA or visa ready.", confidence: "estimated" },
+    peruEntry: { text: "Passport with at least six months' validity is the safe rule; keep the onward LATAM ticket handy. The original passport is also required at the Machu Picchu gate.", confidence: "estimated" }
+  },
+
+  /* ---- think-ahead tips, matched by node code and moment ---- */
+  tips: [
+    { when: "night-before", nodes: ["UTH"], text: "Stage the 25 kg bag by the door, passport in the jacket pocket, e-ticket receipt open in the Wallet. Udon Thani is a small airport: 11:00 is comfortable for 12:55.", confidence: "estimated" },
+    { when: "arrival", nodes: ["DMK"], text: "Don Mueang, not Suvarnabhumi. Head to the taxi rank or Grab pickup; the Siam Mandarina is on Kingkaew Road on the far side of the city, 45 to 75 minutes.", confidence: "estimated" },
+    { when: "hotel", nodes: ["BKK"], text: "First thing at the Siam Mandarina desk: book the free shuttle for about 23:00 on Sunday night. The property needs 24 h notice.", confidence: "primary" },
+    { when: "night-before", nodes: ["BKK"], text: "Sunday is a rest day: sleep in the afternoon if you can. The 02:30 departure means the shuttle at 23:00 and a long night; Qatar online check-in is already open.", confidence: "estimated" },
+    { when: "lounge", nodes: ["DOH"], text: "Doha westbound: 3 h 20 m. Transfer security first, then Al Mourjan for a shower and breakfast; leave the lounge about an hour before the 08:25 departure. US-bound flights can carry a second security check at the gate.", confidence: "estimated" },
+    { when: "arrival", nodes: ["MIA"], text: "After the 16:40 landing expect 60 to 90 minutes for immigration and bags. Then a short ride to the Fairfield on NW 11th Street; check-in from 15:00.", confidence: "estimated" },
+    { when: "night-before", nodes: ["MIA"], text: "AA4024 now leaves at 08:03: alarm for 05:15, out of the Fairfield by 06:00. Domestic bag-drop closes 45 minutes before departure.", confidence: "estimated" },
+    { when: "night-before", nodes: ["JAX"], text: "Peru departure: passports for the whole family, bags through to Lima, out of the house by 07:30 for the 10:06 departure. Remember the train luggage limit in Peru: pack a small bag for the caravan days.", confidence: "estimated" },
+    { when: "arrival", nodes: ["LIM"], text: "Lima at night: pre-arranged car or the official taxi counters inside the terminal. Miraflores is 45 to 70 minutes away. The Courtyard has no confirmation on file, so have the family's booking details ready.", confidence: "estimated" },
+    { when: "altitude", nodes: ["CUZ"], text: "Cusco day one: walk slowly, drink water, light meals, no alcohol. Coca tea is fine. Talk to a doctor about acetazolamide before the trip.", confidence: "estimated" },
+    { when: "general", nodes: ["MAP"], text: "Machu Picchu: original passport at the gate, daypack only, bus queue before dawn. Tickets are timed and held by the operator.", confidence: "estimated" },
+    { when: "night-before", nodes: ["LIM"], text: "LATAM online check-in opened 48 h before LA2694. Leave Miraflores by about 09:30 for the 13:30 departure; say goodbye to the parents, who stay for the cruise.", confidence: "estimated" },
+    { when: "hotel", nodes: ["MIA"], text: "The Miami Airport Marriott booking is under William Tait's name. Bring the confirmation email and your ID; if the desk hesitates, call Dad.", confidence: "primary" },
+    { when: "night-before", nodes: ["MIA"], text: "QR778 leaves at 20:15 on 29 Oct: checkout at noon, a free afternoon, at MIA by 17:15. Qatar online check-in for the US-bound sector opens 24 h before.", confidence: "estimated" },
+    { when: "lounge", nodes: ["DOH"], text: "Doha eastbound: 3 h 35 m from 16:50. Dinner in Al Mourjan, then the 20:25 QR838 to Bangkok, landing 06:40 Saturday.", confidence: "estimated" },
+    { when: "arrival", nodes: ["BKK"], text: "Have the TDAC confirmation ready for immigration. Nothing is booked from Bangkok back to Udon Thani: decide (fly from DMK or BKK, or the train) before landing.", confidence: "estimated" }
+  ]
+};
+
+
 /* ===== assets/js/core/util.js ===== */
 /* ============================================================
    UTIL.JS — helpers + inline SVG icon set (no network, ever).
@@ -3299,6 +3504,381 @@ window.Engine = (function () {
     tasksWithState: tasksWithState, taskState: taskState, readiness: readiness,
     topActions: topActions, nextDeadline: nextDeadline, orderingStatus: orderingStatus,
     dayFor: dayFor, whereAmI: whereAmI, isTravelDayToday: isTravelDayToday
+  };
+})();
+
+
+/* ===== assets/js/core/steps.js ===== */
+/* ============================================================
+   STEPS.JS — the journey as a time-ordered list of moments.
+   Turns flights, hotels, transfers and caravan days into
+   concrete instants (leave for the airport, bag drop closes,
+   head to the gate, boarding, hotel prep 24 h out, checkout)
+   using the timing rules in data/assist.js, then answers
+   "what is next, and in how long" for any instant. Check-in
+   stages Jack ticks on the Now screen hide the moments they
+   make moot. Pure functions over TRIP + Store; all instants are
+   absolute, so the phone's own zone never matters.
+   ============================================================ */
+window.Steps = (function () {
+  "use strict";
+
+  var NS = "journey";
+  var DEFAULT_RULE = {
+    onlineCheckinOpensH: 24,
+    checkinClosesMin_dom: 45, checkinClosesMin_intl: 60,
+    gateClosesMin_dom: 15, gateClosesMin_intl: 20,
+    boardingStartsMin_dom: 35, boardingStartsMin_intl: 45
+  };
+
+  /* Stages Jack can tick for a flight; each hides the moments it makes moot. */
+  var STAGES = [
+    { id: "checkin",  label: "Checked in online",            hides: ["checkin-opens"] },
+    { id: "airport",  label: "At the airport, bags dropped",   hides: ["checkin-opens", "leave", "at-airport", "bagdrop-closes"] },
+    { id: "security", label: "Through security / immigration", hides: ["checkin-opens", "leave", "at-airport", "bagdrop-closes", "connect"] },
+    { id: "lounge",   label: "In the lounge",                 hides: ["checkin-opens", "leave", "at-airport", "bagdrop-closes", "connect"] },
+    { id: "gate",     label: "At the gate",                   hides: ["checkin-opens", "leave", "at-airport", "bagdrop-closes", "connect", "to-gate"] },
+    { id: "boarded",  label: "Boarded",                       hides: ["checkin-opens", "leave", "at-airport", "bagdrop-closes", "connect", "to-gate", "boarding", "gate-closes"] },
+    { id: "landed",   label: "Landed",                        hides: ["checkin-opens", "leave", "at-airport", "bagdrop-closes", "connect", "to-gate", "boarding", "gate-closes", "departs", "lands"] }
+  ];
+
+  function A() { return window.TRIP.assist || {}; }
+  function num(v, fallback) { return typeof v === "number" && !isNaN(v) ? v : fallback; }
+  function minus(d, mins) { return new Date(d.getTime() - mins * 60000); }
+  function plus(d, mins) { return new Date(d.getTime() + mins * 60000); }
+  function place(code) { return Engine.placeOf(code) || { name: code, tz: "Asia/Bangkok", country: "" }; }
+  function isIntl(f) { return place(f.from).country !== place(f.to).country; }
+  function usBound(f) { return place(f.to).country === "USA"; }
+  function rule(code, key, intl) {
+    var r = (A().airlines || {})[code] || {};
+    var k = key + (intl ? "_intl" : "_dom");
+    return num(r[k], num(r[key + "_intl"], num(DEFAULT_RULE[k], DEFAULT_RULE[key + "_intl"])));
+  }
+  function localDate(ymd, hm, tz) {
+    /* instant for a wall-clock time in a zone: iterate once on the offset */
+    var guess = new Date(ymd + "T" + hm + ":00Z");
+    var off = offsetMin(guess, tz);
+    return new Date(guess.getTime() - off * 60000);
+  }
+  function offsetMin(d, tz) {
+    var f = new Intl.DateTimeFormat("en-US", { timeZone: tz, hour12: false, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    var p = {}; f.formatToParts(d).forEach(function (x) { p[x.type] = x.value; });
+    var asUtc = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute, +p.second);
+    return Math.round((asUtc - d.getTime()) / 60000);
+  }
+
+  /* ---- stage state ---- */
+  function stageKey(fid, stage) { return fid + ":" + stage; }
+  function stageDone(fid, stage) { return Store.isChecked(NS, stageKey(fid, stage)); }
+  function setStage(fid, stage, val) {
+    Store.setChecked(NS, stageKey(fid, stage), val);
+    if (val) { /* ticking a later stage implies the earlier ones */
+      var idx = STAGES.map(function (s) { return s.id; }).indexOf(stage);
+      for (var i = 0; i < idx; i++) Store.setChecked(NS, stageKey(fid, STAGES[i].id), true);
+    } else {
+      var idx2 = STAGES.map(function (s) { return s.id; }).indexOf(stage);
+      for (var j = idx2 + 1; j < STAGES.length; j++) Store.setChecked(NS, stageKey(fid, STAGES[j].id), false);
+    }
+  }
+  function resetStages(fid) { STAGES.forEach(function (s) { Store.setChecked(NS, stageKey(fid, s.id), false); }); }
+  /* any non-flight moment (transfer, hotel prep, checkout, caravan day) can be ticked off on its own */
+  function stepDone(id) { return Store.isChecked(NS, "step:" + id); }
+  function setStepDone(id, val) { Store.setChecked(NS, "step:" + id, val); }
+  function hiddenKinds(fid) {
+    var hidden = {};
+    STAGES.forEach(function (s) { if (stageDone(fid, s.id)) s.hides.forEach(function (k) { hidden[k] = true; }); });
+    return hidden;
+  }
+
+  /* ---- helpers to find related records ---- */
+  function transportFor(dateYmd, placeCode, direction) {
+    /* direction "from" = leaving the airport after landing; "to" = ride to the airport */
+    var list = window.TRIP.transport || [];
+    var name = place(placeCode).name;
+    for (var i = 0; i < list.length; i++) {
+      var t = list[i];
+      if (t.date !== dateYmd) continue;
+      var field = direction === "from" ? (t.from || "") : (t.to || "");
+      if (field.indexOf(placeCode) >= 0 || field.indexOf(name) >= 0 || field.toLowerCase().indexOf(placeCode.toLowerCase()) >= 0) return t;
+    }
+    return null;
+  }
+  function hotelArrivingOn(dateYmd, placeCode) {
+    var hs = window.TRIP.hotels.filter(function (h) { return h.checkIn === dateYmd && (h.place === placeCode || (placeCode === "DMK" && h.place === "BKK")); });
+    return hs[0] || null;
+  }
+  function hotelBefore(f) {
+    /* where Jack sleeps the night before a departure: hotel covering that date at the origin */
+    var ymd = T.dateInZone(minus(T.parse(f.dep), 6 * 60), place(f.from).tz);
+    var hs = window.TRIP.hotels.filter(function (h) { return h.checkIn <= ymd && ymd < h.checkOut && (h.place === f.from || (f.from === "BKK" && h.place === "BKK")); });
+    return hs[0] || null;
+  }
+
+  /* ---- build every moment ---- */
+  function build() {
+    var steps = [];
+    var a = A();
+    var buffer = a.airportBufferMin || { intl: 180, dom: 120 };
+    var process = a.arrivalProcessMin || { intl: 75, dom: 25 };
+    var rides = a.rideMin || {};
+    var walks = a.walkToGateMin || {};
+
+    function push(s) { s.until = s.until || s.at; steps.push(s); return s; }
+
+    var journeys = (window.TRIP.journeys || []).map(function (j) {
+      return { id: j.id, name: j.name, note: j.note, legs: j.legs.map(Engine.flightById).filter(Boolean) };
+    }).filter(function (j) { return j.legs.length; });
+
+    journeys.forEach(function (j) {
+      var anyUs = j.legs.some(usBound);
+      j.legs.forEach(function (f, i) {
+        var dep = T.parse(f.dep), arr = f.arr ? T.parse(f.arr) : dep;
+        var pf = place(f.from), pt = place(f.to);
+        var intl = isIntl(f);
+        var buf = intl ? buffer.intl : buffer.dom;
+        var ride = num(rides[f.from], 30);
+        var walk = num(walks[f.from], 15);
+        var first = i === 0, last = i === j.legs.length - 1;
+        var closes = rule(f.code, "checkinClosesMin", intl);
+        var gateCloses = rule(f.code, "gateClosesMin", intl);
+        var boardingStarts = rule(f.code, "boardingStartsMin", intl);
+        var air = (a.airlines || {})[f.code] || {};
+        var base = { flight: f, journey: j, place: f.from, tz: pf.tz, group: j.id };
+        var atAirport = minus(dep, buf);
+
+        if (first) {
+          var opensH = num(air.onlineCheckinOpensH, DEFAULT_RULE.onlineCheckinOpensH);
+          if (anyUs && air.onlineCheckinOpensH_usBound) opensH = Math.min(opensH, air.onlineCheckinOpensH_usBound);
+          push(Object.assign({}, base, {
+            id: "co-" + f.id, kind: "checkin-opens", stage: "checkin", window: true, at: minus(dep, opensH * 60), until: minus(dep, closes),
+            title: "Online check-in opens: " + f.airline + " " + f.flightNo,
+            detail: "Opens " + opensH + " h before the " + T.fmtTime(dep, pf.tz) + " departure. Choose or confirm the seat" + (f.seat ? " (" + f.seat + " is assigned)" : "") + " and save the boarding pass to the phone."
+          }));
+          var hb = hotelBefore(f);
+          push(Object.assign({}, base, {
+            id: "lv-" + f.id, kind: "leave", stage: "airport", at: minus(atAirport, ride), until: plus(minus(atAirport, ride), 60), alert: true,
+            title: "Leave for " + pf.airport + (hb ? " from " + (hb.shortName || hb.name) : ""),
+            detail: "About " + ride + " min to the terminal; be there by " + T.fmtTime(atAirport, pf.tz) + " (" + (intl ? "3 h" : "2 h") + " before departure). " + (f.baggage ? "Bags: " + f.baggage.checked + "." : "")
+          }));
+          push(Object.assign({}, base, {
+            id: "aa-" + f.id, kind: "at-airport", stage: "airport", at: atAirport, until: minus(dep, closes), alert: true,
+            title: "At " + pf.airport + ": check-in and bag drop",
+            detail: f.airline + " counters close " + closes + " min before departure (" + T.fmtTime(minus(dep, closes), pf.tz) + "). " + (f.checkinNote || "")
+          }));
+          push(Object.assign({}, base, {
+            id: "bd-" + f.id, kind: "bagdrop-closes", stage: "airport", at: minus(dep, closes), until: minus(dep, closes),
+            title: "Bag drop closes for " + f.flightNo,
+            detail: "After this the bag travels only as cabin baggage, if at all."
+          }));
+        } else {
+          var prev = j.legs[i - 1], prevArr = T.parse(prev.arr);
+          var lay = Math.round((dep - prevArr) / 60000);
+          var conn = ((a.connections || {})[f.from + "_" + j.id] || {});
+          push(Object.assign({}, base, {
+            id: "cx-" + f.id, kind: "connect", stage: "security", window: true, at: prevArr, until: minus(dep, boardingStarts + walk), alert: true,
+            title: "Connection at " + pf.name + ": " + U.minsToH(lay),
+            detail: (conn.text || ("Transfer to " + f.flightNo + ". Follow transfer signage, clear transfer security, then " + (air.loungeRule || "wait near the gate") + ".")) + " Next departure " + T.fmtTime(dep, pf.tz) + " local."
+          }));
+        }
+        push(Object.assign({}, base, {
+          id: "tg-" + f.id, kind: "to-gate", stage: "gate", at: minus(dep, boardingStarts + walk), until: minus(dep, gateCloses), alert: true,
+          title: "Head to the gate for " + f.flightNo,
+          detail: "Boarding usually starts about " + boardingStarts + " min before departure; allow " + walk + " min to walk. Check the airport display for the gate (not printed on the ticket)."
+        }));
+        push(Object.assign({}, base, {
+          id: "bo-" + f.id, kind: "boarding", stage: "boarded", at: minus(dep, boardingStarts), until: minus(dep, gateCloses), alert: true,
+          title: "Boarding " + f.flightNo + (f.seat ? " · seat " + f.seat : ""),
+          detail: "Gate closes " + gateCloses + " min before departure (" + T.fmtTime(minus(dep, gateCloses), pf.tz) + ")."
+        }));
+        push(Object.assign({}, base, {
+          id: "gc-" + f.id, kind: "gate-closes", stage: "boarded", at: minus(dep, gateCloses), until: minus(dep, gateCloses),
+          title: "Gate closes for " + f.flightNo, detail: "Departure " + T.fmtTime(dep, pf.tz) + " " + pf.tzShort + "."
+        }));
+        push(Object.assign({}, base, {
+          id: "dp-" + f.id, kind: "departs", stage: "landed", at: dep, until: plus(dep, 20),
+          title: f.flightNo + " departs " + pf.name + " for " + pt.name,
+          detail: (f.durationMin ? U.minsToH(f.durationMin) + " in the air. " : "") + "Lands " + T.fmtDT(arr, pt.tz) + " " + pt.tzShort + "."
+        }));
+        push(Object.assign({}, base, {
+          id: "ld-" + f.id, kind: "lands", stage: "landed", at: arr, until: plus(arr, 10), place: f.to, tz: pt.tz, alert: true,
+          title: f.flightNo + " lands at " + pt.airport,
+          detail: last ? "Immigration and bags next." : "Connection follows."
+        }));
+        if (last) {
+          var proc = intl ? process.intl : process.dom;
+          var landYmd = T.dateInZone(arr, pt.tz);
+          var tOut = transportFor(landYmd, f.to, "from");
+          var hotel = hotelArrivingOn(landYmd, f.to);
+          push(Object.assign({}, base, {
+            id: "ar-" + f.id, kind: "arrival", window: true, at: arr, until: plus(arr, proc + 60), place: f.to, tz: pt.tz,
+            title: "Arrival at " + pt.airport + ": " + (intl ? "immigration, customs, bags" : "bags"),
+            detail: "Allow about " + U.minsToH(proc) + ". " + ((((a.airports || {})[f.to] || {}).arrival || {}).tips || []).join(" ")
+          }));
+          if (tOut) push(Object.assign({}, base, {
+            id: "tr-" + f.id, kind: "transfer", at: plus(arr, proc), until: plus(arr, proc + 180), place: f.to, tz: pt.tz, transport: tOut, hotel: hotel,
+            title: tOut.name,
+            detail: [tOut.mode, tOut.window].filter(Boolean).join(" · ") + (tOut.notes && tOut.notes.length ? " " + tOut.notes.join(" ") : "")
+          }));
+        }
+      });
+    });
+
+    /* ---- stays ---- */
+    (window.TRIP.hotels || []).forEach(function (h) {
+      var tz = place(h.place).tz;
+      var arrivalFlight = Engine.activeFlights().filter(function (f) {
+        return f.arr && T.dateInZone(T.parse(f.arr), place(f.to).tz) === h.checkIn && (f.to === h.place || (f.to === "DMK" && h.place === "BKK"));
+      }).sort(function (x, y) { return T.parse(y.arr) - T.parse(x.arr); })[0];
+      var arrive = arrivalFlight
+        ? plus(T.parse(arrivalFlight.arr), (isIntl(arrivalFlight) ? (A().arrivalProcessMin || {}).intl || 75 : (A().arrivalProcessMin || {}).dom || 25) + num((A().rideMin || {})[h.place], 30))
+        : localDate(h.checkIn, "15:00", tz);
+      var hk = (A().hotels || {})[h.id] || {};
+      if (h.status !== "family") {
+        push({
+          id: "hp-" + h.id, kind: "hotel-prep", window: true, at: minus(arrive, 24 * 60), until: arrive, hotel: h, place: h.place, tz: tz, group: h.id, alert: true,
+          title: "Next stay: " + (h.shortName || h.name),
+          detail: (hk.shuttle && hk.shuttle.howToRequest ? hk.shuttle.howToRequest + " " : "") + (h.confirmation && h.confirmation !== "TBC" && h.confirmation !== "via operator" ? "Confirmation is in the Wallet. " : (h.status === "unconfirmed" ? "NO confirmation on file: chase it today. " : "")) + (hk.nameOnBooking ? "Name on booking: " + hk.nameOnBooking : "")
+        });
+      }
+      push({
+        id: "hc-" + h.id, kind: "hotel-checkin", at: arrive, until: plus(arrive, 6 * 60), hotel: h, place: h.place, tz: tz, group: h.id,
+        title: (h.status === "family" ? "Arrive: " : "Check in: ") + (h.shortName || h.name),
+        detail: (h.checkInTime ? "Check-in " + h.checkInTime + ". " : "") + (h.address || "") + (h.status === "operator" ? " Hotel named by the operator on the day." : "")
+      });
+      if (h.status !== "family" && h.status !== "operator") {
+        var co = (h.checkOutTime || "").match(/(\d{1,2}):(\d{2})/);
+        var coHm = co ? (("0" + co[1]).slice(-2) + ":" + co[2]) : (/noon/i.test(h.checkOutTime || "") ? "12:00" : "11:00");
+        var coAt = localDate(h.checkOut, coHm, tz);
+        push({
+          id: "ho-" + h.id, kind: "hotel-checkout", at: minus(coAt, 90), until: coAt, hotel: h, place: h.place, tz: tz, group: h.id, alert: true,
+          title: "Check out of " + (h.shortName || h.name) + " by " + coHm,
+          detail: (h.checkOutTime || "") + ". Settle the bill, collect passports from the safe, arrange the ride."
+        });
+      }
+    });
+
+    /* ---- caravan and headline days ---- */
+    (window.TRIP.days || []).forEach(function (d) {
+      if (!d.caravanDay && !d.star) return;
+      var tz = place(d.place).tz;
+      var at = localDate(d.date, d.star ? "04:00" : "07:00", tz);
+      push({
+        id: "dy-" + d.date, kind: "day", window: true, at: at, until: localDate(d.date, "20:00", tz), day: d, place: d.place, tz: tz, group: "caravan", alert: !!d.star,
+        title: (d.star ? "MACHU PICCHU DAY: " : "Caravan day " + d.caravanDay + ": ") + d.title,
+        detail: d.sub + (d.estimated ? " (day order estimated; operator programme pending)" : "")
+      });
+    });
+
+    steps.sort(function (x, y) { return x.at - y.at; });
+    return { steps: steps, journeys: journeys };
+  }
+
+  /* ---- the answer for one instant ---- */
+  function state(now) {
+    now = now || T.now();
+    var built = build();
+    var hiddenByFlight = {};
+    var visible = built.steps.filter(function (s) {
+      if (stepDone(s.id)) return false;
+      if (!s.flight || !s.stage) return true;
+      var fid = s.flight.id;
+      if (!hiddenByFlight[fid]) hiddenByFlight[fid] = hiddenKinds(fid);
+      return !hiddenByFlight[fid][s.kind];
+    });
+    var live = visible.filter(function (s) { return s.until > now; });
+    /* the headline is the next MOMENT: a future step of any kind, or an overdue point event still inside
+       its grace. A window that has already opened (check-in open, connection, hotel prep, a caravan day)
+       is context, listed under "open now", never the headline. */
+    var nextMoment = live.filter(function (s) { return !s.window; })[0] || null;
+    var nextWindow = live.filter(function (s) { return s.window && s.at > now; })[0] || null;
+    var next = nextMoment;
+    /* a window opening within the next 12 h (a caravan dawn, a check-in window today) may headline; a far-off one never does */
+    if (nextWindow && (!nextMoment || nextWindow.at < nextMoment.at) && (nextWindow.at - now) <= 12 * 3600000) next = nextWindow;
+    var openNow = live.filter(function (s) { return s.window && s.at <= now; });
+    var inFlight = Engine.activeFlights().filter(function (f) { return T.parse(f.dep) <= now && now < T.parse(f.arr) && !stageDone(f.id, "landed"); })[0] || null;
+    var activeJourney = built.journeys.filter(function (j) { return plus(T.parse(j.legs[j.legs.length - 1].arr), 30) > now; })[0] || null;
+    var focusFlight = inFlight || (activeJourney ? activeJourney.legs.filter(function (f) { return !stageDone(f.id, "landed") && plus(T.parse(f.arr), 30) > now; })[0] : null);
+    var currentStay = (window.TRIP.hotels || []).filter(function (h) {
+      var tz = place(h.place).tz, ymd = T.dateInZone(now, tz);
+      return h.checkIn <= ymd && ymd < h.checkOut;
+    })[0] || null;
+    var nextStay = (window.TRIP.hotels || []).filter(function (h) { return localDate(h.checkIn, "23:59", place(h.place).tz) > now && h !== currentStay; })[0] || null;
+    var flightsFlown = Engine.activeFlights().filter(function (f) { return T.parse(f.arr) <= now || stageDone(f.id, "landed"); }).length;
+    var totalFlights = Engine.activeFlights().length;
+    var start = T.parse("2026-09-26T00:00:00+07:00"), end = T.parse(window.TRIP.meta.homecomingLocal);
+    var dayNo = Math.floor((now - start) / 86400000) + 1;
+    var progressPct = Math.max(0, Math.min(100, Math.round(((now - start) / (end - start)) * 100)));
+    var horizon = plus(now, 36 * 60);
+    return {
+      now: now, steps: built.steps, visible: visible, live: live, next: next, openNow: openNow,
+      upcoming: live.filter(function (s) { return s.at > now || !s.window; }).slice(0, 8), soon: live.filter(function (s) { return s.at <= horizon; }),
+      inFlight: inFlight, focusFlight: focusFlight, activeJourney: activeJourney,
+      currentStay: currentStay, nextStay: nextStay,
+      progress: { flightsFlown: flightsFlown, totalFlights: totalFlights, dayNo: dayNo, totalDays: window.TRIP.meta.doorToDoorDays || 36, pct: progressPct, started: now >= start, finished: now >= end }
+    };
+  }
+
+  /* ---- leave-by helper shared with Travel-Day Focus Mode ---- */
+  function leaveBy(f) {
+    if (!f) return null;
+    var a = A(); var intl = isIntl(f);
+    var buf = intl ? (a.airportBufferMin || {}).intl || 180 : (a.airportBufferMin || {}).dom || 120;
+    return minus(T.parse(f.dep), buf + num((a.rideMin || {})[f.from], 30));
+  }
+
+  /* ---- tips for a node + moment ---- */
+  function tipsFor(nodes, whens) {
+    var all = A().tips || [];
+    return all.filter(function (t) {
+      var nodeOk = !nodes || !nodes.length || (t.nodes || []).some(function (n) { return nodes.indexOf(n) >= 0; });
+      var whenOk = !whens || !whens.length || whens.indexOf(t.when) >= 0;
+      return nodeOk && whenOk;
+    });
+  }
+
+  /* ---- alerts: in-app notifications for upcoming moments while the app is open ---- */
+  var timers = [];
+  function alertsOn() { return !!Store.settings().alerts; }
+  function canNotify() { return typeof Notification !== "undefined" && Notification.permission === "granted"; }
+  function notify(title, body) {
+    try {
+      if (navigator.serviceWorker && navigator.serviceWorker.ready && canNotify()) {
+        navigator.serviceWorker.ready.then(function (reg) {
+          if (reg && reg.showNotification) reg.showNotification(title, { body: body, icon: "icon-192.png", badge: "icon-192.png", tag: "sunlit-" + title });
+          else new Notification(title, { body: body });
+        }).catch(function () { try { new Notification(title, { body: body }); } catch (e) {} });
+      } else if (canNotify()) {
+        new Notification(title, { body: body });
+      }
+    } catch (e) { /* notifications unavailable: the toast still fires */ }
+    if (window.App && App.toast) App.toast(title);
+  }
+  function scheduleAlerts() {
+    timers.forEach(clearTimeout); timers = [];
+    if (!alertsOn()) return 0;
+    var st = state();
+    var count = 0;
+    st.live.forEach(function (s) {
+      if (!s.alert) return;
+      var lead = (s.kind === "leave" || s.kind === "to-gate" || s.kind === "hotel-checkout") ? 30 : 0;
+      [lead, 0].forEach(function (l) {
+        var when = minus(s.at, l);
+        var delta = when - st.now;
+        if (delta <= 0 || delta > 12 * 3600000) return;
+        timers.push(setTimeout(function () {
+          notify((l ? "In " + l + " min: " : "Now: ") + s.title, s.detail ? s.detail.slice(0, 140) : "");
+        }, delta));
+        count++;
+      });
+    });
+    return count;
+  }
+
+  return {
+    STAGES: STAGES, build: build, state: state, leaveBy: leaveBy, tipsFor: tipsFor,
+    stageDone: stageDone, setStage: setStage, resetStages: resetStages, stepDone: stepDone, setStepDone: setStepDone,
+    alertsOn: alertsOn, canNotify: canNotify, notify: notify, scheduleAlerts: scheduleAlerts,
+    localDate: localDate, offsetMin: offsetMin, isIntl: isIntl
   };
 })();
 
@@ -4545,6 +5125,7 @@ window.Views.today = function (root, params) {
 
     function leaveBy(f) {
       if (!f) return null;
+      if (window.Steps && Steps.leaveBy) return Steps.leaveBy(f);
       var dep = T.parse(f.dep);
       var domestic = (f.from === "MIA" && f.to === "JAX") || (f.from === "UTH" && f.to === "DMK");
       var bufferMin = domestic ? 120 : 180;
@@ -4889,6 +5470,344 @@ window.Views.wallet = function (root, params) {
 };
 
 
+/* ===== assets/js/ui/now.js ===== */
+/* ============================================================
+   NOW.JS — the live journey assistant. One screen, one hand:
+   where you are (local zone, phone zone), the next move with a
+   live countdown, the active leg with tap-to-confirm stages,
+   what is coming up, tonight's or tomorrow's stay with the
+   arrival playbook, and what to think about next. Every instant
+   is absolute, so it is right in any time zone the phone is in.
+   ============================================================ */
+window.Views = window.Views || {};
+
+window.Views.now = function (root, params) {
+  "use strict";
+  var I = U.icons;
+  var reveal = Store.settings().revealSensitive;
+  var deviceTz = (function () { try { return Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) { return null; } })();
+  var lastNextId = null;
+
+  function pl(code) { return Engine.placeOf(code) || { name: code, tz: "Asia/Bangkok", tzShort: "" }; }
+  function cd(target, now) {
+    var ms = target - now, past = ms < 0; if (past) ms = -ms;
+    var s = Math.floor(ms / 1000);
+    return { past: past, d: Math.floor(s / 86400), h: Math.floor((s % 86400) / 3600), m: Math.floor((s % 3600) / 60), s: s % 60, totalMin: Math.floor(ms / 60000) };
+  }
+  function cdText(c) {
+    if (c.d > 0) return c.d + " d " + U.pad2(c.h) + " h " + U.pad2(c.m) + " m";
+    if (c.h > 0) return c.h + " h " + U.pad2(c.m) + " m " + U.pad2(c.s) + " s";
+    return c.m + " m " + U.pad2(c.s) + " s";
+  }
+  function cdShort(c) {
+    if (c.d > 0) return c.d + "d " + c.h + "h";
+    if (c.h > 0) return c.h + "h " + U.pad2(c.m) + "m";
+    return c.m + "m";
+  }
+  function whenLine(step) {
+    var p = pl(step.place);
+    return T.fmtDay(step.at, step.tz) + " · " + T.fmtTime(step.at, step.tz) + " " + (p.tzShort || "") + " · " + p.name + " local";
+  }
+  function deviceLine(step) {
+    if (!deviceTz || deviceTz === step.tz) return "";
+    return "your phone: " + T.fmtDay(step.at, deviceTz) + " " + T.fmtTime(step.at, deviceTz);
+  }
+  var KIND_ICON = {
+    "checkin-opens": I.check, "leave": I.car, "at-airport": I.planeUp, "bagdrop-closes": I.bag, "connect": I.transfer,
+    "to-gate": I.pin, "boarding": I.planeUp, "gate-closes": I.warn, "departs": I.plane, "lands": I.plane, "arrival": I.stamp,
+    "transfer": I.car, "hotel-prep": I.bed, "hotel-checkin": I.bed, "hotel-checkout": I.clock, "day": I.mountain
+  };
+  var KIND_LABEL = {
+    "checkin-opens": "check-in window", "leave": "leave now", "at-airport": "at the airport", "bagdrop-closes": "deadline", "connect": "connection",
+    "to-gate": "to the gate", "boarding": "boarding", "gate-closes": "deadline", "departs": "departure", "lands": "landing", "arrival": "arrival",
+    "transfer": "transfer", "hotel-prep": "next stay · prepare", "hotel-checkin": "check-in", "hotel-checkout": "checkout", "day": "the day"
+  };
+
+  function actionsFor(step) {
+    var out = [];
+    if (step.flight) {
+      U.docLinks(step.flight.sources).slice(0, 1).forEach(function (l) {
+        out.push('<a class="btn small primary" href="' + U.esc(l.href) + '" target="_blank" rel="noopener">' + I.doc + " Open " + U.esc(l.label) + "</a>");
+      });
+      if (step.kind === "leave" || step.kind === "at-airport" || step.kind === "to-gate") {
+        var ap = pl(step.place);
+        out.push('<a class="btn small" href="https://maps.apple.com/?q=' + encodeURIComponent((ap.airport || ap.name) + " airport") + '" target="_blank" rel="noopener">' + I.pin + " Map</a>");
+      }
+      out.push('<a class="btn small" href="#/wallet?w=' + step.journey.id + '">' + I.ticket + " Wallet</a>");
+    }
+    var h = step.hotel || (step.transport && step.hotel);
+    if (h) {
+      if (h.status === "confirmed") U.docLinks(h.sources).slice(0, 1).forEach(function (l) {
+        out.push('<a class="btn small primary" href="' + U.esc(l.href) + '" target="_blank" rel="noopener">' + I.doc + " Open " + U.esc(l.label) + "</a>");
+      });
+      if (h.address) out.push('<a class="btn small" href="https://maps.apple.com/?q=' + encodeURIComponent(h.address) + '" target="_blank" rel="noopener">' + I.pin + " Map</a>");
+      var tel = telOf(((window.TRIP.assist || {}).hotels || {})[h.id] && ((window.TRIP.assist || {}).hotels || {})[h.id].phone || h.phone);
+      if (tel) out.push('<a class="btn small" href="' + tel + '">' + I.phone + " Call</a>");
+    }
+    if (step.stage && step.flight) out.push('<button class="btn small" data-stage="' + step.stage + '" data-fid="' + step.flight.id + '">' + I.check + " Done: " + U.esc(stageLabel(step.stage)) + "</button>");
+    else out.push('<button class="btn small" data-done="' + U.esc(step.id) + '">' + I.check + " Done</button>");
+    return out.join("");
+  }
+
+  function openNowStrip(st) {
+    if (!st.openNow.length) return "";
+    return '<div class="opennow">' + st.openNow.map(function (s) {
+      var endsIn = cdShort(cd(s.until, st.now));
+      var label = s.kind === "checkin-opens" ? "Online check-in is open · counters close in " + endsIn
+        : s.kind === "connect" ? s.title + " · gate call in " + endsIn
+        : s.kind === "hotel-prep" ? s.title + " · you arrive in " + endsIn
+        : s.kind === "arrival" ? s.title
+        : s.kind === "day" ? s.title
+        : s.title;
+      return '<div class="onrow"><span class="ic-w">' + (KIND_ICON[s.kind] || I.pin) + '</span><span class="tx">' + U.esc(label) + "</span>" +
+        (s.stage && s.flight ? '<button class="btn small ghost" data-stage="' + s.stage + '" data-fid="' + s.flight.id + '">' + I.check + "</button>" : '<button class="btn small ghost" data-done="' + U.esc(s.id) + '" aria-label="done">' + I.check + "</button>") + "</div>";
+    }).join("") + "</div>";
+  }
+  function stageLabel(id) { var s = Steps.STAGES.filter(function (x) { return x.id === id; })[0]; return s ? s.label : id; }
+  function telOf(s) { if (!s) return null; var m = String(s).match(/\+?\d[\d\s().-]{6,}\d/); return m ? "tel:" + m[0].replace(/[^\d+]/g, "") : null; }
+
+  function nextCard(st) {
+    var n = st.next;
+    if (!n) return '<div class="card nextcard"><div class="kicker dim">next move</div><h2>The journey is complete.</h2><p>Home. Nothing left on the list.</p></div>';
+    var c = cd(n.at, st.now);
+    var p = pl(n.place);
+    return '<div class="card nextcard k-' + n.kind + (c.past ? " overdue" : "") + '" id="next-' + n.id + '">' +
+      '<div class="nk">' + (KIND_ICON[n.kind] || I.pin) + '<span class="kicker">' + (c.past ? "now" : n.window ? "coming up" : "next") + " · " + U.esc(KIND_LABEL[n.kind] || n.kind) + "</span>" +
+        (n.flight ? '<span class="pill dim">' + U.esc(n.flight.flightNo) + "</span>" : "") + "</div>" +
+      "<h2>" + U.esc(n.title) + "</h2>" +
+      '<div class="cdbig" id="cd-next" data-at="' + n.at.toISOString() + '">' + (c.past ? "started " + cdShort(c) + " ago" : cdText(c)) + "</div>" +
+      '<div class="when">' + U.esc(whenLine(n)) + (deviceLine(n) ? ' <span class="dev">· ' + U.esc(deviceLine(n)) + "</span>" : "") + "</div>" +
+      (n.detail ? '<p class="det">' + U.esc(reveal ? n.detail : U.maskKnown(n.detail)) + "</p>" : "") +
+      '<div class="wbtns">' + actionsFor(n) + "</div>" +
+    "</div>";
+  }
+
+  function legCard(st) {
+    var f = st.focusFlight;
+    if (!f) return "";
+    var pf = pl(f.from), pt = pl(f.to);
+    var dep = T.parse(f.dep), arr = T.parse(f.arr);
+    var mine = st.steps.filter(function (s) { return s.flight && s.flight.id === f.id; });
+    var hidden = {};
+    st.visible.forEach(function (s) { hidden[s.id] = false; });
+    var air = ((window.TRIP.assist || {}).airlines || {})[f.code] || {};
+    var apt = ((window.TRIP.assist || {}).airports || {})[f.from] || {};
+    var depInfo = apt.departure || {};
+    var inFlight = st.inFlight && st.inFlight.id === f.id;
+    return '<div class="card pad legcard">' +
+      '<div class="kicker dim">' + (inFlight ? "in the air now" : "active leg") + "</div>" +
+      '<div class="lg-head"><span class="wl-no">' + U.esc(f.flightNo) + '</span><span class="wl-air">' + U.esc(f.airline) + '</span><span class="pill ' + (f.status === "rebooked" ? "violet" : "ok") + '">' + (inFlight ? "airborne" : f.status) + "</span></div>" +
+      '<div class="lg-route"><b>' + f.from + "</b> " + T.fmtTime(dep, pf.tz) + " " + U.esc(pf.tzShort) + " → <b>" + f.to + "</b> " + T.fmtTime(arr, pt.tz) + " " + U.esc(pt.tzShort) +
+        (f.seat ? " · seat " + U.esc(f.seat) : " · seat at check-in") + " · " + U.esc(f.cabin || "") + "</div>" +
+      (inFlight ? '<div class="notebox">' + I.plane + " Wheels down " + T.fmtDT(arr, pt.tz) + " " + U.esc(pt.tzShort) + " (" + U.esc(pt.name) + " local); that is " + (deviceTz && deviceTz !== pt.tz ? T.fmtTime(arr, deviceTz) + " on your phone's clock" : "the same on your phone") + ". Set the watch to " + U.esc(pt.name) + " time now.</div>" : "") +
+      '<div class="kicker dim" style="margin-top:14px">tap what you have done</div>' +
+      '<div class="stagegrid">' + Steps.STAGES.map(function (s) {
+        var done = Steps.stageDone(f.id, s.id);
+        return '<button class="stage' + (done ? " done" : "") + '" data-stage="' + s.id + '" data-fid="' + f.id + '" aria-pressed="' + done + '">' + (done ? I.check : "") + U.esc(s.label) + "</button>";
+      }).join("") + "</div>" +
+      '<div class="kicker dim" style="margin-top:14px">this leg, moment by moment · ' + U.esc(pf.name) + " local</div>" +
+      '<div class="tl">' + mine.map(function (s) {
+        var shown = st.visible.indexOf(s) >= 0;
+        var passed = s.until <= st.now;
+        var isNext = st.next && st.next.id === s.id;
+        return '<div class="tlrow' + (isNext ? " next" : "") + (passed || !shown ? " done" : "") + '"><span class="t">' + T.fmtTime(s.at, s.tz) + '</span><span class="ic-w">' + (KIND_ICON[s.kind] || I.pin) + '</span><span class="tx">' + U.esc(s.title) + "</span>" +
+          '<span class="in">' + (passed || !shown ? (shown ? "passed" : "done") : cdShort(cd(s.at, st.now))) + "</span></div>";
+      }).join("") + "</div>" +
+      (depInfo.checkin && depInfo.checkin.length ? '<div class="kicker dim" style="margin-top:14px">check-in at ' + U.esc(pf.airport || pf.name) + "</div><ul class='kf'>" + depInfo.checkin.filter(function (c) { return !c.airline || c.airline.indexOf(f.code) >= 0 || c.airline.indexOf(f.airline) >= 0; }).map(function (c) { return "<li>" + U.esc([c.where, c.opensBefore ? "opens " + c.opensBefore : "", c.closesBefore ? "closes " + c.closesBefore : ""].filter(Boolean).join(" · ")) + conf(c) + "</li>"; }).join("") + "</ul>" : "") +
+      (depInfo.lounges && depInfo.lounges.length ? '<div class="kicker dim" style="margin-top:12px">lounges</div><ul class="kf">' + depInfo.lounges.map(function (l) { return "<li><b>" + U.esc(l.name) + "</b>" + (l.location ? " · " + U.esc(l.location) : "") + (l.access ? " · " + U.esc(l.access) : "") + (l.hours ? " · " + U.esc(l.hours) : "") + conf(l) + "</li>"; }).join("") + "</ul>" : "") +
+      (air.loungeRule ? '<div class="coords" style="margin-top:10px">lounge rule · ' + U.esc(air.loungeRule) + "</div>" : "") +
+      '<div class="wbtns"><a class="btn small" href="#/today?tdm=1">' + I.planeUp + ' Travel-day focus mode</a><button class="btn small ghost" id="reset-leg" data-fid="' + f.id + '">Reset this leg</button></div>' +
+    "</div>";
+  }
+  function conf(x) { return x && x.confidence && x.confidence !== "official" && x.confidence !== "primary" && x.confidence !== "high" ? ' <span class="est">' + U.esc(x.confidence) + "</span>" : ""; }
+
+  function upcomingCard(st) {
+    var list = st.upcoming.filter(function (s) { return !st.next || s.id !== st.next.id; }).slice(0, 7);
+    if (!list.length) return "";
+    var lastDay = "";
+    return '<div class="card pad"><div class="kicker dim">coming up</div><div class="ulist">' + list.map(function (s) {
+      var dayLbl = T.fmtDay(s.at, s.tz);
+      var head = dayLbl !== lastDay ? '<div class="uday">' + U.esc(dayLbl) + " · " + U.esc(pl(s.place).name) + " local</div>" : "";
+      lastDay = dayLbl;
+      return head + '<div class="urow" data-jump="' + s.id + '"><span class="t">' + T.fmtTime(s.at, s.tz) + '</span><span class="ic-w">' + (KIND_ICON[s.kind] || I.pin) + '</span><span class="tx">' + U.esc(s.title) + '</span><span class="in" data-at="' + s.at.toISOString() + '">' + cdShort(cd(s.at, st.now)) + "</span></div>";
+    }).join("") + "</div></div>";
+  }
+
+  function stayCard(st) {
+    var h = st.currentStay || st.nextStay;
+    if (!h) return "";
+    var isNow = !!st.currentStay;
+    var hk = ((window.TRIP.assist || {}).hotels || {})[h.id] || {};
+    var tel = telOf(hk.phone || h.phone);
+    return '<div class="card pad staycard"><div class="kicker dim">' + (isNow ? "where you sleep tonight" : "next stay") + "</div>" +
+      "<h3>" + U.esc(h.shortName || h.name) + "</h3>" +
+      '<div class="wsub">' + T.fmtYmd(h.checkIn) + " → " + T.fmtYmd(h.checkOut) + " · " + h.nights + " night" + (h.nights > 1 ? "s" : "") + (h.status !== "confirmed" ? " · " + U.esc(h.status === "unconfirmed" ? "NO CONFIRMATION ON FILE" : h.status) : "") + "</div>" +
+      '<div class="wrefs">' +
+        (h.address ? '<div class="wref"><span class="k">address</span><span class="v">' + U.esc(h.address) + "</span></div>" : "") +
+        (hk.checkIn ? '<div class="wref"><span class="k">check-in</span><span class="v">' + U.esc(hk.checkIn) + "</span></div>" : "") +
+        (hk.checkOut ? '<div class="wref"><span class="k">check-out</span><span class="v">' + U.esc(hk.checkOut) + "</span></div>" : "") +
+        (hk.shuttle ? '<div class="wref"><span class="k">shuttle</span><span class="v">' + U.esc([hk.shuttle.available === false ? "none" : hk.shuttle.available ? "yes" : "ask", hk.shuttle.howToRequest, hk.shuttle.pickupPoint, hk.shuttle.hours, hk.shuttle.coversAirports].filter(Boolean).join(" · ")) + "</span></div>" : "") +
+        (hk.phoneNote && !hk.phone ? '<div class="wref"><span class="k">phone</span><span class="v">' + U.esc(hk.phoneNote) + "</span></div>" : (hk.phone ? '<div class="wref"><span class="k">phone</span><span class="v">' + U.esc(hk.phone) + "</span></div>" : "")) +
+        (h.confirmation ? '<div class="wref"><span class="k">confirmation</span><span class="v masked">' + (h.confirmation === "TBC" || h.confirmation === "via operator" ? U.esc(h.confirmation) : (reveal ? U.esc(h.confirmation) : U.esc(U.mask(h.confirmation)))) + "</span></div>" : "") +
+        (hk.nameOnBooking ? '<div class="wref"><span class="k">name on booking</span><span class="v">' + U.esc(hk.nameOnBooking) + "</span></div>" : "") +
+      "</div>" +
+      '<div class="wbtns">' +
+        (h.status === "confirmed" ? U.docLinks(h.sources).slice(0, 1).map(function (l) { return '<a class="btn small primary" href="' + U.esc(l.href) + '" target="_blank" rel="noopener">' + I.doc + " Open " + U.esc(l.label) + "</a>"; }).join("") : "") +
+        (h.address ? '<a class="btn small" href="https://maps.apple.com/?q=' + encodeURIComponent(h.address) + '" target="_blank" rel="noopener">' + I.pin + " Map</a>" : "") +
+        (tel ? '<a class="btn small" href="' + tel + '">' + I.phone + " Call</a>" : "") +
+        '<a class="btn small" href="#/wallet?w=' + h.id + '">' + I.ticket + " Wallet</a>" +
+      "</div></div>";
+  }
+
+  function thinkAheadCard(st) {
+    var nodes = [], whens = [];
+    var n = st.next;
+    if (n) {
+      nodes.push(n.place);
+      if (n.flight) nodes.push(n.flight.to);
+      if (n.kind === "checkin-opens" || n.kind === "leave" || n.kind === "at-airport" || n.kind === "bagdrop-closes") whens = ["night-before", "airport"];
+      else if (n.kind === "connect" || n.kind === "to-gate" || n.kind === "boarding" || n.kind === "gate-closes") whens = ["lounge", "airport", "inflight"];
+      else if (n.kind === "departs" || n.kind === "lands" || n.kind === "arrival" || n.kind === "transfer") whens = ["inflight", "arrival", "hotel"];
+      else if (n.kind === "hotel-prep" || n.kind === "hotel-checkin") whens = ["hotel", "arrival"];
+      else if (n.kind === "hotel-checkout") whens = ["night-before", "general"];
+      else if (n.kind === "day") whens = ["altitude", "general"];
+    }
+    if (st.nextStay) nodes.push(st.nextStay.place);
+    var tips = Steps.tipsFor(nodes, whens);
+    if (!tips.length) tips = Steps.tipsFor(nodes, null).slice(0, 3);
+    var entry = (window.TRIP.assist || {}).entry || {};
+    var borders = [];
+    if (n && n.flight) {
+      var dest = pl(n.flight.to);
+      if (dest.country === "USA" && entry.usaEntry) borders.push(entry.usaEntry);
+      if (dest.country === "Peru" && entry.peruEntry) borders.push(entry.peruEntry);
+      if (n.flight.to === "BKK" && entry.thailandReturn) {
+        var win = new Date(T.parse(n.flight.arr).getTime() - 72 * 3600000);
+        borders.push({ text: entry.thailandReturn.text + " Window opens " + T.fmtDT(win, "Asia/Bangkok") + " Bangkok time.", url: entry.thailandReturn.url, confidence: entry.thailandReturn.confidence });
+      }
+    }
+    var acts = !st.progress.started ? Engine.topActions(3) : [];
+    if (!tips.length && !borders.length && !acts.length) return "";
+    return '<div class="card pad thinkcard"><div class="kicker dim">think ahead</div>' +
+      (borders.length ? borders.map(function (b) { return '<div class="notebox warn">' + I.stamp + " " + U.esc(b.text) + (b.url ? ' <a href="' + U.esc(b.url) + '" target="_blank" rel="noopener">' + U.esc(b.url.replace(/^https?:\/\//, "")) + "</a>" : "") + conf(b) + "</div>"; }).join("") : "") +
+      (tips.length ? '<ul class="kf tips">' + tips.slice(0, 5).map(function (t) { return "<li>" + U.esc(t.text) + (t.sourceUrl ? ' <a href="' + U.esc(t.sourceUrl) + '" target="_blank" rel="noopener">source</a>' : "") + conf(t) + "</li>"; }).join("") + "</ul>" : "") +
+      (acts.length ? '<div class="kicker dim" style="margin-top:12px">before you leave</div>' + acts.map(function (t) { return '<div class="action-row">' + (t.priority === "critical" ? I.warn : I.check) + '<div><div class="t">' + U.esc(t.title) + '</div><div class="d">' + U.esc(U.maskKnown(t.detail).slice(0, 120)) + "…</div></div></div>"; }).join("") + '<p style="margin:10px 0 0"><a class="btn small" href="#/prepare">' + I.list + " Preparation board</a></p>" : "") +
+    "</div>";
+  }
+
+  function headCard(st) {
+    var pos = Engine.positionNow();
+    var code = pos.inFlight ? pos.flight.to : (pos.at || "UTH");
+    var here = pl(code);
+    var tz = here.tz;
+    var pr = st.progress;
+    var zoneNote = "";
+    if (deviceTz && deviceTz !== tz) zoneNote = '<div class="zonenote">' + I.clock + " Your phone is on " + U.esc(deviceTz.replace(/_/g, " ")) + " (" + T.fmtTime(st.now, deviceTz) + "). Everything below is in the local time of the place it happens.</div>";
+    return '<div class="card nowhead"><div class="nh-top"><div><div class="kicker">now</div>' +
+      '<div class="nowclock" id="now-clock" data-tz="' + U.esc(tz) + '">' + T.fmtTime(st.now, tz) + "</div>" +
+      '<div class="nowdate" id="now-date">' + U.esc(T.fmtFull(st.now, tz)) + " · " + U.esc((pos.inFlight ? "en route to " : "") + here.name) + " · " + U.esc(here.tzShort || tz) + "</div></div>" +
+      '<div class="nh-prog"><b>' + (pr.started ? (pr.finished ? "done" : "day " + pr.dayNo) : "T−" + Math.max(0, Math.ceil((T.parse("2026-09-26T10:15:00+07:00") - st.now) / 86400000)) + " d") + "</b><span>" + (pr.started ? "of " + pr.totalDays : "to departure") + "</span><b>" + pr.flightsFlown + "/" + pr.totalFlights + "</b><span>legs flown</span></div></div>" +
+      '<div class="pbar"><div class="fill" style="width:' + pr.pct + '%"></div></div>' + zoneNote +
+      '<div class="wbtns nh-btns">' +
+        '<button class="btn small' + (Steps.alertsOn() ? " primary" : "") + '" id="alerts-toggle">' + I.warn + (Steps.alertsOn() ? " Alerts on" : " Enable alerts") + "</button>" +
+        '<button class="btn small" id="locate-me">' + I.pin + " Locate me</button>" +
+        '<button class="btn small" id="reveal-toggle">' + (reveal ? I.eyeOff + " Hide refs" : I.eye + " Reveal refs") + "</button>" +
+      '</div><div class="coords" id="locate-out"></div></div>';
+  }
+
+  function render() {
+    var st = Steps.state();
+    lastNextId = st.next ? st.next.id : null;
+    root.innerHTML = '<div class="view"><section class="section now">' +
+      headCard(st) + nextCard(st) + openNowStrip(st) + legCard(st) + upcomingCard(st) + stayCard(st) + thinkAheadCard(st) +
+      '<p class="coords" style="margin-top:18px">countdowns are absolute instants · times shown in each place\'s local zone · timing rules are planning heuristics (3 h international, 2 h domestic) unless marked primary or official</p>' +
+      "</section></div>";
+
+    root.querySelectorAll("[data-stage]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var fid = b.getAttribute("data-fid"), stage = b.getAttribute("data-stage");
+        var done = Steps.stageDone(fid, stage);
+        Steps.setStage(fid, stage, !done);
+        App.toast(!done ? "Noted: " + stageLabel(stage) : "Undone: " + stageLabel(stage));
+        Steps.scheduleAlerts();
+        render();
+      });
+    });
+    root.querySelectorAll("[data-done]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        Steps.setStepDone(b.getAttribute("data-done"), true);
+        App.toast("Done. On to the next one.");
+        Steps.scheduleAlerts();
+        render();
+      });
+    });
+    var rl = document.getElementById("reset-leg");
+    if (rl) rl.addEventListener("click", function () { Steps.resetStages(rl.getAttribute("data-fid")); render(); });
+    var at = document.getElementById("alerts-toggle");
+    if (at) at.addEventListener("click", function () {
+      if (Steps.alertsOn()) { Store.setSetting("alerts", false); Steps.scheduleAlerts(); App.toast("Alerts off"); render(); return; }
+      var finish = function (granted) {
+        Store.setSetting("alerts", true);
+        var n = Steps.scheduleAlerts();
+        App.toast(granted ? "Alerts on: " + n + " reminder" + (n === 1 ? "" : "s") + " scheduled while the app is open" : "In-app alerts on (system notifications not permitted)");
+        render();
+      };
+      if (typeof Notification === "undefined") return finish(false);
+      if (Notification.permission === "granted") return finish(true);
+      Notification.requestPermission().then(function (p) { finish(p === "granted"); }, function () { finish(false); });
+    });
+    var lm = document.getElementById("locate-me");
+    if (lm) lm.addEventListener("click", function () {
+      var out = document.getElementById("locate-out");
+      if (!navigator.geolocation) { out.textContent = "location not available on this device"; return; }
+      out.textContent = "locating…";
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        var best = null, lat = pos.coords.latitude, lon = pos.coords.longitude;
+        Object.keys(window.TRIP.places).forEach(function (k) {
+          var p = window.TRIP.places[k];
+          var d = haversine(lat, lon, p.lat, p.lon);
+          if (!best || d < best.d) best = { p: p, d: d };
+        });
+        var tzHere = (function () { try { return Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) { return "?"; } })();
+        out.textContent = best ? "You are " + (best.d < 40 ? "in " + best.p.name : Math.round(best.d) + " km from " + best.p.name) + " · phone zone " + tzHere + (best.p.tz !== tzHere ? " (itinerary zone " + best.p.tz + ")" : " (matches)") : "position unknown";
+      }, function (err) { out.textContent = "location denied or unavailable (" + err.message + ")"; }, { timeout: 12000, maximumAge: 60000 });
+    });
+    var rt = document.getElementById("reveal-toggle");
+    if (rt) rt.addEventListener("click", function () { Store.setSetting("revealSensitive", !reveal); reveal = !reveal; render(); });
+    root.querySelectorAll("[data-jump]").forEach(function (r) {
+      r.addEventListener("click", function () { var t = document.querySelector(".legcard"); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); });
+    });
+  }
+  function haversine(a1, o1, a2, o2) {
+    var R = 6371, dLat = (a2 - a1) * Math.PI / 180, dLon = (o2 - o1) * Math.PI / 180;
+    var x = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a1 * Math.PI / 180) * Math.cos(a2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+  }
+
+  var lastMinute = -1;
+  function tick() {
+    var now = T.now();
+    var ck = document.getElementById("now-clock");
+    if (!ck) return;
+    ck.textContent = T.fmtTime(now, ck.getAttribute("data-tz"));
+    var big = document.getElementById("cd-next");
+    if (big) { var c = cd(new Date(big.getAttribute("data-at")), now); big.textContent = c.past ? "started " + cdShort(c) + " ago" : cdText(c); }
+    var min = Math.floor(now.getTime() / 60000);
+    if (min !== lastMinute) {
+      lastMinute = min;
+      root.querySelectorAll(".in[data-at]").forEach(function (el) { el.textContent = cdShort(cd(new Date(el.getAttribute("data-at")), now)); });
+      var st = Steps.state(now);
+      if ((st.next ? st.next.id : null) !== lastNextId) render();
+    }
+  }
+
+  render();
+  tick();
+  App.onTick(tick);
+  if (Steps.alertsOn()) Steps.scheduleAlerts();
+};
+
+
 /* ===== assets/js/app.js ===== */
 /* ============================================================
    APP.JS — shell: hash router, masthead, tabs, tick loop.
@@ -4899,6 +5818,7 @@ window.App = (function () {
 
   var TABS = [
     { id: "home",      label: "Command",   icon: I.compass },
+    { id: "now",       label: "Now",       icon: I.clock },
     { id: "itinerary", label: "Itinerary", icon: I.list },
     { id: "wallet",    label: "Wallet",    icon: I.ticket },
     { id: "map",       label: "Atlas",     icon: I.globe },
@@ -4908,7 +5828,11 @@ window.App = (function () {
     { id: "documents", label: "Documents", icon: I.doc },
     { id: "today",     label: "Today",     icon: I.sun }
   ];
-  var MOBILE_TABS = ["home", "itinerary", "wallet", "prepare", "today"];
+  var MOBILE_TABS = ["now", "itinerary", "wallet", "prepare", "home"];
+  /* the phone app opens on the live assistant; the desktop on the command center */
+  function defaultView() {
+    try { return (window.SHARE_BUILD && window.matchMedia("(max-width: 700px)").matches) ? "now" : "home"; } catch (e) { return "home"; }
+  }
 
   var tickHandlers = [];
   function onTick(fn) { if (tickHandlers.indexOf(fn) < 0) tickHandlers.push(fn); }
@@ -4921,7 +5845,7 @@ window.App = (function () {
   }
 
   function parseHash() {
-    var h = location.hash.replace(/^#\/?/, "") || "home";
+    var h = location.hash.replace(/^#\/?/, "") || defaultView();
     var parts = h.split("?");
     var params = {};
     if (parts[1]) parts[1].split("&").forEach(function (kv) {
@@ -4995,6 +5919,11 @@ window.App = (function () {
       tickMastClocks();
       tickHandlers.slice().forEach(function (fn) { try { fn(); } catch (e) { offTick(fn); } });
     }, 1000);
+
+    // Journey alerts: schedule the next reminders while the app is open, refreshed every 10 minutes
+    try {
+      if (window.Steps && Steps.alertsOn()) { Steps.scheduleAlerts(); setInterval(function () { Steps.scheduleAlerts(); }, 600000); }
+    } catch (e) { /* non-fatal */ }
 
     // Gentle nudge: travel-day suggestion once per travel day
     try {
