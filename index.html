@@ -7645,12 +7645,23 @@ window.Views.now = function (root, params) {
         return '<div class="tlrow' + (isNext ? " next" : "") + (passed || !shown ? " done" : "") + '"><span class="t">' + T.fmtTime(s.at, s.tz) + '</span><span class="ic-w">' + (KIND_ICON[s.kind] || I.pin) + '</span><span class="tx">' + U.esc(s.title) + "</span>" +
           '<span class="in"' + (passed || !shown ? "" : ' data-at="' + s.at.toISOString() + '"') + ">" + (passed || !shown ? (shown ? "passed" : "done") : cdShort(cd(s.at, st.now))) + "</span></div>";
       }).join("") + "</div>" +
-      (know.length ? '<div class="kicker dim" style="margin-top:14px">know before you go</div><ul class="kf">' + know.slice(0, 8).map(function (k) { return "<li>" + mk(k) + "</li>"; }).join("") + "</ul>" : "") +
-      (depInfo.checkin && depInfo.checkin.length ? '<div class="kicker dim" style="margin-top:12px">check-in at ' + U.esc(pf.airport || pf.name) + "</div><ul class='kf'>" + depInfo.checkin.filter(function (c) { return !c.airline || c.airline.indexOf(f.code) >= 0 || c.airline.indexOf(f.airline) >= 0; }).map(function (c) { return "<li>" + mk([c.where, c.opensBefore ? "opens " + c.opensBefore : "", c.closesBefore ? "closes " + c.closesBefore : ""].filter(Boolean).join(" · ")) + conf(c) + "</li>"; }).join("") + "</ul>" : "") +
-      (depInfo.lounges && depInfo.lounges.length ? '<div class="kicker dim" style="margin-top:12px">lounges</div><ul class="kf">' + depInfo.lounges.map(function (l) { return "<li><b>" + mk(l.name) + "</b>" + (l.location ? " · " + mk(l.location) : "") + (l.access ? " · " + mk(l.access) : "") + (l.hours ? " · " + mk(l.hours) : "") + conf(l) + "</li>"; }).join("") + "</ul>" : "") +
-      (air.loungeRule ? '<div class="coords" style="margin-top:10px">lounge rule · ' + mk(air.loungeRule) + "</div>" : "") +
+      briefing(f, pf, depInfo, air, know) +
       '<div class="wbtns"><a class="btn small" href="#/flights?f=' + f.id + '">' + I.plane + ' Boarding pass</a><a class="btn small" href="#/today?tdm=1">' + I.planeUp + ' Travel-day focus</a><button class="btn small ghost" id="reset-leg" data-fid="' + f.id + '">Reset this leg</button></div>' +
     "</div>";
+  }
+
+  /* the researched airport briefing, folded so the leg card stays short until it is needed */
+  function briefing(f, pf, depInfo, air, know) {
+    var checkin = (depInfo.checkin || []).filter(function (c) { return !c.airline || c.airline.indexOf(f.code) >= 0 || c.airline.indexOf(f.airline) >= 0; });
+    var lounges = depInfo.lounges || [];
+    var n = know.length + checkin.length + lounges.length;
+    if (!n) return "";
+    return '<details class="wmore brief"><summary>Airport briefing · ' + n + " notes for " + U.esc(pf.airport || pf.name) + "</summary>" +
+      (know.length ? '<div class="kicker dim" style="margin-top:10px">know before you go</div><ul class="kf">' + know.slice(0, 10).map(function (k) { return "<li>" + mk(k) + "</li>"; }).join("") + "</ul>" : "") +
+      (checkin.length ? '<div class="kicker dim" style="margin-top:12px">check-in</div><ul class="kf">' + checkin.map(function (c) { return "<li>" + mk([c.where, c.opensBefore ? "opens " + c.opensBefore : "", c.closesBefore ? "closes " + c.closesBefore : ""].filter(Boolean).join(" · ")) + conf(c) + "</li>"; }).join("") + "</ul>" : "") +
+      (lounges.length ? '<div class="kicker dim" style="margin-top:12px">lounges</div><ul class="kf">' + lounges.map(function (l) { return "<li><b>" + mk(l.name) + "</b>" + (l.location ? " · " + mk(l.location) : "") + (l.access ? " · " + mk(l.access) : "") + (l.hours ? " · " + mk(l.hours) : "") + conf(l) + "</li>"; }).join("") + "</ul>" : "") +
+      (air.loungeRule ? '<div class="coords" style="margin-top:10px">lounge rule · ' + mk(air.loungeRule) + "</div>" : "") +
+      "</details>";
   }
 
   function upcomingCard(st) {
@@ -7777,9 +7788,9 @@ window.Views.now = function (root, params) {
       (pr[k] || []).filter(matches).slice(0, 2).forEach(function (it) { rows.push({ k: k.replace(/([A-Z])/g, " $1").toLowerCase(), it: it }); });
     });
     if (!rows.length) return "";
-    return '<div class="card pad practicalcard"><div class="kicker dim">practical · ' + U.esc(country) + "</div><ul class='kf'>" + rows.slice(0, 8).map(function (r) {
+    return '<div class="card pad practicalcard"><details class="wmore"><summary>Practical · ' + U.esc(country) + " · " + rows.length + " notes (emergency numbers, embassy, money, power)</summary><ul class='kf'>" + rows.slice(0, 8).map(function (r) {
       return "<li><b>" + U.esc(r.k) + ":</b> " + mk(r.it.text) + (r.it.sourceUrl ? ' <a href="' + U.esc(r.it.sourceUrl) + '" target="_blank" rel="noopener">source</a>' : "") + conf(r.it) + "</li>";
-    }).join("") + "</ul></div>";
+    }).join("") + "</ul></details></div>";
   }
 
   function settingsCard() {
