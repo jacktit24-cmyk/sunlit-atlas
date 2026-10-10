@@ -471,6 +471,7 @@ main { display: block; min-height: 60vh; }
 .seg.k-star .ic     { color: var(--gold); }
 .seg.k-free .ic     { color: var(--jade); }
 .seg.k-transfer .ic { color: var(--paper-dim); }
+.seg.k-car .ic      { color: var(--terra); }
 .seg.k-work .ic     { color: var(--sky); }
 .seg.k-split .ic    { color: var(--violet); }
 .seg.k-warning .ic  { color: var(--danger); }
@@ -879,6 +880,7 @@ button, input, select { font: inherit; color: inherit; }
 .wcard { padding: 16px 18px 16px 22px; position: relative; overflow: hidden; }
 .wcard::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--sky); }
 .wcard.stay::before { background: var(--green); }
+.wcard.booking::before { background: var(--gold); }
 .wcard.next { border-color: var(--terra); box-shadow: 0 0 0 3px rgba(194, 91, 58, .18), var(--shadow); }
 .wcard.live { border-color: var(--danger); }
 .whead { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -1047,7 +1049,7 @@ button, input, select { font: inherit; color: inherit; }
 
   <footer class="site">
     <span>PERU + USA 2026 · The Sunlit Atlas · shared view</span>
-    <span class="mono">reconstructed from 16 travel documents · updated 23 Sep 2026 · all times zone-exact · derived and estimated values are labeled</span>
+    <span class="mono">19 travel documents + 4 email captures · updated 10 Oct 2026 · all times zone-exact · derived and estimated values are labeled</span>
     <span class="mono">tickets and reservations open from the Wallet tab; installed to the Home Screen they stay on the device for offline use (a plain Safari tab can drop them after a week unused)</span>
   </footer>
 </div>
@@ -1068,7 +1070,7 @@ window.TRIP = window.TRIP || {};
 
 window.TRIP.meta = {
   title: "PERU + USA 2026",
-  subtitle: "Bangkok · Doha · Miami · Jacksonville · Lima · Machu Picchu · home again",
+  subtitle: "Bangkok · Doha · Miami · St. Augustine · Tampa · Lima · Machu Picchu · home again",
   traveler: "Toby Jack Tait",
   travelerShort: "Jack",
   routeLine: ["UTH", "BKK", "DOH", "MIA", "JAX", "MIA", "LIM", "CUZ", "LIM", "MIA", "DOH", "BKK"],
@@ -1098,7 +1100,10 @@ window.TRIP.meta = {
   qatarTicket: "157 2135167224"
 };
 
-/* ---- Places: coordinates for the route atlas + local zones ---- */
+/* ---- Places: coordinates for the route atlas + local zones ----
+   STA (St. Augustine) and TPA (Tampa) are road stops inside the Florida
+   chapter: no flights touch them, but stays and drives do. The engine
+   treats STA as the home side of JAX (see core/steps.js samePlace). */
 window.TRIP.places = {
   UTH: { id: "UTH", name: "Udon Thani",     airport: "Udon Thani International",    country: "Thailand", lat: 17.386,  lon: 102.788, tz: "Asia/Bangkok",      tzShort: "ICT", utc: "+07:00", elevationM: 176 },
   DMK: { id: "DMK", name: "Bangkok",        airport: "Don Mueang International",    country: "Thailand", lat: 13.913,  lon: 100.607, tz: "Asia/Bangkok",      tzShort: "ICT", utc: "+07:00", elevationM: 3 },
@@ -1106,9 +1111,11 @@ window.TRIP.places = {
   DOH: { id: "DOH", name: "Doha",           airport: "Hamad International",         country: "Qatar",    lat: 25.273,  lon: 51.608,  tz: "Asia/Qatar",        tzShort: "AST", utc: "+03:00", elevationM: 4 },
   MIA: { id: "MIA", name: "Miami",          airport: "Miami International",         country: "USA",      lat: 25.795,  lon: -80.290, tz: "America/New_York",  tzShort: "EDT", utc: "-04:00", elevationM: 3 },
   JAX: { id: "JAX", name: "Jacksonville",   airport: "Jacksonville International",  country: "USA",      lat: 30.494,  lon: -81.688, tz: "America/New_York",  tzShort: "EDT", utc: "-04:00", elevationM: 9 },
+  STA: { id: "STA", name: "St. Augustine",  airport: null,                          country: "USA",      lat: 29.865,  lon: -81.313, tz: "America/New_York",  tzShort: "EDT", utc: "-04:00", elevationM: 3 },
+  TPA: { id: "TPA", name: "Tampa",          airport: null,                          country: "USA",      lat: 27.961,  lon: -82.437, tz: "America/New_York",  tzShort: "EDT", utc: "-04:00", elevationM: 15 },
   LIM: { id: "LIM", name: "Lima",           airport: "Jorge Chávez International",  country: "Peru",     lat: -12.022, lon: -77.114, tz: "America/Lima",      tzShort: "PET", utc: "-05:00", elevationM: 34 },
   CUZ: { id: "CUZ", name: "Cusco",          airport: "Alejandro Velasco Astete",    country: "Peru",     lat: -13.536, lon: -71.939, tz: "America/Lima",      tzShort: "PET", utc: "-05:00", elevationM: 3399 },
-  SAV: { id: "SAV", name: "Sacred Valley",  airport: null,                          country: "Peru",     lat: -13.258, lon: -72.263, tz: "America/Lima",      tzShort: "PET", utc: "-05:00", elevationM: 2792 },
+  SAV: { id: "SAV", name: "Sacred Valley",  airport: null,                          country: "Peru",     lat: -13.305, lon: -72.116, tz: "America/Lima",      tzShort: "PET", utc: "-05:00", elevationM: 2871 },
   AGC: { id: "AGC", name: "Aguas Calientes",airport: null,                          country: "Peru",     lat: -13.155, lon: -72.525, tz: "America/Lima",      tzShort: "PET", utc: "-05:00", elevationM: 2040 },
   MAP: { id: "MAP", name: "Machu Picchu",   airport: null,                          country: "Peru",     lat: -13.163, lon: -72.545, tz: "America/Lima",      tzShort: "PET", utc: "-05:00", elevationM: 2430 },
   // Parents' continuation (reference only)
@@ -1120,7 +1127,7 @@ window.TRIP.places = {
 window.TRIP.clocks = [
   { label: "Bangkok",     tz: "Asia/Bangkok",     note: "home" },
   { label: "Doha",        tz: "Asia/Qatar",       note: "transit" },
-  { label: "Florida",     tz: "America/New_York", note: "MIA + JAX" },
+  { label: "Florida",     tz: "America/New_York", note: "MIA · St. Augustine · Tampa" },
   { label: "Lima / Cusco",tz: "America/Lima",     note: "Peru" }
 ];
 
@@ -1143,9 +1150,9 @@ window.TRIP.prepPhases = [
 /* ---- Trip phases (during travel), matched by date in the zone given ---- */
 window.TRIP.tripPhases = [
   { id: "outbound",     from: "2026-09-26", to: "2026-09-29", name: "Outbound crossing",  message: "You are currently traveling to the next chapter: Udon Thani to Bangkok, then westward to Miami through Doha." },
-  { id: "florida",      from: "2026-09-29", to: "2026-10-17", name: "Florida chapter",    message: "Florida phase underway. Family, work, and the Atlantic light of Jacksonville." },
-  { id: "peru-caravan", from: "2026-10-17", to: "2026-10-25", name: "Peru caravan",       message: "The Andes chapter. Lima, Cusco, the Sacred Valley, and the citadel itself." },
-  { id: "lima",         from: "2026-10-25", to: "2026-10-28", name: "Lima free days",     message: "Free days in Lima with family. Miraflores, Barranco, one last dinner together." },
+  { id: "florida",      from: "2026-09-29", to: "2026-10-17", name: "Florida chapter",    message: "Florida phase underway: the family home in St. Augustine, the Ybor City Airbnb in Tampa with the Jeep outside, then back north to fly to Peru." },
+  { id: "peru-caravan", from: "2026-10-17", to: "2026-10-24", name: "Peru caravan",       message: "The Andes chapter with Caravan: Lima, the Sacred Valley, Machu Picchu, Cusco, and back to Lima for the farewell dinner." },
+  { id: "lima",         from: "2026-10-24", to: "2026-10-28", name: "Lima free days",     message: "Free days in Lima with family at the JW Marriott on the cliffs of Miraflores: Larcomar next door, Barranco, one last dinner together." },
   { id: "return",       from: "2026-10-28", to: "2026-10-31", name: "Return crossing",    message: "Return journey underway: Lima, a Miami night, then east through Doha to Bangkok." },
   { id: "complete",     from: "2026-10-31", to: "2099-01-01", name: "Trip complete",      message: "Home in Bangkok. 34 days, 8 flights, one lost city. The journey is archived below." }
 ];
@@ -1160,16 +1167,16 @@ window.TRIP.orderingWindows = [
   { id: "intl-risky",       until: "2026-09-14", label: "Delivery timing is now risky",                   detail: "Standard international delivery is more likely to miss departure than make it. Only order with tracked express shipping.", tone: "warn" },
   { id: "local-only",       until: "2026-09-28", label: "Purchase locally instead",                       detail: "Too late for reliable international delivery to Thailand. Buy in Bangkok, or plan to buy after arrival in the USA.", tone: "danger" }
 ];
-/* Second window: US deliveries to the Jacksonville house while Jack is there.
-   Amazon US domestic delivery is fast; the practical cutoff is a few days
-   before the Peru departure on 17 Oct. Estimate, labeled as such. */
+/* Second window: US deliveries while Jack is in Florida. Amazon US domestic
+   delivery is fast; the practical cutoff is the Airbnb checkout on 15 Oct
+   (the family home in St. Augustine takes parcels until the 16th). Estimate. */
 window.TRIP.usOrderingWindow = {
-  openFrom: "2026-09-29", closeBy: "2026-10-12",
-  label: "US ordering window (deliver to Jacksonville)",
-  detail: "Anything for the Peru leg can be ordered from US retailers to the family home in Jacksonville between 29 Sep and about 12 Oct. This is usually cheaper and faster than shipping internationally to Thailand."
+  openFrom: "2026-09-29", closeBy: "2026-10-13",
+  label: "US ordering window (deliver to the Tampa Airbnb, then St. Augustine)",
+  detail: "Anything for the Peru leg can still be ordered from US retailers: to the Ybor City Airbnb until about 13 Oct (checkout is Thu 15 Oct at 11:00), or to the family home in St. Augustine until Fri 16 Oct. After that it travels in the bag or gets bought in Lima."
 };
 
-window.TRIP.dataVersion = "1.1.0 · updated 22 Sep 2026 (SL605 Udon Thani leg, Siam Mandarina Bangkok, AA4024 schedule change) · reconstructed 12 Jul 2026 from the source folder";
+window.TRIP.dataVersion = "1.2.0 · updated 10 Oct 2026 (Caravan Peru programme and hotel list, Tampa Airbnb, Enterprise Jeep, JW Marriott Lima, St. Augustine home) · 1.1.0 of 22 Sep 2026 (SL605, Siam Mandarina, AA4024) · reconstructed 12 Jul 2026 from the source folder";
 
 
 /* ===== assets/js/data/flights.js ===== */
@@ -1284,7 +1291,7 @@ window.TRIP.flights = [
     fare: "Part of $1,358.00 JAX-LIM",
     checkinNote: "Departure time 15:46 is derived from the stated 4 h 15 m layover; reconfirm exact time at check-in.",
     sources: ["doc-aa-jax-lim"], confidence: "confirmed",
-    notes: ["Lima arrival 20:10 is printed on the confirmation.", "The Yahoo mail auto-summary inside the PDF claims a 23:50 arrival; the itinerary body and the flight math both say 20:10. The summary is wrong (see conflict C4)."]
+    notes: ["Lima arrival 20:10 is printed on the confirmation, and Caravan holds the same arrival (AA1307, 8:10 pm) for all three travelers.", "The Yahoo mail auto-summary inside the PDF claims a 23:50 arrival; the itinerary body and the flight math both say 20:10. The summary is wrong (see conflict C4).", "The transfer to the Courtyard Miraflores is on your own: Caravan says use the official taxi counters (Taxi Seguro, Green Taxi) inside arrivals, 90 to 130 soles."]
   },
   /* ---------------- RETURN ---------------- */
   {
@@ -1392,7 +1399,7 @@ window.TRIP.parentsTravel = {
   bookingRef: "LFSOJH",
   events: [
     { date: "2026-10-17", what: "Fly JAX-MIA-LIM with Jack (AA3955 + AA1307)", where: "to Lima" },
-    { date: "2026-10-28", what: "Remain in Lima when Jack departs; Courtyard Miraflores", where: "Lima" },
+    { date: "2026-10-28", what: "Remain in Lima when Jack departs; Courtyard Miraflores from the 28th per their sheet (24-27 Oct is the JW Marriott on William's points)", where: "Lima" },
     { date: "2026-10-30", what: "Board L'Austral at Callao port", where: "Lima / Callao" },
     { date: "2026-10-31", what: "At sea, Pacific coast southbound", where: "at sea", spanTo: "2026-11-03" },
     { date: "2026-11-04", what: "Disembark Valparaíso, coach to Santiago (Renaissance Santiago)", where: "Chile" },
@@ -1407,6 +1414,12 @@ window.TRIP.parentsTravel = {
 /* ============================================================
    HOTELS.JS — every overnight arrangement on the trip.
    status: confirmed | family | unconfirmed | operator
+   Updated 10 Oct 2026: the Florida chapter is three stays (the
+   family home in St. Augustine, the Ybor City Airbnb in Tampa,
+   the family home again); the Peru week follows the Caravan hotel
+   list exactly (Courtyard Miraflores, Rustica Urubamba, JW El
+   Convento Cusco, Courtyard again); the JW Marriott Lima follows
+   the caravan; the night of 27 Oct has NO booking on file.
    ============================================================ */
 window.TRIP = window.TRIP || {};
 
@@ -1421,16 +1434,17 @@ window.TRIP.hotels = [
     checkIn: "2026-09-26", checkInTime: "from 09:00",
     checkOut: "2026-09-28", checkOutTime: "noon (in practice the airport shuttle leaves ~23:00 on the 27th for the 02:30 QR837)",
     nights: 2,
-    room: "Executive Suite with Airport View, non-smoking",
+    room: "Executive Suite with Airport View, non-smoking (plus a second Deluxe King room on a separate Expedia booking)",
     guests: 2,
     confirmation: "61b3d7aa-54af-42d2-94a6-58c89dfba41d",
     expediaItinerary: "73550166195050",
     bookedBy: "Jack via Expedia",
     cancellation: "NON-REFUNDABLE. Changes and cancellations are charged; no refund for early check-out.",
-    sources: ["doc-siam-mandarina"], confidence: "confirmed",
+    sources: ["doc-siam-mandarina", "doc-siam-second"], confidence: "confirmed",
     notes: [
       "The pre-departure base: two airport-side nights before the 02:30 Monday Qatar flight, booked 22 Sep for $270.14 on AmEx ending 1001.",
-      "Free airport shuttle, but the property wants transfer pickups arranged 24 h in advance using the contact details on the confirmation. Book the ~23:00 Sunday run to Suvarnabhumi the moment you check in.",
+      "A second room (Deluxe Room Airport View, 1 King, 1 adult, $209.70, Expedia itinerary 73550167928601) was booked the same morning for the same two nights; found in the inbox on 10 Oct, recorded for completeness.",
+      "Free airport shuttle, but the property wants transfer pickups arranged 24 h in advance using the contact details on the confirmation.",
       "Arrival day catch: SL605 lands at DON MUEANG, the other airport. Cross town by Grab or taxi (45 to 75 minutes); the free shuttle serves Suvarnabhumi."
     ]
   },
@@ -1458,64 +1472,193 @@ window.TRIP.hotels = [
   },
   {
     id: "H2", status: "family",
-    name: "Parents' home, Jacksonville",
-    shortName: "Family home",
-    place: "JAX", city: "Jacksonville, Florida",
+    name: "Parents' home, St. Augustine",
+    shortName: "Family home, St. Augustine",
+    place: "STA", city: "St. Augustine, Florida",
     address: null,
-    checkIn: "2026-09-29", checkInTime: "~10:30",
-    checkOut: "2026-10-17", checkOutTime: "morning",
-    nights: 18,
+    checkIn: "2026-09-29", checkInTime: "~10:30 (after the JAX pickup)",
+    checkOut: "2026-10-06", checkOutTime: "midday (the Jeep is collected at 12:00)",
+    nights: 7,
     room: "Family residence",
     confirmation: null,
     bookedBy: "n/a",
-    sources: ["doc-old-itinerary", "doc-revised-itinerary"], confidence: "confirmed",
+    sources: ["doc-caravan-reconfirm", "doc-enterprise-jeep"], confidence: "confirmed",
     notes: [
-      "Home base for the Florida chapter: 18 nights, Sep 29 to Oct 17.",
-      "Work-from-Jacksonville weekdays run from this address; laundry and repacking happen here before Peru."
+      "The family home is in St. Augustine, not Jacksonville: the Caravan booking carries the parents' Alcala Drive address (32086) and the Jeep was collected 2 miles away at Enterprise's St. Augustine branch.",
+      "First Florida week: 29 Sep to 6 Oct. Work-from-home weekdays, the first weekend with the family.",
+      "The street address stays off this page on purpose; it is printed on the Caravan reconfirmation in the Wallet."
     ]
   },
   {
-    id: "H3", status: "unconfirmed",
-    name: "Courtyard by Marriott Lima Miraflores",
+    id: "H6", status: "confirmed",
+    name: "Ybor City Retreat Near Nightlife (Airbnb, entire home)",
+    shortName: "Ybor City Airbnb, Tampa",
+    place: "TPA", city: "Ybor City, Tampa, Florida",
+    address: "2718 N 21st St, Tampa, FL 33605, USA",
+    phone: "Host Colin Alexander +1 234-241-2845 (Airbnb messages first); Airbnb support 24/7 in the app",
+    checkIn: "2026-10-06", checkInTime: "after 15:00",
+    checkOut: "2026-10-15", checkOutTime: "by 11:00",
+    nights: 9,
+    room: "Entire home/apt, 1 adult (listing allows 6)",
+    guests: 1,
+    confirmation: "HMPHK9DXDY",
+    bookedBy: "Jack via Airbnb, $2,142.20 on AmEx ending 1001 (9 nights at $230.89 less a $190.60 weekly discount, plus $254.80 taxes)",
+    cancellation: "Partial refund only before check-in on 6 Oct; after that the refund depends on when you cancel (Airbnb policy on the confirmation)",
+    sources: ["doc-airbnb-tampa"], confidence: "confirmed",
+    notes: [
+      "The Tampa chapter: nine nights in Ybor City with the Jeep outside, 6 to 15 Oct. Booked 5 Oct at 20:31 EDT.",
+      "House rules: quiet hours 22:00 to 09:00, no pets, 6 guests maximum, exterior security cameras, smoke and CO alarms.",
+      "Checkout Thu 15 Oct by 11:00, then the 3.5-hour drive back to St. Augustine. Leave it as found; message Colin through Airbnb if anything needs attention."
+    ]
+  },
+  {
+    id: "H7", status: "family",
+    name: "Parents' home, St. Augustine (second stay)",
+    shortName: "Family home, St. Augustine",
+    place: "STA", city: "St. Augustine, Florida",
+    address: null,
+    checkIn: "2026-10-15", checkInTime: "afternoon, after the drive from Tampa",
+    checkOut: "2026-10-17", checkOutTime: "~06:30 (ride to JAX)",
+    nights: 2,
+    room: "Family residence",
+    confirmation: null,
+    bookedBy: "n/a",
+    sources: ["doc-airbnb-tampa", "doc-enterprise-jeep"], confidence: "probable",
+    notes: [
+      "Inferred, not documented: the Airbnb ends at 11:00 on the 15th, the Jeep goes back to Enterprise St. Augustine on the 16th, and the family flies from JAX together on the 17th, so the last two Florida nights are at the family home. Correct the dates here if the plan differs.",
+      "Laundry, the Peru repack (one handled bag per person for Caravan), and the AA online check-in at 10:06 on the 16th all happen here."
+    ]
+  },
+  {
+    id: "H3", status: "confirmed",
+    name: "Courtyard by Marriott Lima Miraflores (Caravan days 1 and 2)",
     shortName: "Courtyard Miraflores",
     place: "LIM", city: "Miraflores, Lima, Peru",
-    address: "Miraflores district, Lima (exact address on the booking, which is not in the folder)",
-    checkIn: "2026-10-17", checkInTime: "evening (after the 20:10 landing)",
-    checkOut: "2026-10-28", checkOutTime: "morning",
-    nights: 11,
-    nightsNote: "11 nights booked around the caravan: Oct 17-18 and Oct 24-28 are slept here; Oct 18-24 the room may sit empty or be checked out, depending on the booking, while the caravan travels.",
-    room: "Standard room (to be confirmed)",
-    confirmation: "TBC",
-    bookedBy: "Toby Jack Tait / family (assumed)",
-    sources: ["doc-old-itinerary", "doc-revised-itinerary", "doc-parents-sheet"], confidence: "unconfirmed",
+    address: "Calle Schell No 400, Miraflores, Lima 15074, Peru",
+    phone: "+51 1 625 3838",
+    checkIn: "2026-10-17", checkInTime: "after 15:00 (you arrive about 22:00 after the 20:10 landing); tell the desk you are Caravan tour members",
+    checkOut: "2026-10-19", checkOutTime: "09:00 coach departure (bags outside the room by 08:00) on Caravan day 3",
+    nights: 2,
+    nightsNote: "Two Caravan nights here (17 and 18 Oct), then the tour moves to the Sacred Valley; the group returns to this hotel for one night on 23 Oct (see the second Courtyard entry).",
+    room: "Room 2 single for Jack; Room 1 double for the parents (Caravan allocation)",
+    guests: 1,
+    confirmation: "PE261017-YYD",
+    bookedBy: "Included in the Caravan tour (William's account, fully paid)",
+    cancellation: "Governed by Caravan's terms of travel, not by the hotel",
+    sources: ["doc-caravan-hotels", "doc-caravan-reconfirm", "doc-caravan-days"], confidence: "confirmed",
     notes: [
-      "Named in every itinerary version and in the parents' sheet, but no confirmation document exists in the travel folder.",
-      "OPEN ITEM: obtain the booking confirmation and reference number, and confirm whether the room is held during the caravan week."
+      "CONFIRMED on 10 Oct by the Caravan hotel list and reconfirmation: this is the tour's Lima hotel, not an 11-night family booking. The old 'conf TBC' question is closed.",
+      "Day 1: transfer on your own from the airport by the official taxi counter (Taxi Seguro / Green Taxi, 90 to 130 soles, 30 to 60 min). Dinner on your own.",
+      "Day 2: breakfast, the 08:00 welcome briefing, the Historic Center and the Larco Museum, dinner included.",
+      "Peru's 18% IGV on rooms is waived for foreign tourists staying under 60 days: passport and the virtual TAM record at check-in."
     ]
   },
   {
-    id: "H4", status: "operator",
-    name: "Caravan hotels, Cusco region",
-    shortName: "Caravan hotels",
-    place: "CUZ", city: "Cusco / Sacred Valley / Aguas Calientes",
-    address: null,
-    checkIn: "2026-10-18", checkOut: "2026-10-24",
-    nights: 6,
-    room: "Arranged by the tour operator",
-    confirmation: "via operator",
-    bookedBy: "Tour operator",
-    perNight: [
-      { date: "2026-10-18", where: "Cusco" },
-      { date: "2026-10-19", where: "Sacred Valley" },
-      { date: "2026-10-20", where: "Aguas Calientes" },
-      { date: "2026-10-21", where: "Aguas Calientes" },
-      { date: "2026-10-22", where: "Cusco" },
-      { date: "2026-10-23", where: "Cusco" }
-    ],
-    sources: ["doc-old-itinerary", "doc-revised-itinerary"], confidence: "estimated",
+    id: "H8", status: "confirmed",
+    name: "Rustica Hotel Urubamba (Caravan days 3, 4 and 5)",
+    shortName: "Rustica Hotel, Urubamba",
+    place: "SAV", city: "Urubamba, Sacred Valley, Cusco region, Peru",
+    address: "Otr. Parcela Mza. B Lote 24, Urubamba 08655, Peru",
+    phone: "+51 1 500 8686",
+    checkIn: "2026-10-19", checkInTime: "afternoon, after the LATAM flight to Cusco and the coach down the valley",
+    checkOut: "2026-10-22", checkOutTime: "08:00 coach departure (bags outside the room by 07:00) on Caravan day 6",
+    nights: 3,
+    room: "Room 2 single for Jack; Room 1 double for the parents (Caravan allocation)",
+    guests: 1,
+    confirmation: "PE261017-YYD",
+    bookedBy: "Included in the Caravan tour",
+    cancellation: "Governed by Caravan's terms of travel",
+    sources: ["doc-caravan-hotels", "doc-caravan-days"], confidence: "confirmed",
     notes: [
-      "The night-by-night pattern is carried from the prior itinerary and is ESTIMATED. No tour-operator document exists in the folder.",
-      "OPEN ITEM: confirm hotels, train times, pickup times and the exact day order with the operator."
+      "The Sacred Valley base for three nights at 2,871 m (9,420 ft): lower than Cusco, the kind acclimatisation the earlier plan hoped for.",
+      "Machu Picchu day (21 Oct) starts and ends here: the train runs from the valley and back in the late afternoon. The group does not sleep in Aguas Calientes.",
+      "Dinner included on 19 and 21 Oct; dinner on your own on 20 Oct (Urubamba town is a short taxi away)."
+    ]
+  },
+  {
+    id: "H9", status: "confirmed",
+    name: "JW Marriott El Convento Cusco (Caravan day 6)",
+    shortName: "JW Marriott El Convento, Cusco",
+    place: "CUZ", city: "Cusco, Peru",
+    address: "Esquina de la Calle Ruinas 432 y San Agustín, Cusco 08002, Peru",
+    phone: "+51 84 582200",
+    checkIn: "2026-10-22", checkInTime: "afternoon, after Sacsayhuamán and lunch",
+    checkOut: "2026-10-23", checkOutTime: "08:00 coach departure (bags outside the room by 07:00) on Caravan day 7",
+    nights: 1,
+    room: "Room 2 single for Jack; Room 1 double for the parents (Caravan allocation); every room oxygen-enriched",
+    guests: 1,
+    confirmation: "PE261017-YYD",
+    bookedBy: "Included in the Caravan tour",
+    cancellation: "Governed by Caravan's terms of travel",
+    sources: ["doc-caravan-hotels", "doc-caravan-days"], confidence: "confirmed",
+    notes: [
+      "The highest night of the trip: 3,399 m (11,150 ft). Caravan's own note: the JW El Convento provides enriched oxygen in every guest room and supplemental oxygen on request.",
+      "A converted 16th-century convent two blocks from the Plaza de Armas; the free afternoon and evening are on foot. Dinner on your own."
+    ]
+  },
+  {
+    id: "H10", status: "confirmed",
+    name: "Courtyard by Marriott Lima Miraflores (Caravan day 7)",
+    shortName: "Courtyard Miraflores (night 3)",
+    place: "LIM", city: "Miraflores, Lima, Peru",
+    address: "Calle Schell No 400, Miraflores, Lima 15074, Peru",
+    phone: "+51 1 625 3838",
+    checkIn: "2026-10-23", checkInTime: "afternoon, after the LATAM flight from Cusco and the waterfront drive",
+    checkOut: "2026-10-24", checkOutTime: "12:00 (the tour ends after breakfast, which starts 06:30)",
+    nights: 1,
+    room: "Room 2 single for Jack; Room 1 double for the parents (Caravan allocation)",
+    guests: 1,
+    confirmation: "PE261017-YYD",
+    bookedBy: "Included in the Caravan tour",
+    cancellation: "Governed by Caravan's terms of travel",
+    sources: ["doc-caravan-hotels", "doc-caravan-days"], confidence: "confirmed",
+    notes: [
+      "Farewell dinner on the evening of 23 Oct. On the 24th the tour ends at the hotel; Caravan's airport transfers (05:30, 08:00, 11:00 arrivals at LIM) are not needed because the family stays in Lima.",
+      "Checkout, then the 5-minute move along the malecón to the JW Marriott (check-in 15:00): ask the bellman for a taxi, or leave the bags with the JW concierge and walk."
+    ]
+  },
+  {
+    id: "H11", status: "confirmed",
+    name: "JW Marriott Hotel Lima",
+    shortName: "JW Marriott Lima",
+    place: "LIM", city: "Miraflores, Lima, Peru",
+    address: "Malecón de la Reserva 615, Miraflores, Lima 15074, Peru",
+    phone: "+51 1 217 7000",
+    checkIn: "2026-10-24", checkInTime: "15:00",
+    checkOut: "2026-10-27", checkOutTime: "12:00",
+    nights: 3,
+    room: "Contemporary Classic guest room, 2 Queen, Oceanfront (booked for 1 adult)",
+    guests: 1,
+    confirmation: "97879273",
+    bookedBy: "William Tait: Marriott Bonvoy redemption, 126,000 points (Titanium Elite), Visa guarantee",
+    cancellation: "Free until 23:59 hotel time on Thu 22 Oct 2026 (2 days before arrival)",
+    parking: "Complimentary on-site parking (not needed)",
+    sources: ["doc-jw-lima"], confidence: "confirmed",
+    notes: [
+      "Found in the inbox on 10 Oct: William forwarded the Marriott confirmation on 6 May with the note that after the Courtyard night the family 'heads over to the J.W. for some luxe'.",
+      "OPEN: the reservation is ONE room for ONE adult, and three people arrive. Confirm whether a second room exists or whether Jack books his own (free cancellation on this one runs to 22 Oct).",
+      "Clifftop on the malecón, next door to Larcomar; Parque del Amor and the paragliding point are a short walk. Titanium Elite lounge access and the welcome gift are tied to William being present.",
+      "Rate is quoted in USD, charged in soles; foreign tourists under 60 days are exempt from the 18% IGV with passport and TAM."
+    ]
+  },
+  {
+    id: "H12", status: "unconfirmed",
+    name: "Lima, night of 27 to 28 Oct: NOT BOOKED",
+    shortName: "Lima 27 Oct (not booked)",
+    place: "LIM", city: "Miraflores, Lima, Peru",
+    address: null,
+    phone: null,
+    checkIn: "2026-10-27", checkInTime: "JW Marriott checkout is 12:00 on the 27th",
+    checkOut: "2026-10-28", checkOutTime: "leave for LIM by ~09:30 for LA2694 at 13:30",
+    nights: 1,
+    room: "nothing on file",
+    confirmation: "TBC",
+    bookedBy: "n/a",
+    sources: ["doc-jw-lima", "doc-parents-sheet"], confidence: "estimated",
+    notes: [
+      "GAP found 10 Oct: the JW Marriott ends on the 27th at noon and LATAM leaves at 13:30 on the 28th. No booking covers the night between. The parents' sheet puts them at the Courtyard from the 28th, which does not cover the 27th either.",
+      "Simplest fixes: extend the JW Marriott by one night (ask William to add a night on points or cash), or book the Courtyard Miraflores for the 27th, where the parents stay on from the 28th.",
+      "Until it is booked this entry stays red on the Now screen on purpose."
     ]
   },
   {
@@ -1545,7 +1688,7 @@ window.TRIP.hotels = [
 
 /* Parents' reference accommodation after the split (not Jack's bookings) */
 window.TRIP.parentsHotels = [
-  { date: "2026-10-28", to: "2026-10-30", name: "Courtyard Miraflores, Lima", note: "final Lima nights before the cruise" },
+  { date: "2026-10-28", to: "2026-10-30", name: "Courtyard Miraflores, Lima", note: "final Lima nights before the cruise (parents' sheet; the night of 27 Oct is not covered by any document)" },
   { date: "2026-10-30", to: "2026-11-04", name: "L'Austral (Ponant), at sea", note: "Callao to Valparaíso" },
   { date: "2026-11-04", to: "2026-11-06", name: "Renaissance Santiago", note: "Chile" },
   { date: "2026-11-06", to: "2026-11-07", name: "Holiday Inn Lima", note: "overnight before flying home" }
@@ -1554,10 +1697,12 @@ window.TRIP.parentsHotels = [
 
 /* ===== assets/js/data/transport.js ===== */
 /* ============================================================
-   TRANSPORT.JS — ground transportation and transfers.
-   Nothing in the folder documents any ground booking, so every
-   entry is a REQUIRED ARRANGEMENT with status "to-arrange" or
-   an operator-provided transfer with status "operator".
+   TRANSPORT.JS — ground transportation, transfers and the
+   non-flight, non-hotel bookings (the Jeep, the Caravan tour).
+   status: to-arrange | family | operator | booked | done
+   Entries with a `time` and a `place` become timed moments on the
+   Now screen (core/steps.js); the rest are context for the flight
+   steps (matched by date and place code or name).
    ============================================================ */
 window.TRIP = window.TRIP || {};
 
@@ -1608,40 +1753,95 @@ window.TRIP.transport = [
   },
   {
     id: "T4", status: "family", date: "2026-09-29",
-    name: "JAX pickup",
-    from: "JAX arrivals (09:26 landing, AA4024)", to: "Parents' home, Jacksonville",
+    name: "JAX pickup, then home to St. Augustine",
+    from: "JAX arrivals (09:26 landing, AA4024)", to: "Parents' home, St. Augustine (about 50 miles south on I-95)",
     mode: "Parents collect by car",
-    sources: ["doc-old-itinerary", "doc-aa-change-jpeg"], confidence: "estimated",
-    notes: ["Confirm with the family closer to the date. New landing time is 23 minutes earlier than originally booked."]
+    sources: ["doc-aa-change-jpeg", "doc-caravan-reconfirm"], confidence: "confirmed",
+    notes: ["The family home is in St. Augustine (the Caravan booking carries the Alcala Drive address), roughly an hour from JAX."]
   },
   {
-    id: "T5", status: "family", date: "2026-10-17",
-    name: "Ride to JAX for the Peru departure",
-    from: "Parents' home", to: "JAX (10:06 departure)",
-    window: "Leave ~06:50 (international ticket: bags through to Lima, at the airport by ~07:35); everyone flies together",
-    mode: "Car / Uber ('Need Uber' per the parents' sheet)",
-    sources: ["doc-parents-sheet"], confidence: "estimated", notes: []
+    id: "T12", status: "done", date: "2026-10-06", time: "12:00", place: "STA",
+    name: "Collect the Jeep at Enterprise St. Augustine, then drive to Tampa",
+    from: "Enterprise JAX-ST. AUGUSTINE, 2140 South U.S. 1, St. Augustine FL 32086 (+1 904-797-1697)", to: "Ybor City Airbnb, 2718 N 21st St, Tampa",
+    window: "Pickup booked 12:00 Tue 6 Oct (the agreement was opened at 13:06); I-95 south and I-4 west, about 200 miles, 3 h 15 m to 3 h 45 m; Airbnb check-in after 15:00",
+    mode: "Enterprise Jeep Wagoneer, white, Florida plate KQP9358 (rental agreement in the Wallet)",
+    sources: ["doc-enterprise-jeep", "doc-airbnb-tampa"], confidence: "confirmed",
+    notes: ["Done. Unlimited mileage; damage waiver, supplemental liability and roadside protection taken; no additional drivers on the agreement."]
+  },
+  {
+    id: "T13", status: "booked", date: "2026-10-15", time: "11:00", place: "TPA",
+    name: "Check out of the Airbnb by 11:00, drive back to St. Augustine",
+    from: "Ybor City Airbnb, Tampa", to: "Parents' home, St. Augustine",
+    window: "Checkout by 11:00 Thu 15 Oct; I-4 east then I-95 north (about 200 miles, 3 h 15 m to 3 h 45 m; worse if Orlando is slow); home mid-afternoon",
+    mode: "The Jeep",
+    sources: ["doc-airbnb-tampa", "doc-enterprise-jeep"], confidence: "confirmed",
+    notes: [
+      "Leave the house as found; message the host Colin through Airbnb if anything needs reporting. Take the chargers off the walls, check the fridge, bins out.",
+      "Refuel near St. Augustine today or tomorrow morning: the Jeep went out at 23.5 gallons and Enterprise charges for any shortfall at return."
+    ]
+  },
+  {
+    id: "T14", status: "booked", date: "2026-10-16", time: "12:15", place: "STA",
+    name: "Return the Jeep to Enterprise St. Augustine by 13:00",
+    from: "Parents' home, St. Augustine", to: "Enterprise JAX-ST. AUGUSTINE, 2140 South U.S. 1 (about 2 miles)",
+    window: "Rental agreement return: Fri 16 Oct 13:00; branch open 07:30 to 18:00; drop box after hours (you stay responsible until the branch opens)",
+    mode: "Drive it in, then a short Uber or a lift home",
+    sources: ["doc-enterprise-jeep"], confidence: "confirmed",
+    notes: [
+      "Same fuel level as received (23.5 gal mark on the dash), photograph the exterior, the dash and the fuel gauge, keep the receipt. Estimated total on the reservation: $1,120.45.",
+      "Florida tolls on I-4 are mostly electronic; any toll-by-plate charges are billed to the card later by Enterprise's TollPass program. Leave nothing in the glove box.",
+      "Returning on time matters: the agreement lists no second driver, and tomorrow's 06:30 ride to JAX needs to be booked separately (Uber, or a family friend)."
+    ]
+  },
+  {
+    id: "T5", status: "to-arrange", date: "2026-10-17",
+    name: "Ride from St. Augustine to JAX for the Peru departure",
+    from: "Parents' home, St. Augustine", to: "JAX (10:06 departure, international ticket)",
+    window: "Leave ~06:30 (about 50 miles up I-95, 55 to 70 min; at the airport by ~07:35, 2.5 h before an international-ticket departure); everyone flies together",
+    mode: "Uber / Lyft (the Jeep went back on the 16th) or a family friend; the parents' sheet says 'Need Uber'",
+    sources: ["doc-parents-sheet", "doc-enterprise-jeep"], confidence: "estimated",
+    notes: ["Three people, three handled bags plus day bags: book an XL. AA accepts bags no more than 4 h before departure at JAX, so arriving before 06:06 gains nothing."]
   },
   {
     id: "T6", status: "to-arrange", date: "2026-10-17",
-    name: "Lima airport to Courtyard Miraflores",
-    from: "LIM arrivals (20:10 landing)", to: "Miraflores district",
-    window: "Evening; 45-70 min drive depending on traffic",
-    mode: "Pre-arranged hotel car or official airport taxi",
-    sources: [], confidence: "estimated",
-    notes: ["Use the official taxi counters or a pre-booked car at Jorge Chávez; do not hail on the curb at night.", "Possibly bundled with the caravan operator's meet-and-greet. Confirm with the operator."]
+    name: "Lima airport to the Courtyard Miraflores (official taxi counter)",
+    from: "LIM arrivals (20:10 landing)", to: "Courtyard Miraflores, Calle Schell 400, Miraflores",
+    window: "Caravan's instruction: after customs and bags, go to the counters for the official companies (Taxi Seguro, Green Taxi), book and pay at the counter before leaving the terminal; 30 to 60 min to Miraflores",
+    mode: "Official airport taxi: 90 to 130 soles or $25 to $35 plus tip; USD, soles or card accepted at the counter; ATMs and exchange in arrivals",
+    sources: ["doc-caravan-reconfirm", "doc-caravan-days"], confidence: "confirmed",
+    notes: ["The transfer is on your own (not included in the tour). Never hail on the curb at night. At the hotel desk, identify yourselves as Caravan tour members."]
   },
   {
     id: "T7", status: "operator", date: "2026-10-18",
-    name: "Caravan transfers, Cusco region",
-    from: "Lima", to: "Cusco / Sacred Valley / Aguas Calientes / Machu Picchu",
-    window: "Oct 18-24, per operator programme",
-    mode: "Caravan flights LIM-CUZ and CUZ-LIM, coach, PeruRail / IncaRail trains, Machu Picchu shuttle buses",
-    sources: ["doc-old-itinerary", "doc-revised-itinerary"], confidence: "estimated",
+    name: "Caravan motorcoach, LATAM flights and the Machu Picchu train",
+    from: "Lima", to: "Sacred Valley / Machu Picchu / Cusco / Lima",
+    window: "Oct 18-24, per the Caravan day-by-day (times below are Caravan's printed coach times)",
+    mode: "Caravan motorcoach with Tour Director and Driver; LATAM LIM-CUZ (19 Oct) and CUZ-LIM (23 Oct) included; train to Machu Picchu and back (21 Oct)",
+    sources: ["doc-caravan-days", "doc-caravan-reconfirm"], confidence: "confirmed",
     notes: [
-      "ESTIMATED: the caravan's internal flights and trains are presumed operator-arranged. No tickets exist in the folder.",
-      "OPEN ITEM: get the operator's day-by-day transport list, train departure times and hotel pickups in writing."
+      "18 Oct: welcome briefing 08:00, then the coach (Historic Center, Larco Museum). 19 Oct: bags out 08:00, depart 09:00, fly to Cusco, coach to Urubamba. 20 Oct: depart 08:00 (Ollantaytambo, Moray, Chinchero). 21 Oct: depart 07:00, train to Machu Picchu, train back late afternoon. 22 Oct: bags 07:00, depart 08:00 (Sacsayhuamán, Cusco). 23 Oct: bags 07:00, depart 08:00, fly to Lima, waterfront drive, farewell dinner. 24 Oct: tour ends after breakfast (from 06:30).",
+      "The LATAM flights are on Caravan's tickets: exact departure times come from the Tour Director on tour; one checked bag and one carry-on per person; extra bags paid to LATAM.",
+      "Caravan handles ONE piece of luggage per person (airline-style limit 60 linear inches, 50 lb); a second piece under the coach costs $30; the day bag you carry yourself must not be a wheeled bag.",
+      "Departure transfers on 24 Oct exist only at fixed times (arriving LIM 05:30, 08:00, 11:00) and are not needed: the family stays in Lima."
     ]
+  },
+  {
+    id: "T16", status: "to-arrange", date: "2026-10-24", time: "11:30", place: "LIM",
+    name: "Move from the Courtyard to the JW Marriott Lima",
+    from: "Courtyard Miraflores, Calle Schell 400", to: "JW Marriott Lima, Malecón de la Reserva 615",
+    window: "The tour ends after breakfast (from 06:30); Courtyard checkout 12:00; JW check-in 15:00. About 1.2 km along Miraflores: a 5-minute taxi with the bags, or leave them with the JW concierge and walk",
+    mode: "Taxi via the Courtyard bellman, or on foot",
+    sources: ["doc-jw-lima", "doc-caravan-days"], confidence: "estimated",
+    notes: ["Lunch at Larcomar (next to the JW) fills the gap before the room is ready."]
+  },
+  {
+    id: "T15", status: "to-arrange", date: "2026-10-28",
+    name: "Lima hotel to Jorge Chávez for LA2694",
+    from: "Miraflores (wherever the night of the 27th is booked)", to: "LIM international departures (13:30)",
+    window: "Leave by ~09:30: 3 h international guidance plus 30 to 60 min on the road; bags dropped by ~11:30",
+    mode: "Taxi arranged by the hotel bellman (Taxi Seguro / Green Taxi class), $25 to $35 plus tip; never street-hailed",
+    sources: ["doc-caravan-reconfirm"], confidence: "estimated",
+    notes: ["Caravan's own guidance for the airport run; the same companies serve the hotel-to-airport direction."]
   },
   {
     id: "T8", status: "to-arrange", date: "2026-10-28",
@@ -1666,18 +1866,78 @@ window.TRIP.transport = [
     from: "BKK arrivals (06:40 landing)", to: "Home, Udon Thani",
     mode: "Unbooked: a BKK or DMK flight to UTH, or the train from Krung Thep Aphiwat",
     sources: [], confidence: "estimated",
-    notes: ["Nothing in the folder covers Bangkok to Udon Thani on 31 Oct. Qatar lands at Suvarnabhumi; the free DMK shuttle applies only to same-day connecting passengers. Immigration + bags realistically put you at the curb 07:45-08:15."]
+    notes: ["Nothing in the folder or the inbox (checked 10 Oct) covers Bangkok to Udon Thani on 31 Oct. Qatar lands at Suvarnabhumi; the free DMK shuttle applies only to same-day connecting passengers. Immigration + bags realistically put you at the curb 07:45-08:15."]
+  }
+];
+
+/* ---- Other reservations: the car and the tour (Wallet cards) ----
+   kind: car | tour. Dates are local calendar dates. References are
+   masked by the UI like every other booking number. */
+window.TRIP.bookings = [
+  {
+    id: "B1", kind: "car", status: "confirmed",
+    name: "Enterprise Rent-A-Car: Jeep Wagoneer, 10 days",
+    shortName: "Enterprise Jeep, St. Augustine",
+    provider: "Enterprise Rent-A-Car, JAX-ST. AUGUSTINE branch",
+    place: "STA",
+    from: "2026-10-06", to: "2026-10-16",
+    pickup: "Tue 6 Oct 12:00 booked (agreement opened 13:06)",
+    dropoff: "Fri 16 Oct 13:00 · branch hours Fri 07:30 to 18:00 · drop box after hours",
+    address: "2140 South U.S. 1, Saint Augustine, FL 32086, USA",
+    phone: "+1 904-797-1697",
+    vehicle: "Jeep Wagoneer, white, Florida plate KQP9358, vehicle 7XH5SK (reserved class: Audi A4 / BMW 3 Series / Genesis G70 or similar, automatic)",
+    renter: "Toby Tait, no additional drivers",
+    confirmation: "77946899",
+    agreement: "58ZMNW",
+    cost: "Estimated $1,120.45: 1 week at $374.99 + 3 days at $53.65, damage waiver $319.90, supplemental liability $160.90, roadside $39.90, Florida surcharges and fees, 6.5% tax. Unlimited mileage. Out at 51,873 miles and 23.5 gal.",
+    sources: ["doc-enterprise-jeep"], confidence: "confirmed",
+    notes: [
+      "Return with the same fuel as received; photograph the car and the gauge at return and keep the receipt.",
+      "Tolls: I-4 and the Tampa expressways are electronic; plate-based tolls are billed to the card through Enterprise's TollPass program after the rental.",
+      "The full rental agreement PDF is attached to the Enterprise email of 6 Oct in the Yahoo inbox (not copied here); the capture in the Wallet carries the summary and the reservation."
+    ]
+  },
+  {
+    id: "B2", kind: "tour", status: "confirmed",
+    name: "Caravan Tours: Peru with Machu Picchu, 8 Days",
+    shortName: "Caravan Peru tour",
+    provider: "Caravan Tours, Inc. (Barrington, IL; Florida Seller of Travel ST 38035)",
+    place: "LIM",
+    from: "2026-10-17", to: "2026-10-24",
+    pickup: "Starts Sat 17 Oct at the Courtyard Miraflores, Lima (check-in after 15:00; dinner on your own)",
+    dropoff: "Ends Sat 24 Oct after breakfast at the Courtyard Miraflores, Lima",
+    address: "Courtyard by Marriott Lima Miraflores, Calle Schell 400, Miraflores (tour start and end)",
+    phone: "+1 800-227-2826 (office hours; emergency operator after hours) · outside the US +1 312-321-9800 · Travel Protection claims (RoamRight) +1 855-892-2382",
+    confirmation: "PE261017-YYD",
+    renter: "Account William Tait; party of 3 in 2 rooms: Room 1 double (William and Gillian), Room 2 single (Jack). Guest names must match passports exactly.",
+    cost: "Fully paid, $5,872 total on the card ending 6195: $1,824 per parent and $2,224 for Jack (single room), each including $129 Caravan Travel Protection. Deposit 12 Jan, balance 9 May 2026.",
+    includes: "All 7 hotel nights, LATAM Lima-Cusco-Lima (1 checked + 1 carry-on each), the Machu Picchu train and entry, motorcoach with Tour Director and Driver, 7 breakfasts, 3 lunches, 4 dinners, bottled water on the coach, departure transfers to LIM on 24 Oct at 05:30 / 08:00 / 11:00 only.",
+    excludes: "Arrival taxi on 17 Oct (official counter, 90 to 130 soles), lunches on days 2, 3 and 7, dinners on days 1, 4 and 6, tips (Tour Director $8 to $15 and Driver $7 to $12 per person per day, cash), a second handled bag ($30).",
+    sources: ["doc-caravan-reconfirm", "doc-caravan-days", "doc-caravan-hotels"], confidence: "confirmed",
+    notes: [
+      "Caravan has AA1307 arriving 20:10 on 17 Oct on file for all three, and the parents' departure as 'by ship, no transfer needed'.",
+      "Passports: Machu Picchu entry and the LATAM tickets are tied to the passport numbers Caravan holds (Jack's expires Jan 2034 on file). Carry the same passport; if one was renewed since, bring both.",
+      "Travel Protection covers cancellation for any reason before departure, $50,000 medical, $150,000 evacuation, baggage and delay; medical claims are secondary (pay first, claim later).",
+      "Altitude per Caravan: three nights at 9,420 ft in the Sacred Valley, one night at 11,150 ft in Cusco with oxygen-enriched rooms. Anyone with heart or breathing issues should have cleared it with a doctor.",
+      "Manage Booking page: booking.caravan.com (sign in as William). Online copies of the day-by-day and hotel list are at pdf.caravan."
+    ]
   }
 ];
 
 
 /* ===== assets/js/data/itinerary.js ===== */
 /* ============================================================
-   ITINERARY.JS — the 34-day master itinerary, day by day.
+   ITINERARY.JS — the master itinerary, day by day.
    kind: flight | layover | hotel | home | caravan | star | free |
-         transfer | work | split | warning
+         transfer | car | work | split | warning
    Each segment may reference flight/hotel/transport ids so the
    UI can pull full detail without duplicating facts.
+   Caravan days carry Caravan's printed times: `bags` (luggage
+   outside the room) and `depart` (coach leaves); the Now screen
+   turns them into timed reminders.
+   Updated 10 Oct 2026 from the Caravan day-by-day, hotel list and
+   reconfirmation, the Airbnb and Enterprise confirmations, and the
+   JW Marriott Lima confirmation.
    ============================================================ */
 window.TRIP = window.TRIP || {};
 
@@ -1721,127 +1981,193 @@ window.TRIP.days = [
   },
   {
     date: "2026-09-29", dayNo: 2, phase: "florida", place: "JAX",
-    title: "Miami to Jacksonville", sub: "Arrive at the family home",
+    title: "Miami to St. Augustine", sub: "AA4024 into Jacksonville, then an hour south to the family home",
     travelDay: true,
     segments: [
       { kind: "transfer", ref: "T3", text: "Early ride to MIA (~06:00; the flight moved 27 minutes earlier)" },
       { kind: "flight", ref: "F3", text: "AA4024 Miami 08:03 to Jacksonville 09:26, First (schedule change of 22 Sep; was AA3140 at 08:30)" },
-      { kind: "transfer", ref: "T4", text: "Parents collect at JAX" },
-      { kind: "home", ref: "H2", text: "Arrive parents' home, the base for the next 18 nights" }
+      { kind: "transfer", ref: "T4", text: "Parents collect at JAX; about 50 miles down I-95 to St. Augustine" },
+      { kind: "home", ref: "H2", text: "Arrive at the parents' home in St. Augustine, the base for the first Florida week" }
     ],
-    sleep: "Parents' home, Jacksonville"
+    sleep: "Parents' home, St. Augustine"
   },
   {
-    date: "2026-09-30", dayNo: 3, phase: "florida", place: "JAX", span: { to: "2026-10-16", label: "Days 3-19" },
-    title: "The Florida chapter", sub: "Jacksonville: family time and the work-from-Florida stretch",
+    date: "2026-09-30", dayNo: 3, phase: "florida", place: "STA", span: { to: "2026-10-05", label: "Days 3-8" },
+    title: "St. Augustine, the first family week", sub: "Seven nights at the family home: work on US Eastern time, the oldest city in the country outside the door",
     segments: [
-      { kind: "home", text: "17 unbroken nights in Jacksonville. No flights, no hotels, no packing." },
-      { kind: "work", text: "Weekdays are work-capable: US Eastern hours with zero jet-lag friction for US colleagues. 13 weekdays fall in this window (no work schedule document exists; plan is suggested, not confirmed)." },
-      { kind: "free", text: "Weekends free: Oct 3-4 and Oct 10-11, plus evenings." },
-      { kind: "warning", text: "US ordering window: anything needed for Peru can be delivered to the house until about Oct 12 (estimate)." }
+      { kind: "home", ref: "H2", text: "Home base 29 Sep to 6 Oct. No flights, no hotels, no packing." },
+      { kind: "work", text: "Weekdays 30 Sep to 2 Oct and 5 Oct are work days on US Eastern time, zero jet-lag friction for US colleagues (no work schedule document exists; plan is suggested, not confirmed)." },
+      { kind: "free", text: "Weekend 3-4 Oct free with the family: the old town, the fort, Anastasia Island." },
+      { kind: "free", text: "Mon 5 Oct: the Tampa Airbnb and the Jeep were both booked this evening for tomorrow." }
     ],
-    sleep: "Parents' home, Jacksonville"
+    sleep: "Parents' home, St. Augustine"
   },
   {
-    date: "2026-10-17", dayNo: 20, phase: "peru-caravan", place: "LIM",
-    title: "Jacksonville to Lima", sub: "The caravan begins. The whole family flies together.",
+    date: "2026-10-06", dayNo: 9, phase: "florida", place: "TPA",
+    title: "The Jeep, then Tampa", sub: "Enterprise St. Augustine at noon, I-95 and I-4 west, Ybor City by evening",
+    segments: [
+      { kind: "car", ref: "T12", text: "Enterprise JAX-St. Augustine, 2140 South U.S. 1: pickup booked 12:00 (agreement opened 13:06). White Jeep Wagoneer, plate KQP9358, unlimited mileage, 10 days." },
+      { kind: "transfer", ref: "T12", text: "Drive I-95 south and I-4 west to Tampa: about 200 miles, 3 h 15 m to 3 h 45 m." },
+      { kind: "hotel", ref: "H6", text: "Ybor City Retreat Near Nightlife (Airbnb, entire home), 2718 N 21st St: check-in after 15:00, 9 nights, conf in the Wallet." },
+      { kind: "warning", text: "House rules: quiet hours 22:00 to 09:00, no pets, 6 guests max, exterior cameras. Host Colin Alexander via Airbnb messages." }
+    ],
+    sleep: "Ybor City Airbnb, Tampa"
+  },
+  {
+    date: "2026-10-07", dayNo: 10, phase: "florida", place: "TPA", span: { to: "2026-10-14", label: "Days 10-17" },
+    title: "Tampa: the Ybor City chapter", sub: "Nine nights in a whole-home Airbnb in the historic cigar district, the Jeep outside, work by day",
+    segments: [
+      { kind: "home", ref: "H6", text: "Ybor City Airbnb, 6 to 15 Oct. The neighbourhood is Tampa's old Cuban-Spanish-Italian cigar quarter: brick warehouses, 7th Avenue, roosters in the street." },
+      { kind: "work", text: "Weekdays 7-9 and 12-14 Oct work from the Airbnb on US Eastern time (suggested, not a confirmed calendar)." },
+      { kind: "free", text: "On foot or by streetcar: 7th Avenue (La Séptima), the Columbia Restaurant (Florida's oldest, 1905), Ybor City Museum State Park, and the free TECO streetcar into downtown and the Riverwalk. Saturday 10 Oct: the Ybor City Saturday Market at Centennial Park (morning)." },
+      { kind: "free", text: "With the Jeep: the Gulf beaches (Clearwater Beach, St. Pete Beach) are 40 to 60 minutes west; Bayshore Boulevard and Hyde Park for an evening; Tarpon Springs' sponge docks for a Greek lunch. Ideas, not bookings." },
+      { kind: "warning", text: "US ordering window: deliveries to the Airbnb until about 13 Oct (checkout is Thu 15 Oct at 11:00); the family home takes parcels until the 16th." },
+      { kind: "warning", text: "Peru prep from here: one handled bag per person for Caravan (60 linear inches, 50 lb), a non-wheeled day bag for the coach, layers for 2 to 6 C nights, sunblock, a small first-aid kit, and cash for tips and the Lima taxi." }
+    ],
+    sleep: "Ybor City Airbnb, Tampa"
+  },
+  {
+    date: "2026-10-15", dayNo: 18, phase: "florida", place: "TPA",
+    title: "Tampa to St. Augustine", sub: "Airbnb checkout by 11:00, the drive north, home for the last two Florida nights",
+    segments: [
+      { kind: "warning", ref: "H6", text: "Airbnb checkout by 11:00: leave it as found, chargers off the walls, fridge checked, message Colin if anything needs reporting." },
+      { kind: "transfer", ref: "T13", text: "Drive I-4 east and I-95 north to St. Augustine, about 200 miles, 3 h 15 m to 3 h 45 m. Refuel near home to the pick-up level (23.5 gal) before tomorrow's return." },
+      { kind: "home", ref: "H7", text: "Back at the parents' home in St. Augustine for the last two Florida nights (inferred from the bookings, not documented)." },
+      { kind: "free", text: "Laundry and the Peru repack: altitude layers, rain shell, daypack, passport, the paper copies of the Caravan documents." }
+    ],
+    sleep: "Parents' home, St. Augustine", estimated: true
+  },
+  {
+    date: "2026-10-16", dayNo: 19, phase: "florida", place: "STA",
+    title: "Return the Jeep, pack for Peru", sub: "Enterprise by 13:00, AA check-in opens at 10:06, cash and bags sorted",
+    segments: [
+      { kind: "car", ref: "T14", text: "Return the Jeep to Enterprise St. Augustine (2140 South U.S. 1) by 13:00; Friday hours 07:30 to 18:00. Fuel to the pick-up level, photos of the car and the gauge, keep the receipt." },
+      { kind: "warning", text: "AA online check-in opens 10:06 (24 h before AA3955): seats for all three, passports verified for the Lima sector, bags tagged through to LIM." },
+      { kind: "free", text: "Pack to Caravan's rule: one handled bag per person (60 linear inches, 50 lb; $30 for a second), a day bag you carry yourself (no wheels). Prescriptions and a second supply in the cabin bag." },
+      { kind: "free", text: "Cash: clean US dollars or soles for the arrival taxi ($25 to $35) and the tips (Tour Director $8 to $15 and Driver $7 to $12 per person per day; about $100 to $190 per person for the week, cash only)." },
+      { kind: "warning", ref: "T5", text: "Book tomorrow's 06:30 ride to JAX for three people and three bags (Uber XL or a family friend); the Jeep is gone." }
+    ],
+    sleep: "Parents' home, St. Augustine", estimated: true
+  },
+  {
+    date: "2026-10-17", dayNo: 20, phase: "peru-caravan", place: "LIM", caravanDay: 1,
+    title: "St. Augustine to Lima", sub: "Caravan day 1 · the whole family flies together · dinner on your own",
     travelDay: true,
     segments: [
-      { kind: "transfer", ref: "T5", text: "Morning ride to JAX (~07:30)" },
+      { kind: "transfer", ref: "T5", text: "~06:30 ride from St. Augustine to JAX (50 miles, about an hour); at the airport ~07:35" },
       { kind: "flight", ref: "F4", text: "AA3955 Jacksonville 10:06 to Miami ~11:31, Embraer 175" },
       { kind: "layover", text: "Miami connection: 4 h 15 m (stated on the confirmation)", at: "MIA" },
-      { kind: "flight", ref: "F5", text: "AA1307 Miami ~15:46 to Lima 20:10, A321neo, Business" },
-      { kind: "transfer", ref: "T6", text: "Night transfer to Miraflores (45-70 min)" },
-      { kind: "hotel", ref: "H3", text: "Courtyard Lima Miraflores, the Peru base hotel (conf TBC)" }
+      { kind: "flight", ref: "F5", text: "AA1307 Miami ~15:46 to Lima 20:10, A321neo, Business (Caravan has this arrival on file)" },
+      { kind: "transfer", ref: "T6", text: "Official taxi counter in arrivals (Taxi Seguro / Green Taxi): 90 to 130 soles or $25 to $35, 30 to 60 min to Miraflores" },
+      { kind: "hotel", ref: "H3", text: "Courtyard Lima Miraflores, Calle Schell 400: identify yourselves as Caravan tour members; Room 2 single for Jack" }
     ],
     sleep: "Courtyard Lima Miraflores"
   },
   {
-    date: "2026-10-18", dayNo: 21, phase: "peru-caravan", place: "CUZ", caravanDay: 1,
-    title: "Lima to Cusco", sub: "Caravan day 1 · up to 3,399 m",
+    date: "2026-10-18", dayNo: 21, phase: "peru-caravan", place: "LIM", caravanDay: 2, depart: "08:00",
+    title: "Lima: the Historic Center and the Larco Museum", sub: "Caravan day 2 · welcome briefing 08:00 · breakfast and dinner included",
     segments: [
-      { kind: "caravan", ref: "T7", text: "Morning flight Lima to Cusco (operator-arranged; times unconfirmed)" },
-      { kind: "warning", text: "Altitude day: Cusco sits at 3,399 m. Take it slowly, hydrate, skip the pisco tonight." },
-      { kind: "caravan", text: "Gentle acclimatisation afternoon; short walking only" },
-      { kind: "hotel", ref: "H4", text: "Caravan hotel, Cusco (via operator)" }
-    ],
-    sleep: "Caravan hotel, Cusco", estimated: true
-  },
-  {
-    date: "2026-10-19", dayNo: 22, phase: "peru-caravan", place: "SAV", caravanDay: 2,
-    title: "The Sacred Valley", sub: "Caravan day 2 · Pisac market, Ollantaytambo fortress",
-    segments: [
-      { kind: "caravan", text: "Sacred Valley day: Pisac artisan market in the morning, Ollantaytambo Inca fortress in the afternoon" },
-      { kind: "free", text: "The valley floor sits near 2,800 m, noticeably easier than Cusco" },
-      { kind: "hotel", ref: "H4", text: "Caravan hotel, Sacred Valley" }
-    ],
-    sleep: "Caravan hotel, Sacred Valley", estimated: true
-  },
-  {
-    date: "2026-10-20", dayNo: 23, phase: "peru-caravan", place: "AGC", caravanDay: 3,
-    title: "Train to Aguas Calientes", sub: "Caravan day 3 · the gateway town",
-    segments: [
-      { kind: "caravan", ref: "T7", text: "PeruRail / IncaRail from Ollantaytambo down the Urubamba gorge to Aguas Calientes (times via operator)" },
-      { kind: "warning", text: "Early night. The Machu Picchu bus queue starts before dawn tomorrow." },
-      { kind: "hotel", ref: "H4", text: "Caravan hotel, Aguas Calientes (2,040 m)" }
-    ],
-    sleep: "Caravan hotel, Aguas Calientes", estimated: true
-  },
-  {
-    date: "2026-10-21", dayNo: 24, phase: "peru-caravan", place: "MAP", caravanDay: 4, star: true,
-    title: "MACHU PICCHU", sub: "Caravan day 4 · the main event · 2,430 m",
-    segments: [
-      { kind: "star", text: "Machu Picchu. Bus up around 04:00-05:00 for sunrise over the citadel (~05:30-06:00)." },
-      { kind: "caravan", text: "Guided tour: Sun Gate (Inti Punku), Inca Bridge, the terraces. Huayna Picchu only if the operator secured permits." },
-      { kind: "warning", text: "Bring the ORIGINAL passport: it is checked at the entry gate. Daypack only; large bags are refused at the citadel." },
-      { kind: "hotel", ref: "H4", text: "Caravan hotel, Aguas Calientes" }
-    ],
-    sleep: "Caravan hotel, Aguas Calientes", estimated: true
-  },
-  {
-    date: "2026-10-22", dayNo: 25, phase: "peru-caravan", place: "CUZ", caravanDay: 5,
-    title: "Back to Cusco", sub: "Caravan day 5 · optional second visit, then the train out",
-    segments: [
-      { kind: "caravan", text: "Optional second Machu Picchu entry or Huayna Picchu hike (if ticketed), then train + road back to Cusco" },
-      { kind: "hotel", ref: "H4", text: "Caravan hotel, Cusco" }
-    ],
-    sleep: "Caravan hotel, Cusco", estimated: true
-  },
-  {
-    date: "2026-10-23", dayNo: 26, phase: "peru-caravan", place: "CUZ", caravanDay: 6,
-    title: "Cusco, the imperial city", sub: "Caravan day 6 · Sacsayhuamán, Qorikancha, Plaza de Armas",
-    segments: [
-      { kind: "caravan", text: "Full-day city tour: Sacsayhuamán fortress, Qorikancha sun temple, the Plaza, San Pedro market" },
-      { kind: "free", text: "Last caravan night" },
-      { kind: "hotel", ref: "H4", text: "Caravan hotel, Cusco" }
-    ],
-    sleep: "Caravan hotel, Cusco", estimated: true
-  },
-  {
-    date: "2026-10-24", dayNo: 27, phase: "peru-caravan", place: "LIM", caravanDay: 7,
-    title: "Cusco to Lima", sub: "Caravan day 7 · the caravan ends",
-    segments: [
-      { kind: "caravan", ref: "T7", text: "Return flight Cusco to Lima (operator-arranged), caravan officially ends" },
-      { kind: "hotel", ref: "H3", text: "Back to the Courtyard Miraflores base" }
-    ],
-    sleep: "Courtyard Lima Miraflores", estimated: true
-  },
-  {
-    date: "2026-10-25", dayNo: 28, phase: "lima", place: "LIM", span: { to: "2026-10-27", label: "Days 28-30" },
-    title: "Lima free days", sub: "Miraflores cliffs, Barranco, the last family days",
-    segments: [
-      { kind: "free", text: "Oct 25: Miraflores malecón, Larcomar, the Pacific light" },
-      { kind: "free", text: "Oct 26: Barranco's bridges and murals, the historic centre" },
-      { kind: "free", text: "Oct 27: last full day together; farewell dinner; pack for the split" }
+      { kind: "caravan", ref: "T7", text: "Breakfast, then the 08:00 welcome briefing with the Tour Director; luggage tags handed out." },
+      { kind: "caravan", text: "Morning in the Historic Center (UNESCO): the Main Plaza, the Archbishop's Palace, the Government Palace, the 16th-century Cathedral, then the Monasterio de San Francisco." },
+      { kind: "caravan", text: "Back to Miraflores; lunch on your own. Afternoon drive to the Larco Museum: pre-Columbian gold, ceramics and textiles in an 18th-century mansion. Dinner included." },
+      { kind: "free", text: "Sea level, mild and grey: the easy day before the altitude. Early night; bags go out at 08:00 tomorrow." },
+      { kind: "hotel", ref: "H3", text: "Courtyard Lima Miraflores, second night" }
     ],
     sleep: "Courtyard Lima Miraflores"
+  },
+  {
+    date: "2026-10-19", dayNo: 22, phase: "peru-caravan", place: "SAV", caravanDay: 3, bags: "08:00", depart: "09:00",
+    title: "Fly to Cusco, down into the Sacred Valley", sub: "Caravan day 3 · bags out 08:00 · depart 09:00 · breakfast and dinner included",
+    segments: [
+      { kind: "caravan", ref: "T7", text: "LATAM Lima to Cusco, included in the tour; the exact departure time comes from the Tour Director. One checked bag and one carry-on each; extra bags paid to LATAM." },
+      { kind: "warning", text: "Passport in hand all day: the LATAM ticket and the Machu Picchu entry are tied to the passport number Caravan holds. Lunch on your own." },
+      { kind: "caravan", text: "From Cusco airport (3,399 m) the coach drops straight down the valley to Urubamba at 2,871 m (9,420 ft) for three nights. Dinner included." },
+      { kind: "warning", text: "Altitude day: slow pace, water, light food, no alcohol for the first 48 hours. Symptoms, if any, show 6 to 10 hours after arrival; tell the Tour Director." },
+      { kind: "hotel", ref: "H8", text: "Rustica Hotel Urubamba, 3 nights (Caravan days 3 to 5)" }
+    ],
+    sleep: "Rustica Hotel, Urubamba"
+  },
+  {
+    date: "2026-10-20", dayNo: 23, phase: "peru-caravan", place: "SAV", caravanDay: 4, depart: "08:00",
+    title: "Ollantaytambo, Moray, Chinchero", sub: "Caravan day 4 · depart 08:00 · breakfast and lunch included",
+    segments: [
+      { kind: "caravan", ref: "T7", text: "Ollantaytambo: the living Inca town with its 15th-century water channels, the handicraft market, and the fortress terraces climbing the hillside." },
+      { kind: "caravan", text: "Moray's circular agricultural terraces, then lunch. Afternoon at a Chinchero textile cooperative: alpaca wool washed, dyed, spun and woven by hand, with time to buy." },
+      { kind: "free", text: "Back to Urubamba; dinner on your own. Early night: the Machu Picchu coach leaves at 07:00." },
+      { kind: "hotel", ref: "H8", text: "Rustica Hotel Urubamba, second night" }
+    ],
+    sleep: "Rustica Hotel, Urubamba"
+  },
+  {
+    date: "2026-10-21", dayNo: 24, phase: "peru-caravan", place: "MAP", caravanDay: 5, star: true, depart: "07:00",
+    title: "MACHU PICCHU", sub: "Caravan day 5 · depart 07:00 · train both ways · breakfast, box lunch and dinner included",
+    segments: [
+      { kind: "star", text: "Morning train from the Sacred Valley down the Urubamba gorge to Machu Picchu. A two-and-a-half-hour guided visit: the Temple of the Sun, the House of the Priest, the Sacred Plaza." },
+      { kind: "warning", text: "ORIGINAL passport at the gate: entry is controlled by the passport number Caravan filed (bring both if renewed). Daypack only, no wheeled bags; rain shell and sunblock." },
+      { kind: "caravan", text: "Box lunch, then the late-afternoon train back up to the Sacred Valley. Dinner included." },
+      { kind: "hotel", ref: "H8", text: "Rustica Hotel Urubamba, third night (the group does not sleep in Aguas Calientes)" }
+    ],
+    sleep: "Rustica Hotel, Urubamba"
+  },
+  {
+    date: "2026-10-22", dayNo: 25, phase: "peru-caravan", place: "CUZ", caravanDay: 6, bags: "07:00", depart: "08:00",
+    title: "Sacsayhuamán, then Cusco", sub: "Caravan day 6 · bags out 07:00 · depart 08:00 · breakfast and lunch included",
+    segments: [
+      { kind: "caravan", ref: "T7", text: "Sacsayhuamán: the fortress and ceremonial centre above Cusco, its interlocking megaliths. Lunch included." },
+      { kind: "caravan", text: "Into Cusco (3,399 m, 11,150 ft), capital of the Inca empire: the Plaza de Armas and the Cathedral, then free time in the cobbled streets, the colonial courtyards and the artisan shops. Dinner on your own." },
+      { kind: "warning", text: "The highest night of the trip. The JW Marriott El Convento pipes enriched oxygen into every room and has more on request; go gently, drink water, skip the pisco." },
+      { kind: "hotel", ref: "H9", text: "JW Marriott El Convento Cusco, Calle Ruinas 432, one night" }
+    ],
+    sleep: "JW Marriott El Convento, Cusco"
+  },
+  {
+    date: "2026-10-23", dayNo: 26, phase: "peru-caravan", place: "LIM", caravanDay: 7, bags: "07:00", depart: "08:00",
+    title: "Fly to Lima; the farewell dinner", sub: "Caravan day 7 · bags out 07:00 · depart 08:00 · breakfast and farewell dinner included",
+    segments: [
+      { kind: "caravan", ref: "T7", text: "LATAM Cusco to Lima, included (one checked bag, one carry-on); time from the Tour Director. Lunch on your own." },
+      { kind: "caravan", text: "Scenic drive along Lima's revitalised waterfront on the way into Miraflores, then the farewell dinner." },
+      { kind: "hotel", ref: "H10", text: "Courtyard Lima Miraflores, one night (Caravan day 7)" }
+    ],
+    sleep: "Courtyard Lima Miraflores"
+  },
+  {
+    date: "2026-10-24", dayNo: 27, phase: "lima", place: "LIM", caravanDay: 8,
+    title: "The tour ends; the JW Marriott", sub: "Caravan day 8 · breakfast from 06:30 · the family stays on in Lima",
+    segments: [
+      { kind: "caravan", text: "The tour ends at the hotel after breakfast. Caravan's airport transfers run only at fixed times (arriving LIM 05:30, 08:00, 11:00) and are not needed." },
+      { kind: "transfer", ref: "T16", text: "Courtyard checkout 12:00, JW Marriott check-in 15:00: a 5-minute taxi along the malecón with the bags, or leave them with the JW concierge and walk. Lunch at Larcomar next door." },
+      { kind: "hotel", ref: "H11", text: "JW Marriott Lima, Malecón de la Reserva 615: 3 nights on William's points, 2 Queen Oceanfront" },
+      { kind: "warning", ref: "H11", text: "The JW reservation is for ONE adult in ONE room. Confirm the rooming for three people before 22 Oct (free cancellation deadline)." }
+    ],
+    sleep: "JW Marriott Lima"
+  },
+  {
+    date: "2026-10-25", dayNo: 28, phase: "lima", place: "LIM", span: { to: "2026-10-26", label: "Days 28-29" },
+    title: "Lima free days", sub: "Miraflores from the clifftop: Larcomar, the malecón, Barranco",
+    segments: [
+      { kind: "free", text: "Sun 25 Oct: Larcomar is next door; the malecón north past Parque del Amor to the paragliders, Huaca Pucllana for the pre-Inca pyramid in the middle of the city, dinner in Miraflores." },
+      { kind: "free", text: "Mon 26 Oct: Barranco (the Puente de los Suspiros, the murals, MATE), the Museo de Arte de Lima or a cevichería lunch; the Larco Museum is already done with Caravan." },
+      { kind: "warning", text: "Mon 26 Oct 13:30: LATAM online check-in opens for LA2694 (48 h before). Migraciones' pre-registration for departure can be done from the hotel the same day." }
+    ],
+    sleep: "JW Marriott Lima"
+  },
+  {
+    date: "2026-10-27", dayNo: 30, phase: "lima", place: "LIM",
+    title: "Last Lima day, and a night with no booking", sub: "JW Marriott checkout 12:00 · the family's last evening together",
+    segments: [
+      { kind: "warning", ref: "H12", text: "The night of 27 to 28 Oct has NO booking on file: extend the JW Marriott by a night, or book the Courtyard Miraflores (where the parents stay from the 28th). Fix it before leaving Florida." },
+      { kind: "free", text: "Farewell dinner with the parents; pack for the split (LATAM 13:30 tomorrow, Qatar the day after)." },
+      { kind: "hotel", ref: "H12", text: "Lima, night of 27 Oct: not yet booked" }
+    ],
+    sleep: "Lima (not yet booked)", estimated: true
   },
   {
     date: "2026-10-28", dayNo: 31, phase: "return", place: "MIA",
     title: "Lima to Miami", sub: "Paths split: Jack flies home, the parents stay for the cruise",
     travelDay: true,
     segments: [
-      { kind: "split", text: "The family parts here. Parents remain at the Courtyard until L'Austral boards on Oct 30." },
+      { kind: "split", text: "The family parts here. The parents stay in Lima (Courtyard Miraflores from the 28th per their sheet) until L'Austral boards on Oct 30." },
+      { kind: "transfer", ref: "T15", text: "Leave Miraflores by ~09:30: hotel-arranged taxi to Jorge Chávez, $25 to $35, 30 to 60 min" },
       { kind: "flight", ref: "F6", text: "LA2694 Lima 13:30 to Miami 20:35, Premium Business, B767" },
       { kind: "transfer", ref: "T8", text: "To the Miami Airport Marriott" },
       { kind: "hotel", ref: "H5", text: "Miami Airport Marriott, conf 76989687 (booked on William's points; get Jack's name added)" }
@@ -1952,20 +2278,21 @@ window.TRIP.destinations = [
     stamps: ["usa-entry"]
   },
   {
-    id: "jacksonville", place: "JAX", order: 4,
-    name: "Jacksonville", role: "Home base · work + family",
+    id: "jacksonville", place: "JAX", places: ["JAX", "STA", "TPA"], order: 4,
+    name: "Florida: St. Augustine + Tampa", role: "Home base · work + family · the road chapter",
     dates: "29 Sep - 17 Oct",
     nights: 18,
     palette: { accent: "#ffa45c", accent2: "#c25f1e", glow: "rgba(255,164,92,.14)" },
-    coords: "30.3322° N, 81.6557° W",
+    coords: "29.8947° N, 81.3145° W (St. Augustine) · 27.9601° N, 82.4370° W (Ybor City)",
     tzNote: "EDT, UTC-4 · Bangkok is 11 h ahead",
-    hero: "Eighteen nights at the family home: the longest stillness of the trip. Work runs on US Eastern time; evenings belong to the family.",
-    weather: { label: "October (seasonal guidance)", temp: "16-29 °C", note: "Warm early-October days cooling gently through the month; low rain. The pleasant season." },
+    hero: "Eighteen Florida nights in three stays: the family home in St. Augustine, nine nights in a whole-home Airbnb in Ybor City, Tampa, with a white Jeep Wagoneer outside, then St. Augustine again to repack for the Andes. Work runs on US Eastern time; evenings belong to the family and to 7th Avenue.",
+    weather: { label: "October (seasonal guidance)", temp: "18-31 °C", note: "Warm, humid early-October days in Tampa cooling gently through the month; low rain, afternoon storms possible. Hurricane season formally runs to 30 Nov." },
     facts: [
-      "Longest stay of the trip: 18 nights, one address",
+      "St. Augustine 29 Sep to 6 Oct (family home), Ybor City Airbnb 6 to 15 Oct (conf in the Wallet), St. Augustine 15 to 17 Oct (inferred)",
+      "Enterprise Jeep Wagoneer from the St. Augustine branch, 6 to 16 Oct; return by 13:00 on Fri 16 Oct with the same fuel",
       "13 work-capable weekdays (Sep 30 - Oct 16); no work schedule document exists, so treat as a suggested plan",
-      "US ordering window: deliveries to the house until ~12 Oct (estimate) for Peru gear",
-      "Repack for Peru here: laundry, altitude layers, daypack"
+      "US ordering window: deliveries to the Airbnb until ~13 Oct, the family home until the 16th (estimate)",
+      "Repack for Peru in St. Augustine: one handled bag per person for Caravan, a non-wheeled day bag, altitude layers; JAX ride at ~06:30 on the 17th"
     ],
     tasksHint: "work",
     stamps: ["florida"]
@@ -1973,37 +2300,39 @@ window.TRIP.destinations = [
   {
     id: "lima", place: "LIM", order: 5,
     name: "Lima", role: "Peru base",
-    dates: "17-18 Oct · 24-28 Oct",
-    nights: 5,
+    dates: "17-19 Oct · 23-28 Oct",
+    nights: 7,
     palette: { accent: "#e0b64f", accent2: "#9c7422", glow: "rgba(224,182,79,.15)" },
     coords: "12.0464° S, 77.0428° W",
     tzNote: "PET, UTC-5, no daylight saving · 1 h behind Florida, 12 h behind Bangkok",
-    hero: "The desert capital on the Pacific cliffs. Courtyard Miraflores is the family base: first night, then the post-caravan free days and the farewell dinner.",
+    hero: "The desert capital on the Pacific cliffs. Caravan's Courtyard Miraflores for the first two nights and the farewell night, then three nights at the JW Marriott on the malecón with Larcomar next door. One night, the 27th, still has no bed.",
     weather: { label: "October (seasonal guidance)", temp: "15-21 °C", note: "End of the garúa season: grey coastal mist burning off to mild afternoons, effectively zero rain. A light jacket city." },
     facts: [
-      "Courtyard by Marriott Lima Miraflores: named in every itinerary, but NO confirmation document in the folder (conf TBC)",
-      "Free days Oct 25-27: malecón and Larcomar, Barranco, the historic centre",
-      "Oct 28: LA2694 departs 13:30; parents stay behind for the cruise",
-      "Airport transfer at night: use pre-arranged or official taxis only"
+      "Courtyard by Marriott Lima Miraflores, Calle Schell 400: Caravan nights 17, 18 and 23 Oct (confirmed by the Caravan hotel list)",
+      "JW Marriott Lima, Malecón de la Reserva 615: 24-27 Oct on William's points (booked for 1 adult; rooming for three is open)",
+      "Night of 27 Oct: NOT BOOKED (extend the JW or book the Courtyard)",
+      "Caravan day 2 (18 Oct): briefing 08:00, Historic Center, Larco Museum; free days 25-26 Oct: Larcomar, the malecón, Barranco",
+      "Arrival 17 Oct: official taxi counter (Taxi Seguro / Green Taxi), 90-130 soles · Oct 28: LA2694 departs 13:30, leave Miraflores by ~09:30"
     ],
     tasksHint: "peru",
     stamps: ["peru-entry"]
   },
   {
-    id: "cusco", place: "CUZ", order: 6,
-    name: "Cusco + Sacred Valley", role: "The Andes caravan",
-    dates: "18-24 Oct",
-    nights: 6,
+    id: "cusco", place: "CUZ", places: ["CUZ", "SAV", "AGC", "MAP"], order: 6,
+    name: "Sacred Valley + Cusco", role: "The Andes with Caravan",
+    dates: "19-23 Oct",
+    nights: 4,
     palette: { accent: "#c4553a", accent2: "#7e2f1c", glow: "rgba(196,85,58,.16)" },
-    coords: "13.5320° S, 71.9675° W",
-    tzNote: "PET, UTC-5 · altitude 3,399 m",
-    hero: "Seven caravan days through the Inca heartland: the imperial city, the Sacred Valley markets and fortresses, and the train down the Urubamba gorge.",
+    coords: "13.3050° S, 72.1160° W (Urubamba) · 13.5320° S, 71.9675° W (Cusco)",
+    tzNote: "PET, UTC-5 · Urubamba 2,871 m · Cusco 3,399 m",
+    hero: "Caravan's Andes: three nights low in the Sacred Valley at the Rustica in Urubamba, the Ollantaytambo-Moray-Chinchero day, the train to Machu Picchu and back, then one oxygen-enriched night in the imperial city before the flight home to Lima.",
     weather: { label: "October (seasonal guidance)", temp: "days 18-20 °C · nights 2-6 °C", note: "Dry-to-wet shoulder season: strong high-altitude sun, cold nights, occasional showers. Layers, sunblock, and a rain shell." },
     facts: [
-      "Cusco 3,399 m; Sacred Valley ~2,800 m; Aguas Calientes 2,040 m: the classic acclimatisation ladder",
-      "Caravan day-by-day is ESTIMATED: no operator document exists in the folder",
-      "Day 1 rule at altitude: slow pace, water, light meals, no alcohol",
-      "Discuss altitude medication (acetazolamide) with a doctor before the trip"
+      "Caravan programme CONFIRMED (hotel list + day-by-day): Rustica Hotel Urubamba 19-22 Oct, JW Marriott El Convento Cusco 22-23 Oct; nobody sleeps in Aguas Calientes",
+      "LATAM LIM-CUZ on the 19th (bags 08:00, coach 09:00) and CUZ-LIM on the 23rd (bags 07:00, coach 08:00) are included; times from the Tour Director; one checked bag + one carry-on",
+      "Urubamba 2,871 m first, Cusco 3,399 m only on the last night, with oxygen-enriched rooms: the kind acclimatisation order",
+      "Day 1 rule at altitude: slow pace, water, light meals, no alcohol for 48 h; altitude medication is a doctor's call",
+      "Tips in cash on the 23rd: Tour Director $8-15 and Driver $7-12 per person per day"
     ],
     tasksHint: "health",
     stamps: ["cusco"]
@@ -2097,6 +2426,25 @@ window.TRIP.taskCategories = [
 ];
 
 window.TRIP.tasks = [
+  /* ---------------- ADDED 10 OCT 2026: the Caravan programme, the Florida road chapter, the JW Marriott Lima ---------------- */
+  { id: "doc-passport-caravan", cat: "documents", priority: "critical", due: "2026-10-16",
+    title: "Passport check against the Caravan file (Machu Picchu entry)",
+    detail: "Caravan holds each traveler's passport number for the LATAM tickets and the Machu Picchu entry, and names must match the passports exactly. Confirm the passport you carry is the one on file (Jack's expires Jan 2034 per the reconfirmation); anyone who renewed since January brings both passports to Peru." },
+  { id: "pk-caravan-bag", cat: "packing", priority: "high", due: "2026-10-16",
+    title: "Pack to Caravan's one-bag rule",
+    detail: "Caravan handles ONE piece per person (airline-style limit 60 linear inches, 50 lb); a second piece costs $30 and rides under the coach. The day bag you carry must not be wheeled. LATAM allows one checked bag and one carry-on on the internal flights. Altitude layers, rain shell, hat, sunblock, flashlight, hand sanitizer, a small first-aid kit, insect repellent." },
+  { id: "mn-caravan-cash", cat: "money", priority: "high", due: "2026-10-16",
+    title: "Cash for the Lima taxi and the Caravan tips",
+    detail: "Arrival taxi 90 to 130 soles or $25 to $35 (USD, soles or card at the counter). Tips are cash, handed individually on the last day: Tour Director $8 to $15 and Driver $7 to $12 per person per day, so roughly $100 to $190 per person for the week. Clean, newer US notes; a few soles a day for hotel maids." },
+  { id: "fl-latam-internal", cat: "flights", priority: "normal", due: "2026-10-18",
+    title: "LATAM Lima-Cusco-Lima: times from the Tour Director",
+    detail: "Both internal flights (19 and 23 Oct) are on Caravan's tickets. The Tour Director announces the departure times on tour; the printed constraints are bags out 08:00 and coach 09:00 on the 19th, bags 07:00 and coach 08:00 on the 23rd. One checked bag and one carry-on each; extra bags paid to LATAM." },
+  { id: "fm-jw-move", cat: "family", priority: "normal", due: "2026-10-24", openFrom: "2026-10-20",
+    title: "24 Oct: Courtyard checkout 12:00, JW Marriott check-in 15:00",
+    detail: "The tour ends after breakfast (from 06:30). Move the family and the bags five minutes along the malecón to the JW Marriott (Malecón de la Reserva 615); leave the bags with the concierge if the room is not ready and lunch at Larcomar next door. Caravan's airport transfers that morning are not needed." },
+  { id: "em-caravan-line", cat: "emergency", priority: "normal", due: "2026-10-16",
+    title: "Caravan's emergency line and the hotel phones onto the card",
+    detail: "Caravan +1 800-227-2826 (emergency operator after hours, through William's account); Courtyard Miraflores +51 1 625 3838; Rustica Urubamba +51 1 500 8686; JW El Convento Cusco +51 84 582200; JW Marriott Lima +51 1 217 7000; Travel Protection claims (RoamRight) +1 855-892-2382. Add them to the printable emergency card." },
   /* ---------------- DOCUMENTS ---------------- */
   { id: "doc-passport-validity", cat: "documents", priority: "critical", due: "2026-08-01",
     title: "Check passport validity (6-month rule)",
@@ -2167,15 +2515,21 @@ window.TRIP.tasks = [
     detail: "Qatar: 2 × 32 kg checked + 7 kg cabin (1 cabin piece only on the MIA-DOH sector). AA and LATAM business fares include checked bags. Pack to the tightest rule so nothing needs repacking at a counter." },
 
   /* ---------------- HOTELS ---------------- */
-  { id: "ht-courtyard-conf", cat: "hotels", priority: "critical", due: "2026-08-15",
-    title: "Obtain the Courtyard Lima Miraflores confirmation",
-    detail: "The Peru base hotel (11 nights, Oct 17-28) is named in every itinerary but has NO confirmation document in the folder. Get the booking reference from whoever holds it (likely the parents or Marriott.com history), confirm the dates and whether the room is kept during the caravan week, and file the email into the travel folder." },
+  { id: "ht-lima-27oct", cat: "hotels", priority: "critical", due: "2026-10-16",
+    title: "Book the night of 27 Oct in Lima (nothing on file)",
+    detail: "The JW Marriott ends at noon on the 27th and LA2694 leaves at 13:30 on the 28th. No booking covers the night between (the folder and the inbox were both checked on 10 Oct). Extend the JW by a night through William (points or cash) or book the Courtyard Miraflores, where the parents stay from the 28th. Do it from Florida: connectivity on the caravan is thin." },
+  { id: "ht-jw-rooming", cat: "hotels", priority: "critical", due: "2026-10-20",
+    title: "JW Marriott Lima: one room, one adult, three people",
+    detail: "William's confirmation (24-27 Oct, 126,000 points) is for 1 adult in 1 room with 2 queens. Settle the rooming with him before the free-cancellation deadline of 23:59 on 22 Oct: a second room, or Jack's own booking nearby. If Jack sleeps in the points room without William present, William must register it as a gifted award stay via Bonvoy Member Support." },
+  { id: "ht-airbnb-checkout", cat: "hotels", priority: "high", due: "2026-10-15", openFrom: "2026-10-12",
+    title: "Airbnb checkout Thu 15 Oct by 11:00",
+    detail: "Ybor City Retreat: leave it as found, chargers off the walls, fridge emptied, bins out, message Colin through Airbnb about anything broken. Then the 3.5-hour drive to St. Augustine; refuel the Jeep near home to the pick-up level." },
   { id: "ht-marriott-name", cat: "hotels", priority: "high", due: "2026-09-30",
     title: "Add Jack's name to the Miami Airport Marriott booking",
     detail: "Conf 76989687 (Oct 28-29) is a points booking under WILLIAM TAIT, but Jack is the guest sleeping there. Have Dad call Marriott and add Jack as a named guest, or carry the forwarded confirmation and be ready to explain. Points bookings can be strict about the member being present." },
-  { id: "ht-caravan-hotels", cat: "hotels", priority: "critical", due: "2026-08-22",
-    title: "Get the caravan hotel list from the operator",
-    detail: "Six nights (Oct 18-24) are in operator-arranged hotels that appear in no document. Ask the operator for the named hotels per night, and file the list. Until then the dashboard shows the estimated Cusco / Sacred Valley / Aguas Calientes pattern." },
+  { id: "ht-caravan-paper", cat: "hotels", priority: "normal", due: "2026-10-16",
+    title: "Print the Caravan hotel list and reconfirmation",
+    detail: "The Caravan hotel list (Courtyard Miraflores, Rustica Urubamba, JW El Convento Cusco) and the reconfirmation are in the Wallet; a paper copy with the passport covers a dead phone, and family at home can reach you through the hotel phones on the list." },
   { id: "ht-fairfield-reconfirm", cat: "hotels", priority: "normal", due: "2026-09-21",
     title: "Reconfirm the Fairfield (Sep 28) and shuttle hours",
     detail: "Conf 72830827, booked in April. A 2-minute call confirms the booking survived the summer and whether the airport shuttle runs at 18:00 when you land." },
@@ -2193,9 +2547,9 @@ window.TRIP.tasks = [
     openFrom: "2026-09-20",
     title: "Book the Siam Mandarina shuttle for Sunday ~23:00",
     detail: "The one transfer that can sink the whole trip, now solved by the hotel's free Suvarnabhumi shuttle, BUT the property wants pickups arranged 24 h in advance. Book the ~23:00 Sunday run at check-in on Saturday (target BKK by 23:30 for the 02:30 QR837), and keep Grab as the 10-minute backup. Separately: the Saturday arrival is at DON MUEANG, so plan a paid cross-town ride to the hotel." },
-  { id: "tr-lima-transfer", cat: "transport", priority: "high", due: "2026-10-10",
+  { id: "tr-lima-transfer", cat: "transport", priority: "high", due: "2026-10-16",
     title: "Arrange the Lima airport pickup (17 Oct, 20:10 arrival)",
-    detail: "Night arrival at Jorge Chávez with the parents. Pre-book a hotel car or use the official taxi counters; ask the caravan operator whether a meet-and-greet is included." },
+    detail: "Caravan's rule for 17 Oct: the transfer is on your own, no meet-and-greet. After customs and bags, book at the official taxi counters inside arrivals (Taxi Seguro, Green Taxi): 90 to 130 soles or $25 to $35 plus tip, 30 to 60 min to the Courtyard Miraflores at Calle Schell 400. Have small USD or soles ready; the counter also takes cards." },
   { id: "tr-jax-pickup", cat: "transport", priority: "normal", due: "2026-09-25",
     title: "Confirm JAX pickup with the parents (29 Sep, now 09:26)",
     detail: "A text message task, with news: the flight is now AA4024 landing 09:26, twenty-three minutes earlier. Also confirm who drives everyone to JAX on 17 Oct (the parents' sheet says 'Need Uber')." },
@@ -2203,9 +2557,15 @@ window.TRIP.tasks = [
     openFrom: "2026-10-15",
     title: "Miami hotel shuttles, both directions",
     detail: "Fairfield (Sep 28) and Airport Marriott (Oct 28): check shuttle hours, else plan a rideshare. Both are minutes from MIA." },
-  { id: "tr-caravan-pickups", cat: "transport", priority: "high", due: "2026-08-22",
-    title: "Caravan pickups and train times in writing",
-    detail: "Part of the operator confirmation task: exact hotel pickup times, LIM-CUZ and CUZ-LIM flight numbers, and PeruRail / IncaRail departures. No document currently exists for any of it." },
+  { id: "tr-jeep-return", cat: "transport", priority: "critical", due: "2026-10-16", openFrom: "2026-10-12",
+    title: "Return the Jeep to Enterprise St. Augustine by 13:00 Fri 16 Oct",
+    detail: "2140 South U.S. 1, branch open 07:30 to 18:00 on Friday. Same fuel as received (23.5 gal), photos of the car and the gauge, receipt kept, glove box emptied. Estimated total $1,120.45; tolls from Tampa are billed later through TollPass. The agreement lists no second driver." },
+  { id: "tr-jax-ride", cat: "transport", priority: "high", due: "2026-10-16", openFrom: "2026-10-13",
+    title: "Book the ~06:30 ride to JAX on 17 Oct for all three",
+    detail: "With the Jeep gone, the family needs a ride from St. Augustine to JAX (50 miles, about an hour): an Uber XL for three people and three bags, or a family friend. Target the airport by ~07:35; AA takes bags from 06:06 at the earliest." },
+  { id: "tr-caravan-coach-times", cat: "transport", priority: "normal", due: "2026-10-18",
+    title: "Caravan coach times into the phone's alarms",
+    detail: "Printed by Caravan: 18 Oct briefing 08:00; 19 Oct bags out 08:00 and coach 09:00; 20 Oct coach 08:00; 21 Oct coach 07:00 (Machu Picchu); 22 Oct bags 07:00, coach 08:00; 23 Oct bags 07:00, coach 08:00; 24 Oct breakfast from 06:30. The Now screen reminds you while it is open; the Clock app is what wakes you." },
 
   /* ---------------- PACKING ---------------- */
   { id: "pk-altitude-layers", cat: "packing", priority: "high", due: "2026-09-21",
@@ -2377,7 +2737,7 @@ window.TRIP.packing = [
   { id: "p-gifts",      bag: "checked",  when: "week",         label: "Thailand gifts for the family" },
   { id: "p-swim",       bag: "checked",  when: "week",         label: "Swim gear (Florida, hotel pools)" },
   { id: "p-bottle",     bag: "buy-us",   when: "early",        label: "Wide-mouth water bottle for altitude days" },
-  { id: "p-snacks",     bag: "buy-us",   when: "early",        label: "Trail snacks for caravan days (buy in Jacksonville)" },
+  { id: "p-snacks",     bag: "buy-us",   when: "early",        label: "Trail snacks for caravan days (buy in Tampa or St. Augustine)" },
   { id: "p-soles-note", bag: "buy-us",   when: "early",        label: "Draw soles at LIM airport ATM on arrival" }
 ];
 
@@ -2386,7 +2746,7 @@ window.TRIP.packingLanes = {
     { id: "personal", name: "Personal item", note: "under the seat, never leaves you" },
     { id: "cabin",    name: "Cabin bag",     note: "7 kg on Qatar; 1 piece only on MIA-DOH" },
     { id: "checked",  name: "Checked bag",   note: "2 × 32 kg allowance on Qatar" },
-    { id: "buy-us",   name: "Buy in the USA",note: "order to Jacksonville by ~12 Oct" }
+    { id: "buy-us",   name: "Buy in the USA",note: "deliver to the Tampa Airbnb by ~13 Oct (St. Augustine until the 16th)" }
   ],
   when: [
     { id: "early",        name: "Pack early / buy first" },
@@ -2411,6 +2771,111 @@ window.TRIP = window.TRIP || {};
 window.TRIP.sourceFolder = "Jack's desktop (original travel folder, offline)";
 
 window.TRIP.documents = [
+  /* ---- added 10 Oct 2026: the Caravan programme (three PDFs in the source folder) and four
+     email captures (extraction\email_captures, text of booking emails read in the inbox) ---- */
+  {
+    id: "doc-caravan-reconfirm",
+    file: "Caravan-Reconfirmation-PE261017-YYD-01.pdf",
+    category: "Tour", authority: "primary", current: true, sensitivity: "high",
+    docDate: "2026-10-10", fileDate: "2026-10-10",
+    what: "Caravan Tours' booking reconfirmation for 'Peru with Machu Picchu, 8 Days' (17 to 24 Oct 2026) on William's account: party of three in two rooms, fully paid, with the arrival and departure transfer rules. Sent by William on 10 Oct ('See attached').",
+    keyFacts: [
+      "Booking PE261017-YYD · starts Sat 17 Oct Lima, ends Sat 24 Oct Lima · deposit and final payment PAID",
+      "Room 1 double: William and Gillian ($1,824 each incl. $129 Travel Protection) · Room 2 single: Toby Jack Tait ($2,224 incl. protection) · grand total $5,872 on the card ending 6195",
+      "Arrival on file: 17 Oct, AA1307 MIA to LIM, 8:10 pm · parents' departure 'by ship, no transfer needed'",
+      "Arrival transfer on your own: official taxi counters (Taxi Seguro, Green Taxi), 90 to 130 soles or $25 to $35, 30 to 60 min to the Courtyard Miraflores, Calle Schell 400",
+      "Departure transfers included only at fixed times on 24 Oct (arriving LIM 05:30, 08:00, 11:00)",
+      "Guest names must exactly match passports; passport numbers and expiries are on file (Jack's expires Jan 2034)",
+      "Caravan 800-227-2826 · Florida Seller of Travel ST 38035 · Manage Booking on caravan.com"
+    ],
+    masked: ["booking id", "card digits", "passport digits", "family phone numbers"]
+  },
+  {
+    id: "doc-caravan-hotels",
+    file: "Caravan-Hotel-List-Peru-2026a.pdf",
+    category: "Hotels", authority: "primary", current: true, sensitivity: "low",
+    docDate: "2026-01-23", fileDate: "2026-10-10",
+    what: "Caravan's official hotel list for the 2026 Peru tour: which hotel on which day, with addresses and phones. Settles the caravan week's night-by-night, which every earlier version had to guess.",
+    keyFacts: [
+      "Days 1, 2 and 7: Marriott Courtyard Miraflores, Calle Schell No 400, Miraflores, Lima 15074 · +51 1 625 3838",
+      "Days 3, 4, 5: Rustica Hotel Urubamba, Otr. Parcela Mza. B Lote 24, Urubamba 08655 · +51 1 500 8686",
+      "Day 6: JW Marriott El Convento Cusco, Esquina de la Calle Ruinas 432 y San Agustín, Cusco 08002 · +51 84 582200",
+      "The group never sleeps in Aguas Calientes; Machu Picchu is a day trip from the valley"
+    ],
+    masked: []
+  },
+  {
+    id: "doc-caravan-days",
+    file: "Caravan-Day-by-Day-Itinerary-Peru-2026a.pdf",
+    category: "Tour", authority: "primary", current: true, sensitivity: "low",
+    docDate: "2026 (v. 81726)", fileDate: "2026-10-10",
+    what: "Caravan's day-by-day itinerary and travel tips for 'Peru with Machu Picchu, 8 Days': the programme, meals, bag and coach times, luggage rules, altitude notes, tipping guidance and the LATAM flight rules.",
+    keyFacts: [
+      "Day 1 Lima (own transfer, check-in after 15:00, dinner own) · Day 2 briefing 08:00, Historic Center, Larco Museum (B, D) · Day 3 bags 08:00 depart 09:00, fly to Cusco, Sacred Valley 3 nights (B, D)",
+      "Day 4 depart 08:00 Ollantaytambo, Moray, Chinchero (B, L) · Day 5 depart 07:00 Machu Picchu by train, 2.5 h visit, box lunch, back to the valley (B, L, D)",
+      "Day 6 bags 07:00 depart 08:00 Sacsayhuamán, Cusco, JW Marriott with oxygen-enriched rooms (B, L) · Day 7 bags 07:00 depart 08:00 fly to Lima, waterfront drive, farewell dinner (B, D) · Day 8 breakfast from 06:30, tour ends",
+      "LATAM LIM-CUZ-LIM included; times from the Tour Director; one checked bag + one carry-on per person",
+      "Luggage: one handled piece per person (60 linear inches, 50 lb), $30 per extra piece; day bag not wheeled",
+      "Tips: Tour Director $8 to $15 and Driver $7 to $12 per traveler per day, cash; overnight elevations 9,420 ft (valley) and 11,150 ft (Cusco)",
+      "Bottled water on the coach; 220 V; soles or cards; no vaccines required from the US"
+    ],
+    masked: []
+  },
+  {
+    id: "doc-airbnb-tampa", capture: true,
+    file: "airbnb-ybor-city-tampa-confirmation.html",
+    category: "Stays", authority: "primary", current: true, sensitivity: "medium",
+    docDate: "2026-10-05", fileDate: "2026-10-10",
+    what: "Email capture (Yahoo inbox, read 10 Oct) of the Airbnb confirmation and receipt for the Tampa chapter. The original email stays in the inbox; this is its text, unaltered.",
+    keyFacts: [
+      "Ybor City Retreat Near Nightlife, entire home hosted by Colin Alexander · 2718 N 21st St, Tampa, FL 33605",
+      "Tue 6 Oct after 15:00 to Thu 15 Oct by 11:00 · 1 adult · confirmation HMPHK9DXDY",
+      "$2,142.20 on AmEx ending 1001 (9 nights at $230.89, weekly discount $190.60, taxes $254.80)",
+      "Quiet hours 22:00 to 09:00 · 6 guests max · no pets · exterior cameras · host +1 234-241-2845"
+    ],
+    masked: ["confirmation code", "card digits"]
+  },
+  {
+    id: "doc-enterprise-jeep", capture: true,
+    file: "enterprise-jeep-rental-st-augustine.html",
+    category: "Ground", authority: "primary", current: true, sensitivity: "medium",
+    docDate: "2026-10-06", fileDate: "2026-10-10",
+    what: "Email capture of the Enterprise reservation (5 Oct) and rental-agreement summary (6 Oct) for the Jeep. The full agreement PDF is attached to the 6 Oct email in the inbox and was not copied.",
+    keyFacts: [
+      "JAX-ST. AUGUSTINE branch, 2140 South U.S. 1, Saint Augustine FL 32086 · +1 904-797-1697",
+      "Pick-up Tue 6 Oct 12:00 (agreement 13:06) · return Fri 16 Oct 13:00 · Friday hours 07:30 to 18:00",
+      "Jeep Wagoneer, white, plate KQP9358 · out at 51,873 miles and 23.5 gal · renter Toby Tait, no additional drivers",
+      "Confirmation 77946899 · rental agreement 58ZMNW · estimated total $1,120.45 · unlimited mileage · damage waiver, SLP and roadside taken"
+    ],
+    masked: ["confirmation", "rental agreement number"]
+  },
+  {
+    id: "doc-jw-lima", capture: true,
+    file: "jw-marriott-lima-confirmation.html",
+    category: "Hotels", authority: "primary", current: true, sensitivity: "medium",
+    docDate: "2026-05-06", fileDate: "2026-10-10",
+    what: "Email capture of the Marriott Bonvoy confirmation William forwarded on 6 May for the JW Marriott Hotel Lima, the family's post-caravan hotel. Found in the inbox on 10 Oct; closes the old 'where after the caravan' question.",
+    keyFacts: [
+      "JW Marriott Hotel Lima, Malecón de la Reserva 615, Miraflores · +51 1 217 7000",
+      "Sat 24 Oct 15:00 to Tue 27 Oct 12:00 · 1 room · 1 adult · Contemporary Classic, 2 Queen, Oceanfront · confirmation 97879273",
+      "Redemption: 126,000 Bonvoy points (William Tait, Titanium Elite) · free cancellation until 23:59 on 22 Oct · complimentary parking",
+      "Booked for ONE adult: the rooming for three is open (conflict C19)"
+    ],
+    masked: ["confirmation"]
+  },
+  {
+    id: "doc-siam-second", capture: true,
+    file: "siam-mandarina-second-room-expedia.html",
+    category: "Hotels", authority: "primary", current: false, sensitivity: "medium",
+    docDate: "2026-09-22", fileDate: "2026-10-10",
+    what: "Email capture of a second Expedia booking at the Siam Mandarina for 26 to 28 Sep (a Deluxe King room, 1 adult), made the same morning as the Executive Suite that is in the travel folder. Past; recorded for completeness.",
+    keyFacts: [
+      "Deluxe Room Airport View, 1 King, 1 adult · Sat 26 Sep to Mon 28 Sep · Expedia itinerary 73550167928601",
+      "$209.70 on AmEx ending 1001 · non-refundable",
+      "Hotel +66 2 738 8191 · airport transfer on request 24 h ahead"
+    ],
+    masked: ["itinerary number", "card digits"]
+  },
   {
     id: "doc-lion-uth",
     file: "Electronic ticket receipt, September 26 for MR TOBY TAIT.pdf",
@@ -2645,6 +3110,13 @@ window.TRIP.documents = [
    carry no booking references. */
 window.TRIP.vaultBase = "vault-082b3cc503";
 window.TRIP.hostedFiles = {
+  "doc-caravan-reconfirm": "caravan-peru-reconfirmation-2026.pdf",
+  "doc-caravan-hotels":    "caravan-peru-hotel-list-2026.pdf",
+  "doc-caravan-days":      "caravan-peru-day-by-day-2026.pdf",
+  "doc-airbnb-tampa":      "airbnb-ybor-city-tampa-confirmation.html",
+  "doc-enterprise-jeep":   "enterprise-jeep-rental-st-augustine.html",
+  "doc-jw-lima":           "jw-marriott-lima-confirmation.html",
+  "doc-siam-second":       "siam-mandarina-second-room-expedia.html",
   "doc-lion-uth":          "thai-lion-sl605-eticket-2026-09-26.pdf",
   "doc-siam-mandarina":    "siam-mandarina-bangkok-expedia-confirmation.pdf",
   "doc-aa-change-jpeg":    "aa-mia-jax-schedule-change-2026-09-22.jpeg",
@@ -2663,6 +3135,13 @@ window.TRIP.hostedFiles = {
 };
 /* Short labels for document chips on itinerary and flight cards */
 window.TRIP.docLabels = {
+  "doc-caravan-reconfirm": "Caravan reconfirmation",
+  "doc-caravan-hotels": "Caravan hotel list",
+  "doc-caravan-days": "Caravan day-by-day",
+  "doc-airbnb-tampa": "Airbnb confirmation",
+  "doc-enterprise-jeep": "Enterprise rental",
+  "doc-jw-lima": "JW Marriott Lima confirmation",
+  "doc-siam-second": "Expedia second room",
   "doc-lion-uth": "Thai Lion e-ticket",
   "doc-siam-mandarina": "Siam Mandarina confirmation",
   "doc-aa-change-jpeg": "AA schedule change",
@@ -2724,9 +3203,9 @@ window.TRIP.conflicts = [
     title: "Lima arrival 20:10 vs the email's own AI summary saying 23:50",
     conflict: "Inside the JAX-LIM PDF, Yahoo's 'Scout' auto-summary says the flight arrives Lima at 11:50 pm; the Chase itinerary body in the same document says 08:10 pm.",
     chosen: "20:10 (8:10 pm) Peru time.",
-    why: "The itinerary body is the actual booking record, and the arithmetic agrees: 10:06 EDT + 11 h 04 m total = 21:10 EDT = 20:10 PET. The AI summary is simply wrong.",
+    why: "The itinerary body is the actual booking record, and the arithmetic agrees: 10:06 EDT + 11 h 04 m total = 21:10 EDT = 20:10 PET. The AI summary is simply wrong. Caravan's reconfirmation (10 Oct) also carries 'AA1307, arrive 8:10 pm'.",
     confidence: "confirmed",
-    sources: ["doc-aa-jax-lim"]
+    sources: ["doc-aa-jax-lim", "doc-caravan-reconfirm"]
   },
   {
     id: "C5", state: "noted", severity: "minor",
@@ -2738,24 +3217,23 @@ window.TRIP.conflicts = [
     sources: ["doc-aa-jax-lim", "doc-old-itinerary", "doc-revised-itinerary"]
   },
   {
-    id: "C6", state: "open", severity: "major",
-    title: "Courtyard Lima Miraflores: no confirmation document",
-    conflict: "Every itinerary names the Courtyard Miraflores as the 11-night Peru base (17-28 Oct), but no booking confirmation exists anywhere in the folder. Reference marked 'TBC' in both workbooks.",
-    chosen: "Shown as UNCONFIRMED throughout this dashboard.",
-    why: "No primary document. This is the largest unverified accommodation on the trip.",
-    action: "Obtain the confirmation (Marriott account history or the parents), verify dates and caravan-week handling, file the email into the source folder.",
-    confidence: "estimated",
-    sources: ["doc-old-itinerary", "doc-revised-itinerary", "doc-parents-sheet"]
+    id: "C6", state: "resolved", severity: "major",
+    title: "Courtyard Lima Miraflores: 'no confirmation' was the wrong question",
+    conflict: "Every itinerary named the Courtyard Miraflores as an 11-night family base (17 to 28 Oct) with the reference 'TBC', and no confirmation existed in the folder. The Caravan hotel list and reconfirmation (received 10 Oct) show the Courtyard is the TOUR's hotel for days 1, 2 and 7 only (nights of 17, 18 and 23 Oct), while William's Marriott confirmation of 6 May (found in the inbox) books the JW Marriott Lima for 24 to 27 Oct.",
+    chosen: "Courtyard Miraflores for 17-19 Oct and 23-24 Oct as Caravan nights (confirmed, booking id in the Wallet); JW Marriott Lima 24-27 Oct (confirmed, conf 97879273); the night of 27 Oct carried as a separate open item (C16).",
+    why: "Operator-issued hotel list plus a fully paid reconfirmation beat the workbook's assumption; the Marriott email is a primary record. The '11 nights' framing came from the workbooks, not from any booking.",
+    confidence: "confirmed",
+    sources: ["doc-caravan-hotels", "doc-caravan-reconfirm", "doc-jw-lima", "doc-revised-itinerary"]
   },
   {
-    id: "C7", state: "open", severity: "major",
-    title: "Peru caravan: entire day-by-day is undocumented",
-    conflict: "The 7-day caravan (18-24 Oct: Cusco, Sacred Valley, Aguas Calientes, Machu Picchu) exists only in the itinerary workbooks, marked 'confirm with operator'. No operator name, no tickets, no train times, no hotel list.",
-    chosen: "Carried into this dashboard clearly labeled ESTIMATED on every caravan day.",
-    why: "It is the only account of the week and both workbooks agree, but nothing airline- or operator-issued backs it.",
-    action: "Get the operator programme in writing: flights LIM-CUZ / CUZ-LIM, train times, hotels per night, Machu Picchu entry tickets and any Huayna Picchu permits.",
-    confidence: "estimated",
-    sources: ["doc-old-itinerary", "doc-revised-itinerary"]
+    id: "C7", state: "resolved", severity: "major",
+    title: "The Peru caravan week is now fully documented",
+    conflict: "Until 10 Oct the 7-day caravan existed only in the itinerary workbooks ('confirm with operator'): no operator, no hotels, no times, and a guessed night order (Cusco first, two nights in Aguas Calientes).",
+    chosen: "Caravan Tours' 'Peru with Machu Picchu, 8 Days' (booking in the Wallet), 17-24 Oct: Courtyard Miraflores (17, 18 Oct), Rustica Hotel Urubamba in the Sacred Valley (19, 20, 21 Oct), JW Marriott El Convento Cusco (22 Oct), Courtyard Miraflores (23 Oct); LATAM LIM-CUZ on the 19th and CUZ-LIM on the 23rd included; Machu Picchu by train from the valley on the 21st with the group returning to Urubamba that night; bags and coach times as printed.",
+    why: "Three operator-issued documents (day-by-day, hotel list, reconfirmation) replace the estimate. Differences from the old guess: the group sleeps in the Sacred Valley first (not Cusco), never sleeps in Aguas Calientes, and spends only one night in Cusco, on day 6.",
+    action: "Residual: the exact LATAM flight times are issued by the Tour Director on tour (C20).",
+    confidence: "confirmed",
+    sources: ["doc-caravan-days", "doc-caravan-hotels", "doc-caravan-reconfirm"]
   },
   {
     id: "C8", state: "noted", severity: "minor",
@@ -2778,35 +3256,35 @@ window.TRIP.conflicts = [
   {
     id: "C10", state: "noted", severity: "minor",
     title: "Duplicate parents' sheet",
-    conflict: "'Peru and Chile.xlsx' and 'Peru and Chile-Jack_Legion.xlsx' are byte-identical (11,610 bytes, same timestamps).",
-    chosen: "'Peru and Chile.xlsx' treated as the reference copy; the other catalogued as a duplicate. Both remain untouched in the source folder.",
-    why: "Identical content; no basis or need to prefer either.",
+    conflict: "Peru and Chile.xlsx and Peru and Chile-Jack_Legion.xlsx are byte-identical.",
+    chosen: "The former is treated as the reference copy; both remain in place.",
+    why: "Same size, same content.",
     confidence: "confirmed",
     sources: ["doc-parents-sheet", "doc-parents-sheet-dup"]
   },
   {
     id: "C11", state: "noted", severity: "minor",
     title: "Trip length: 33 vs 34 days",
-    conflict: "The April workbook calls it 'Sep 28 to Oct 30, 33 days'; the rebooking pushed arrival to 31 Oct.",
-    chosen: "34 days, Sep 28 to Oct 31.",
-    why: "Follows directly from the reissued ticket (C1).",
+    conflict: "The April workbook says 'Sep 28 to Oct 30, 33 days'. The rebooking moved arrival to 31 Oct: 34 days.",
+    chosen: "34 days (28 Sep to 31 Oct); 36 door to door from Udon Thani.",
+    why: "Follows from C1 and C15.",
     confidence: "confirmed",
-    sources: ["doc-qatar-updated", "doc-old-itinerary"]
+    sources: ["doc-qatar-updated", "doc-lion-uth"]
   },
   {
     id: "C12", state: "noted", severity: "minor",
     title: "Parents' continuation is approximate",
-    conflict: "The parents' cruise-and-Chile leg (30 Oct - 7 Nov) appears in their sheet and both workbooks with slightly loose dating ('cruise dates approximate'). Their sheet also has a stale note about Jack's old 11:20 pm connection.",
-    chosen: "Shown in a clearly-labeled reference section, never mixed into Jack's itinerary; the stale note ignored in favour of the reissued ticket.",
-    why: "Parents' bookings are outside this trip's scope and their source is a planning sheet, not confirmations.",
+    conflict: "The cruise-and-Chile leg (30 Oct to 7 Nov) comes from a planning sheet, not confirmations, and both workbooks call the cruise dates approximate.",
+    chosen: "Shown only in clearly labeled reference sections, never mixed into Jack's itinerary. Caravan's reconfirmation records the parents' departure as 'by ship, no transfer needed', which fits.",
+    why: "Planning sheet, not primary; consistent with the reconfirmation.",
     confidence: "probable",
-    sources: ["doc-parents-sheet", "doc-old-itinerary"]
+    sources: ["doc-parents-sheet", "doc-caravan-reconfirm"]
   },
   {
     id: "C13", state: "open", severity: "minor",
     title: "No work schedule document exists",
-    conflict: "The brief describes working while in the USA, but the folder contains no work calendar, deadlines or meeting list.",
-    chosen: "Jacksonville weekdays (Sep 30 - Oct 16) are shown as work-capable days and all work items are labeled 'suggested'.",
+    conflict: "The brief describes working while in the USA, but the folder holds no work calendar or deadlines.",
+    chosen: "Florida weekdays (30 Sep to 16 Oct, first in St. Augustine, then the Tampa Airbnb from 6 Oct) are presented as work-capable days and every work item is labeled suggested.",
     why: "Reasonable inference from the trip's shape; nothing asserted as a confirmed obligation.",
     action: "Adjust the Prepare tab's work tasks against the real JLL calendar.",
     confidence: "estimated",
@@ -2830,6 +3308,63 @@ window.TRIP.conflicts = [
     why: "Two primary documents beat an unstated assumption. The old framing was never sourced; it was the reconstruction's default.",
     confidence: "confirmed",
     sources: ["doc-lion-uth", "doc-siam-mandarina"]
+  },
+  {
+    id: "C16", state: "open", severity: "major",
+    title: "Lima, night of 27 to 28 Oct: nothing is booked",
+    conflict: "The JW Marriott Lima reservation ends with checkout at 12:00 on Tue 27 Oct. LA2694 departs at 13:30 on Wed 28 Oct. The parents' sheet puts them at the Courtyard from the 28th. No document, and no email found in the inbox (searched 10 Oct for Lima, Courtyard, Marriott, October 27), covers the night between.",
+    chosen: "Shown as an unconfirmed placeholder stay (H12) so the Now screen and the Wallet keep it visible until it is booked.",
+    why: "A real gap between two primary records; the dashboard must not paper over it.",
+    action: "Extend the JW Marriott by one night (ask William, points or cash) or book the Courtyard Miraflores for the 27th; do it from Florida, before the caravan's thin connectivity.",
+    confidence: "confirmed",
+    sources: ["doc-jw-lima", "doc-latam-lim-mia", "doc-parents-sheet"]
+  },
+  {
+    id: "C17", state: "resolved", severity: "major",
+    title: "The Florida chapter was not 18 nights in Jacksonville",
+    conflict: "The workbooks and every earlier dashboard version placed Jack at 'the parents' home, Jacksonville' from 29 Sep to 17 Oct. The inbox (read 10 Oct) shows an Airbnb in Ybor City, Tampa, for 6 to 15 Oct and an Enterprise Jeep rented from the St. Augustine branch for 6 to 16 Oct; the Caravan reconfirmation gives the parents' address as Alcala Drive, St. Augustine.",
+    chosen: "Three Florida stays: the family home in St. Augustine (29 Sep to 6 Oct), the Ybor City Airbnb (6 to 15 Oct, conf in the Wallet), and the family home again (15 to 17 Oct, inferred); the Jeep from Enterprise St. Augustine, due back Fri 16 Oct 13:00. JAX remains the airport.",
+    why: "Two primary bookings and an operator record beat the workbooks' shorthand. The last two nights are inferred from the car return and the flight, not from a document.",
+    action: "Confirm the 15 to 17 Oct nights are at the family home; book the 17 Oct ride to JAX.",
+    confidence: "confirmed",
+    sources: ["doc-airbnb-tampa", "doc-enterprise-jeep", "doc-caravan-reconfirm"]
+  },
+  {
+    id: "C18", state: "noted", severity: "minor",
+    title: "A second Siam Mandarina room existed for 26 to 28 Sep",
+    conflict: "The travel folder holds one Expedia booking for the Siam Mandarina (Executive Suite, 2 adults). The inbox holds a second Expedia confirmation made the same morning (22 Sep 07:46): a Deluxe Room Airport View, 1 King, 1 adult, $209.70, itinerary 73550167928601, non-refundable.",
+    chosen: "Recorded on the Siam Mandarina card and in the document library for completeness; past, no action.",
+    why: "Both are primary records; whether the second room was used does not change anything ahead.",
+    confidence: "confirmed",
+    sources: ["doc-siam-mandarina", "doc-siam-second"]
+  },
+  {
+    id: "C19", state: "open", severity: "major",
+    title: "JW Marriott Lima is booked for one adult; three people arrive",
+    conflict: "Marriott's confirmation (6 May, William's 126,000-point redemption) is for ONE room, ONE adult, 2 Queen Oceanfront, 24 to 27 Oct. William's covering note ('we head over to the J.W. for some luxe') implies the family moves together. No second room was found in the inbox.",
+    chosen: "Shown as confirmed for the dates, with the rooming flagged on the itinerary, the Wallet and the Now screen.",
+    why: "The booking is real; its capacity is the question.",
+    action: "Settle the rooming with William before the free-cancellation deadline (23:59 hotel time, 22 Oct): a second room, or Jack's own booking nearby. Also ask him to add Jack's name if Jack is to sleep in that room.",
+    confidence: "confirmed",
+    sources: ["doc-jw-lima"]
+  },
+  {
+    id: "C20", state: "noted", severity: "minor",
+    title: "The LATAM Lima-Cusco flights have no times on any document",
+    conflict: "Caravan's day-by-day says the LIM-CUZ (19 Oct) and CUZ-LIM (23 Oct) flights are included and on LATAM, that each ticket allows one checked bag and one carry-on, and that 'your Tour Director will advise the exact departure times'. No flight numbers or times exist anywhere.",
+    chosen: "Not entered as ticketed legs in the flight list (the 9 confirmed legs stay as they are); shown as caravan segments with Caravan's coach times (bags 08:00 / depart 09:00 on the 19th; bags 07:00 / depart 08:00 on the 23rd).",
+    why: "Entering invented times would corrupt the countdown engine; the coach times are the real constraints on those mornings.",
+    confidence: "confirmed",
+    sources: ["doc-caravan-days"]
+  },
+  {
+    id: "C21", state: "noted", severity: "minor",
+    title: "Jack travels on his father's Caravan account",
+    conflict: "The Caravan booking is on William's account with Jack as the third guest (Room 2 single, $2,224 paid on the card ending 6195). The booking, the manage-booking page and the travel-protection policy are therefore in William's hands.",
+    chosen: "The booking id is shown masked on Jack's Wallet card like any other reference; the Caravan phone line is listed for emergencies.",
+    why: "Useful to know on tour: questions to Caravan go through William's account.",
+    confidence: "confirmed",
+    sources: ["doc-caravan-reconfirm"]
   }
 ];
 
@@ -2851,7 +3386,7 @@ window.TRIP.workPlan = {
     { from: "2026-09-24", to: "2026-09-26", kind: "limited", label: "Wind-down in Udon Thani", note: "Close the laptop by Friday noon; Saturday is the flight to Bangkok and the airport hotel." },
     { from: "2026-09-26", to: "2026-09-29", kind: "travel",  label: "Transit: UTH to BKK to MIA to JAX", note: "Unreachable across 4 flights and 11 time zones." },
     { from: "2026-09-29", to: "2026-09-30", kind: "jetlag",  label: "Arrival + jet lag buffer", note: "Suggested: no client-facing commitments until Thu 1 Oct." },
-    { from: "2026-10-01", to: "2026-10-16", kind: "work",    label: "Work-from-Jacksonville", note: "12 clean weekdays on US Eastern time (Oct 1-2, 5-9, 12-16); weekends Oct 3-4 and 10-11 are family days." },
+    { from: "2026-10-01", to: "2026-10-16", kind: "work",    label: "Work from Florida", note: "12 clean weekdays on US Eastern time (Oct 1-2, 5-9, 12-16): from the family home in St. Augustine until 5 Oct, from the Ybor City Airbnb in Tampa 6-15 Oct, St. Augustine again on the 16th; weekends Oct 3-4 and 10-11 are family days." },
     { from: "2026-10-17", to: "2026-10-28", kind: "vacation",label: "Peru with the family", note: "Out of office. Connectivity thin to nonexistent Oct 18-24 (Andes caravan)." },
     { from: "2026-10-28", to: "2026-10-31", kind: "travel",  label: "Return crossing", note: "LIM to MIA to DOH to BKK; a Miami afternoon on the 29th is the only workable pocket, and it should not be worked." },
     { from: "2026-11-02", to: "2026-11-03", kind: "jetlag",  label: "Re-entry buffer in Bangkok", note: "Suggested: resume normally Mon 2 Nov, protect deep-work mornings while the +12 h flip settles." }
@@ -2861,7 +3396,7 @@ window.TRIP.workPlan = {
     "Move anything due 17 Oct - 2 Nov to before 15 Oct, or delegate it",
     "Announce the Peru absence in September, not October",
     "Set OOO for 17 Oct - 1 Nov with a named delegate",
-    "Batch heavy uploads and file syncs for Jacksonville, where the connection is known-good"
+    "Batch heavy uploads and file syncs for Florida (the family home or the Airbnb), where the connection is known-good"
   ]
 };
 
@@ -2883,7 +3418,7 @@ window.TRIP.workPlan = {
 window.TRIP = window.TRIP || {};
 
 window.TRIP.assist = {
-  "updated": "2026-09-23 (research pack merged)",
+  "updated": "2026-10-10 (Caravan programme, Florida road chapter, JW Marriott Lima; research pack of 2026-09-23 retained)",
   "airportBufferMin": {
     "intl": 180,
     "dom": 120
@@ -2897,9 +3432,11 @@ window.TRIP.assist = {
     "BKK": 15,
     "DMK": 60,
     "MIA": 25,
-    "JAX": 45,
+    "JAX": 65,
     "LIM": 60,
-    "DOH": 0
+    "DOH": 0,
+    "STA": 65,
+    "TPA": 30
   },
   "walkToGateMin": {
     "UTH": 5,
@@ -3729,11 +4266,17 @@ window.TRIP.assist = {
       "mapUrl": null,
       "arrival": {
         "tips": [
+          "Caravan's instruction for 17 Oct: after customs and bags, book at the official taxi counters (Taxi Seguro, Green Taxi) inside the terminal, 90 to 130 soles or $25 to $35 plus tip, 30 to 60 min to the Courtyard Miraflores (Calle Schell 400). Pay in USD, soles or by card; ATMs and exchange are in arrivals. At the hotel, say you are Caravan tour members.",
           "AA1307 lands 20:10 Sat 17 Oct. Arrival e-gates are for Peruvians and resident foreigners only; US and UK tourists queue at manned booths, where biometrics are captured (needed for departure e-gates). No passport stamp since 29 May 2023: entry is the virtual TAM (check or download at cel.migraciones.gob.pe/ConsultaTAMVirtual/VerificarTAM/). Carry proof of onward travel (LA2694).",
           "Customs: no declaration form if nothing dutiable; declare cash over US$10,000 (over US$30,000 prohibited, 30% penalty on undeclared); one laptop and two phones duty free. Baggage claim and red/green channels on Level 1.",
           "Lima and Callao are under a 60-day state of emergency (DS 123-2026-PCM, 28 Aug 2026, to about 26 to 27 Oct; renewals continuous): joint police and military patrols, ID checks; tourist life in Miraflores reported normal."
         ],
         "steps": [
+          {
+            "text": "Caravan's instruction for 17 Oct: after customs and bags, book at the official taxi counters (Taxi Seguro, Green Taxi) inside the terminal, 90 to 130 soles or $25 to $35 plus tip, 30 to 60 min to the Courtyard Miraflores (Calle Schell 400). Pay in USD, soles or by card; ATMs and exchange are in arrivals. At the hotel, say you are Caravan tour members.",
+            "sourceUrl": "(Caravan reconfirmation, local document)",
+            "confidence": "high"
+          },
           {
             "text": "AA1307 lands 20:10 Sat 17 Oct. Arrival e-gates are for Peruvians and resident foreigners only; US and UK tourists queue at manned booths, where biometrics are captured (needed for departure e-gates). No passport stamp since 29 May 2023: entry is the virtual TAM (check or download at cel.migraciones.gob.pe/ConsultaTAMVirtual/VerificarTAM/). Carry proof of onward travel (LA2694).",
             "sourceUrl": "https://www.infobae.com/peru/2025/05/15/nuevo-aeropuerto-jorge-chavez-lanza-sistema-digital-para-reducir-tiempos-de-espera-en-migraciones-como-funciona/",
@@ -3849,14 +4392,20 @@ window.TRIP.assist = {
       "mapUrl": null,
       "arrival": {
         "tips": [
-          "Caravan operator (undocumented) is expected to meet the group. If not: official taxi counters inside Arrivals S/35 to 55; Uber/Cabify/inDrive S/12 to 25 from in-app zones; street taxis S/15 to 30. Scams: detours, 'hotel closed' ploys, add-on charges. FCDO: never hail on the street; app or hotel-booked taxis only.",
+          "Caravan's coach and Tour Director meet the group at Cusco airport on 19 Oct (LATAM on Caravan's ticket, time from the Tour Director) and drive straight down to Urubamba (2,871 m), so nobody sleeps at Cusco's altitude until day 6. If separated from the group, call Caravan +1 800-227-2826; official taxi counters inside arrivals S/35 to 55; never hail on the street.",
+          "Caravan's coach and Tour Director meet the group at Cusco airport on 19 Oct (LATAM on Caravan's ticket, time from the Tour Director) and drive straight down to Urubamba (2,871 m), so nobody sleeps at Cusco's altitude until day 6. If separated from the group, call Caravan +1 800-227-2826; official taxi counters inside arrivals S/35 to 55; never hail on the street.",
           "Altitude: Lima (sea level) to Cusco (about 3,400 m) breaches CDC's rule against sleeping above 2,750 m on day one. Symptoms start 6 to 10 h after arrival; rest on 18 Oct, no alcohol first 48 h, descend if symptoms worsen; ask the operator to sleep the group in the lower Sacred Valley (about 2,800 m) first."
         ],
         "steps": [
           {
-            "text": "Caravan operator (undocumented) is expected to meet the group. If not: official taxi counters inside Arrivals S/35 to 55; Uber/Cabify/inDrive S/12 to 25 from in-app zones; street taxis S/15 to 30. Scams: detours, 'hotel closed' ploys, add-on charges. FCDO: never hail on the street; app or hotel-booked taxis only.",
-            "sourceUrl": "https://howtoperu.com/answers/cusco-airport-to-city-transfers-prices-scams-best-options/",
-            "confidence": "medium"
+            "text": "Caravan's coach and Tour Director meet the group at Cusco airport on 19 Oct (LATAM on Caravan's ticket, time from the Tour Director) and drive straight down to Urubamba (2,871 m), so nobody sleeps at Cusco's altitude until day 6. If separated from the group, call Caravan +1 800-227-2826; official taxi counters inside arrivals S/35 to 55; never hail on the street.",
+            "sourceUrl": "(Caravan day-by-day, local document)",
+            "confidence": "high"
+          },
+          {
+            "text": "Caravan's coach and Tour Director meet the group at Cusco airport on 19 Oct (LATAM on Caravan's ticket, time from the Tour Director) and drive straight down to Urubamba (2,871 m), so nobody sleeps at Cusco's altitude until day 6. If separated from the group, call Caravan +1 800-227-2826; official taxi counters inside arrivals S/35 to 55; never hail on the street.",
+            "sourceUrl": "(Caravan day-by-day, local document)",
+            "confidence": "high"
           },
           {
             "text": "Altitude: Lima (sea level) to Cusco (about 3,400 m) breaches CDC's rule against sleeping above 2,750 m on day one. Symptoms start 6 to 10 h after arrival; rest on 18 Oct, no alcohol first 48 h, descend if symptoms worsen; ask the operator to sleep the group in the lower Sacred Valley (about 2,800 m) first.",
@@ -3870,7 +4419,7 @@ window.TRIP.assist = {
         "checkin": [
           {
             "airline": "LA",
-            "where": "Domestic terminal (if the 24 Oct CUZ-LIM leg is on LATAM)",
+            "where": "Caravan's LATAM ticket, domestic terminal; the Tour Director gives the time for 23 Oct (bags out 07:00, coach 08:00 from the JW El Convento)",
             "opensBefore": "2 h before domestic (LATAM Lima table)",
             "closesBefore": "Unverified",
             "sourceUrl": "https://www.latamairlines.com/us/en/help-center/faq/check-in/boarding/earlier-arrival-airport",
@@ -3969,10 +4518,14 @@ window.TRIP.assist = {
       "confidence": "official"
     },
     "H3": {
-      "checkIn": "3:00 pm",
-      "checkOut": "12:00 pm",
-      "nameOnBooking": "unconfirmed: no booking document exists Unknown; no booking document. Whose name the reservation is under, and whether it exists, is an open question.",
-      "sources": [],
+      "checkIn": "After 3:00 pm (Caravan day 1); you arrive about 22:00 on 17 Oct. Identify yourselves as Caravan tour members at the desk.",
+      "checkOut": "09:00 coach departure on 19 Oct with bags outside the room by 08:00 (Caravan day 3); the room bill (incidentals only) is settled before that",
+      "nameOnBooking": "Caravan tour booking (id in the Wallet) on William Tait's account: Room 1 double (William and Gillian), Room 2 single (Toby Jack Tait). Incidentals on your own card.",
+      "sources": [
+        "doc-caravan-hotels",
+        "doc-caravan-reconfirm",
+        "doc-caravan-days"
+      ],
       "phone": "+51 1 625 3838 (toll-free +800-321-2211 per Travel Weekly); reservations.cy@marriott.com",
       "shuttle": {
         "available": false,
@@ -3983,6 +4536,16 @@ window.TRIP.assist = {
         "notes": "10.7 miles from LIM per Marriott; 45 to 70 min by road. British Embassy Lima is in the same district (Torre Parque Mar, Av. José Larco 1301)."
       },
       "tips": [
+        {
+          "text": "Breakfast included on days 2 and 3 (Caravan). Day 2: welcome briefing at 08:00, luggage tags handed out for the one main bag.",
+          "confidence": "high",
+          "sourceUrl": null
+        },
+        {
+          "text": "Breakfast included on days 2 and 3 (Caravan). Day 2: welcome briefing at 08:00, luggage tags handed out for the one main bag.",
+          "confidence": "high",
+          "sourceUrl": null
+        },
         {
           "text": "Foreign tourists staying under 60 days are exempt from 18% IGV on room charges with passport plus TAM record; check the folio (industry sources, medium).",
           "sourceUrl": "https://exploorperu.com/blog/peru/peru-entry-requirements-us-citizens-2026/",
@@ -3998,7 +4561,7 @@ window.TRIP.assist = {
         "https://www.marriott.com/en-us/hotels/limlm-courtyard-lima-miraflores/overview/",
         "https://www.facebook.com/CourtyardLimaMiraflores/"
       ],
-      "confidence": "medium"
+      "confidence": "official"
     },
     "H5": {
       "checkIn": "3:00 pm; minimum age 18; 24-hour front desk",
@@ -4039,6 +4602,131 @@ window.TRIP.assist = {
         "https://www.marriott.co.uk/hotels/maps/travel/miaap-miami-airport-marriott/"
       ],
       "confidence": "official"
+    },
+    "H10": {
+      "checkIn": "Afternoon of 23 Oct with the group after the LATAM flight from Cusco (Caravan day 7)",
+      "checkOut": "12:00 pm on 24 Oct; breakfast from 06:30; the tour ends here after breakfast",
+      "nameOnBooking": "Caravan tour booking (id in the Wallet) on William Tait's account: Room 1 double (William and Gillian), Room 2 single (Toby Jack Tait). Incidentals on your own card.",
+      "sources": [
+        "doc-caravan-hotels",
+        "doc-caravan-reconfirm",
+        "doc-caravan-days"
+      ],
+      "phone": "+51 1 625 3838 (toll-free +800-321-2211 per Travel Weekly); reservations.cy@marriott.com",
+      "shuttle": {
+        "available": false,
+        "howToRequest": "Hotel provides no shuttle. Alternate listed by Marriott: CMV car US$50 one way, reservation required.",
+        "pickupPoint": null,
+        "hours": null,
+        "coversAirports": "None",
+        "notes": "10.7 miles from LIM per Marriott; 45 to 70 min by road. British Embassy Lima is in the same district (Torre Parque Mar, Av. José Larco 1301)."
+      },
+      "tips": [
+        {
+          "text": "Farewell dinner on the 23rd. On the 24th Caravan's airport transfers (arriving LIM 05:30, 08:00, 11:00) are not needed: the family moves to the JW Marriott, five minutes along the malecón.",
+          "confidence": "high",
+          "sourceUrl": null
+        }
+      ],
+      "webSources": [
+        "https://www.marriott.com/en-us/hotels/limlm-courtyard-lima-miraflores/overview/",
+        "https://www.facebook.com/CourtyardLimaMiraflores/"
+      ],
+      "confidence": "official"
+    },
+    "H6": {
+      "checkIn": "After 3:00 PM Tue 6 Oct (Airbnb)",
+      "checkOut": "By 11:00 AM Thu 15 Oct",
+      "nameOnBooking": "Jack, 1 adult; confirmation code in the Wallet",
+      "phone": "Host Colin Alexander +1 234-241-2845 (message through Airbnb first); Airbnb 24/7 support in the app",
+      "tips": [
+        {
+          "text": "Quiet hours 22:00 to 09:00; exterior security cameras; no pets; 6 guests max. Leave it as found at checkout and message Colin if anything needs reporting.",
+          "confidence": "high",
+          "sourceUrl": null
+        }
+      ],
+      "sources": [
+        "doc-airbnb-tampa"
+      ],
+      "confidence": "official"
+    },
+    "H8": {
+      "checkIn": "Afternoon of 19 Oct with the group (Caravan handles the rooms)",
+      "checkOut": "08:00 coach departure on 22 Oct with bags outside the room by 07:00 (Caravan day 6)",
+      "nameOnBooking": "Caravan allocation: Room 2 single (Jack), Room 1 double (parents)",
+      "phone": "+51 1 500 8686 (Caravan hotel list)",
+      "tips": [
+        {
+          "text": "2,871 m (9,420 ft): slow first evening, water, no alcohol for 48 h. Dinner included on the 19th and 21st, on your own on the 20th. Machu Picchu day starts here at 07:00 and ends here in the evening.",
+          "confidence": "high",
+          "sourceUrl": null
+        }
+      ],
+      "sources": [
+        "doc-caravan-hotels",
+        "doc-caravan-days"
+      ],
+      "confidence": "official"
+    },
+    "H9": {
+      "checkIn": "Afternoon of 22 Oct with the group",
+      "checkOut": "08:00 coach departure on 23 Oct with bags outside the room by 07:00 (Caravan day 7)",
+      "nameOnBooking": "Caravan allocation: Room 2 single (Jack), Room 1 double (parents)",
+      "phone": "+51 84 582200 (Caravan hotel list)",
+      "tips": [
+        {
+          "text": "3,399 m (11,150 ft), the highest night of the trip. Every room is oxygen-enriched; ask for supplemental oxygen if needed. Two blocks from the Plaza de Armas; dinner on your own.",
+          "confidence": "high",
+          "sourceUrl": null
+        }
+      ],
+      "sources": [
+        "doc-caravan-hotels",
+        "doc-caravan-days"
+      ],
+      "confidence": "official"
+    },
+    "H11": {
+      "checkIn": "3:00 PM Sat 24 Oct",
+      "checkOut": "12:00 PM Tue 27 Oct",
+      "nameOnBooking": "William Tait, 1 adult, 1 room (2 Queen Oceanfront), Bonvoy redemption of 126,000 points. Three travelers: the rooming is unresolved (C19). If Jack is to sleep in that room without William present, William must register it as a gifted award stay through Bonvoy Member Support first.",
+      "phone": "+51 1 217 7000",
+      "cancellation": "Free until 23:59 hotel time on Thu 22 Oct 2026 (printed)",
+      "parking": "Complimentary on-site (printed)",
+      "shuttle": {
+        "available": false,
+        "howToRequest": "No hotel shuttle; the bellman arranges taxis (Taxi Seguro / Green Taxi class).",
+        "pickupPoint": null,
+        "hours": null,
+        "coversAirports": null,
+        "notes": "About 30 to 60 min to LIM depending on traffic."
+      },
+      "tips": [
+        {
+          "text": "Clifftop on the malecón next to Larcomar. Rate quoted in USD, charged in soles; foreign tourists under 60 days are exempt from the 18% IGV with passport and the virtual TAM.",
+          "confidence": "high",
+          "sourceUrl": null
+        }
+      ],
+      "sources": [
+        "doc-jw-lima"
+      ],
+      "confidence": "official"
+    },
+    "H12": {
+      "checkIn": "Nothing is booked for the night of 27 Oct",
+      "checkOut": "Leave Miraflores for LIM by about 09:30 on 28 Oct (LA2694 at 13:30)",
+      "nameOnBooking": "No booking exists. Options: extend the JW Marriott by one night (William, points or cash) or book the Courtyard Miraflores, where the parents stay from the 28th.",
+      "sources": [],
+      "confidence": "estimated",
+      "tips": [
+        {
+          "text": "Book it from Florida before the caravan; connectivity on tour is thin and the JW's free-cancellation deadline (22 Oct) is also the natural moment to sort the rooming.",
+          "confidence": "estimated",
+          "sourceUrl": null
+        }
+      ]
     }
   },
   "entry": {
@@ -4720,6 +5408,196 @@ window.TRIP.assist = {
         "2026-11-01",
         "2026-09-26"
       ]
+    },
+    {
+      "confidence": "high",
+      "when": "general",
+      "nodes": [
+        "TPA",
+        "H6"
+      ],
+      "on": [
+        "2026-10-12",
+        "2026-10-13",
+        "2026-10-14"
+      ],
+      "text": "Last Tampa days: order nothing more to the Airbnb after about the 13th; start the Peru pile by the door (one handled bag each for Caravan, 60 linear inches and 50 lb, plus a non-wheeled day bag)."
+    },
+    {
+      "confidence": "high",
+      "when": "night-before",
+      "nodes": [
+        "TPA",
+        "H6"
+      ],
+      "on": [
+        "2026-10-14",
+        "2026-10-15"
+      ],
+      "text": "Checkout Thu 15 Oct by 11:00, then I-4 east and I-95 north, about 3.5 hours. Refuel near St. Augustine to the 23.5-gallon level the Jeep left with; Enterprise charges for any shortfall."
+    },
+    {
+      "confidence": "high",
+      "when": "general",
+      "nodes": [
+        "STA"
+      ],
+      "on": [
+        "2026-10-15",
+        "2026-10-16"
+      ],
+      "text": "The Jeep goes back to Enterprise St. Augustine (2140 South U.S. 1) by 13:00 on Fri 16 Oct: photos of the car and the fuel gauge, receipt kept, nothing left in the glove box. Tolls from the Tampa days are billed later through TollPass."
+    },
+    {
+      "confidence": "high",
+      "when": "night-before",
+      "nodes": [
+        "JAX",
+        "STA"
+      ],
+      "on": [
+        "2026-10-16",
+        "2026-10-17"
+      ],
+      "text": "AA online check-in opens 10:06 on the 16th. Tomorrow leave St. Augustine about 06:30 (50 miles, about an hour); JAX accepts bags from 06:06 at the earliest. Three people, three bags: book an XL."
+    },
+    {
+      "confidence": "high",
+      "when": "airport",
+      "nodes": [
+        "JAX"
+      ],
+      "on": [
+        "2026-10-17"
+      ],
+      "text": "One central TSA checkpoint; American from Concourse C; no lounge Jack can use at JAX. Bags tagged through to LIM; passports checked for the Lima sector; the parents' bags too."
+    },
+    {
+      "confidence": "high",
+      "when": "arrival",
+      "nodes": [
+        "LIM",
+        "H3"
+      ],
+      "on": [
+        "2026-10-17"
+      ],
+      "text": "Official taxi counter (Taxi Seguro / Green Taxi) inside arrivals, 90 to 130 soles, 30 to 60 min to Calle Schell 400. At the Courtyard say you are Caravan tour members. Dinner on your own; the 08:00 briefing is tomorrow."
+    },
+    {
+      "confidence": "high",
+      "when": "hotel",
+      "nodes": [
+        "LIM",
+        "H3"
+      ],
+      "on": [
+        "2026-10-18"
+      ],
+      "text": "Welcome briefing at 08:00 after breakfast; the Caravan luggage tag goes on the one main bag only. Lunch on your own in Miraflores, dinner included. Bags out at 08:00 tomorrow, coach at 09:00."
+    },
+    {
+      "confidence": "high",
+      "when": "altitude",
+      "nodes": [
+        "CUZ",
+        "SAV",
+        "H8"
+      ],
+      "on": [
+        "2026-10-19"
+      ],
+      "text": "LATAM to Cusco on Caravan's ticket (one checked bag, one carry-on; time from the Tour Director). The coach drops to Urubamba (2,871 m) the same afternoon: water, light food, no alcohol for 48 hours; tell the Tour Director about any symptoms."
+    },
+    {
+      "confidence": "high",
+      "when": "altitude",
+      "nodes": [
+        "SAV",
+        "H8"
+      ],
+      "on": [
+        "2026-10-20"
+      ],
+      "text": "Depart 08:00: Ollantaytambo, Moray, Chinchero; lunch included, dinner on your own. Early night: the Machu Picchu coach leaves at 07:00."
+    },
+    {
+      "confidence": "high",
+      "when": "altitude",
+      "nodes": [
+        "MAP",
+        "SAV",
+        "H8"
+      ],
+      "on": [
+        "2026-10-21"
+      ],
+      "text": "Original passport at the Machu Picchu gate (the number Caravan filed; both passports if renewed). Day bag only, no wheels; rain shell, hat, sunblock, water. Box lunch; the train brings you back to Urubamba late afternoon."
+    },
+    {
+      "confidence": "high",
+      "when": "altitude",
+      "nodes": [
+        "CUZ",
+        "H9"
+      ],
+      "on": [
+        "2026-10-22"
+      ],
+      "text": "Bags 07:00, coach 08:00: Sacsayhuamán, lunch, then Cusco at 3,399 m for the one high night. The JW El Convento's rooms are oxygen-enriched; dinner on your own, go gently, drink water."
+    },
+    {
+      "confidence": "high",
+      "when": "general",
+      "nodes": [
+        "LIM",
+        "CUZ",
+        "H9",
+        "H10"
+      ],
+      "on": [
+        "2026-10-23"
+      ],
+      "text": "Bags 07:00, coach 08:00, LATAM to Lima; lunch on your own; farewell dinner tonight. Tips in cash, handed individually to the Tour Director ($8 to $15 per person per day) and the Driver ($7 to $12)."
+    },
+    {
+      "confidence": "high",
+      "when": "hotel",
+      "nodes": [
+        "LIM",
+        "H10",
+        "H11"
+      ],
+      "on": [
+        "2026-10-24"
+      ],
+      "text": "Tour ends after breakfast (from 06:30). Courtyard checkout 12:00, JW Marriott check-in 15:00, five minutes along the malecón; Larcomar for lunch while the room is readied. The rooming for three at the JW must be settled by now."
+    },
+    {
+      "confidence": "high",
+      "when": "general",
+      "nodes": [
+        "LIM",
+        "H11"
+      ],
+      "on": [
+        "2026-10-25",
+        "2026-10-26"
+      ],
+      "text": "LATAM online check-in opens 13:30 on Mon 26 Oct for LA2694. The night of the 27th still needs a booking if it has not been fixed."
+    },
+    {
+      "confidence": "high",
+      "when": "night-before",
+      "nodes": [
+        "LIM",
+        "H11",
+        "H12"
+      ],
+      "on": [
+        "2026-10-27"
+      ],
+      "text": "JW checkout 12:00. Tomorrow leave Miraflores by about 09:30 for LA2694 at 13:30: a hotel-arranged taxi, $25 to $35 plus tip, 30 to 60 min to Jorge Chávez."
     }
   ],
   "openQuestions": [
@@ -4728,15 +5606,16 @@ window.TRIP.assist = {
     "If UK passport: does he hold a valid ESTA with the selfie photo, and has he previously entered the US under ESTA (needed for Mobile Passport Control)?",
     "Global Entry, TSA PreCheck, CLEAR, Priority Pass, Admirals Club or eligible Amex card membership?",
     "Has William already added Jack's name to the Fairfield reservation (reference in the Wallet) and/or arranged a Credit Card Authorization Form? Has he registered Marriott (reference in the Wallet) as a Gifted Award Stay via Bonvoy Member Support?",
-    "Does a Courtyard Lima Miraflores reservation actually exist, in whose name, and does it include breakfast?",
-    "Who is the caravan operator (18 to 24 Oct)? Which train company and class (PeruRail vs Inca Rail), which bus company, which Machu Picchu circuit/route and entry hour, are the tickets paid and in each passport name, is the S/11 SERNANP fee and the Boleto Turístico included, where does the group sleep on 18 Oct (Cusco vs Sacred Valley), what is the bus-strike contingency, and how is the LIM-CUZ leg flown?",
-    "Parents' nationalities, ages, cabin on AA1307 (Business or economy, which decides Admirals Club access), ESTA/MPC status, and which Jacksonville neighbourhood they live in (drive time to JAX).",
     "Is seat 11A on QR838 actually held (no EMD on the receipt)? Confirm the aircraft for each Qatar sector in Manage Booking.",
     "Has AA4024 08:03 been re-verified against record (reference in the Wallet) in the AA app (the April email showed AA3140 08:30)?",
     "Any sulfa allergy, kidney issues or other reason not to take acetazolamide; has a physician prescribed altitude prophylaxis for Jack and both parents?",
     "What is the plan for Bangkok to Udon Thani on 31 Oct (nothing booked)?",
     "Does Jack want the Siam Mandarina to arrange the DMK taxi on 26 Sep (24 h notice by 14:10 on 25 Sep) or will he use the Gate 15 official taxi/Grab?",
-    "Will he carry cash over US$10,000 at any border (declaration thresholds apply, family aggregate in the US)?"
+    "Will he carry cash over US$10,000 at any border (declaration thresholds apply, family aggregate in the US)?",
+    "JW Marriott Lima (24 to 27 Oct) is one room for one adult: does a second room exist, does Jack book his own, and will William register the stay as a gifted award if he is not present?",
+    "Where does Jack sleep on the night of 27 Oct in Lima? Nothing is booked between the JW checkout (27th, noon) and LA2694 (28th, 13:30).",
+    "Are the nights of 15 and 16 Oct at the family home in St. Augustine as inferred, and who drives everyone to JAX at about 06:30 on the 17th now that the Jeep goes back on the 16th?",
+    "Parents' cabin on AA1307 (Business or economy decides Admirals Club access) and ESTA/MPC status; all three are US citizens per the Caravan reconfirmation, and the home is in St. Augustine, about an hour from JAX."
   ],
   "gaps": [
     {
@@ -4753,16 +5632,6 @@ window.TRIP.assist = {
       "priority": 1,
       "node": "LIM departure / airlines.LA",
       "gap": "LATAM counter/bag-drop close, gate close and boarding-start minutes are all null (LATAM pages returned 403). The plan 'bags dropped by 12:00' is the pack's own guess. For a 13:30 international departure with three travelers this is the one cutoff set that could strand the group, and it is the only airline in the pack without an airline-sourced closing time."
-    },
-    {
-      "priority": 1,
-      "node": "CUZ / LIM domestic / caravan 18 to 24 Oct",
-      "gap": "The entire 18 to 24 Oct segment has no operator, no LIM-CUZ or CUZ-LIM flight numbers/times/airline, no hotel names for Cusco, Sacred Valley or Aguas Calientes, no train company/class, no bus tickets, and no Machu Picchu ticket confirmations. Consequences the pack does not address: Peru domestic baggage allowance (LATAM domestic fare families, Sky, JetSMART allow far less than 2 x 32 kg), LIM domestic departure procedure (which check-in island, domestic TUUA, 2 h rule), and whether the group returns to Miraflores on 24 Oct by operator transfer."
-    },
-    {
-      "priority": 1,
-      "node": "H3 Courtyard Lima Miraflores",
-      "gap": "No confirmation exists. Beyond the name-on-booking question, the pack does not address whether the reservation is 17 to 28 Oct continuous (room held and paid during the 18 to 24 Oct caravan, allowing main suitcases to stay in the room) or split (check-out 18 Oct, luggage storage, re-check-in 24 Oct), nor whether breakfast or airport pickup is included. This decides what happens with the 32 kg bags that cannot go on the train (8 kg limit)."
     },
     {
       "priority": 2,
@@ -4831,11 +5700,6 @@ window.TRIP.assist = {
     },
     {
       "priority": 3,
-      "node": "JAX arrival 29 Sep",
-      "gap": "Drive times are low-confidence rome2rio model estimates and the parents' neighbourhood is unknown; the pickup plan (cell phone lot, curb text) is fine but timing cannot be given."
-    },
-    {
-      "priority": 3,
       "node": "airlines.SL / UTH",
       "gap": "Thai Lion customer care hours conflict (07:00 to 20:00 vs 24 h) and lionairthai.com could not be fetched directly; UTH airport phone and address come from a third-party site because the DOA minisite was unreadable. Both are high-risk phone/hours items."
     },
@@ -4863,6 +5727,16 @@ window.TRIP.assist = {
       "priority": 3,
       "node": "tips (night-before, BKK)",
       "gap": "The Siam Mandarina shuttle plan (leave 22:30 to 22:45) assumes a 10-seat van with a bookable named seat, based on one Jan 2026 review; the hotel publishes no minute timetable. A confirmed departure time from the hotel is needed for a 02:30 flight with a single Grab fallback."
+    },
+    {
+      "priority": 1,
+      "node": "H11 / H12 Lima 24 to 28 Oct",
+      "gap": "The JW Marriott Lima is booked for one adult in one room while three people arrive, and the night of 27 to 28 Oct has no booking at all. Both need a decision before the free-cancellation deadline of 22 Oct."
+    },
+    {
+      "priority": 2,
+      "node": "LATAM LIM-CUZ-LIM 19 and 23 Oct",
+      "gap": "Flight numbers and times are issued by Caravan's Tour Director on tour; the pack carries only the printed coach times (bags 08:00 / depart 09:00 on the 19th; bags 07:00 / depart 08:00 on the 23rd) and the one-checked-one-carry-on rule."
     }
   ]
 };
@@ -4901,7 +5775,9 @@ window.U = (function () {
   /* Known sensitive tokens (booking refs, tickets, confirmations,
      trip ids). maskKnown() hides them inside any prose unless the
      user has chosen Reveal. */
-  var SENSITIVE = ["866YAF", "157 2135167224", "MBBZJB", "ANEDSD", "LYZZCQ", "LFSOJH", "72830827", "76989687", "1015761780", "1015761550", "1015761997", "UBKKTC", "3102165055848", "WFZHEJ", "61b3d7aa-54af-42d2-94a6-58c89dfba41d", "73550166195050"];
+  var SENSITIVE = ["866YAF", "157 2135167224", "MBBZJB", "ANEDSD", "LYZZCQ", "LFSOJH", "72830827", "76989687", "1015761780", "1015761550", "1015761997", "UBKKTC", "3102165055848", "WFZHEJ", "61b3d7aa-54af-42d2-94a6-58c89dfba41d", "73550166195050",
+    /* added 10 Oct 2026: Caravan booking id, Airbnb code, Enterprise confirmation and agreement, JW Marriott Lima, second Expedia room */
+    "PE261017-YYD", "PE261017", "HMPHK9DXDY", "77946899", "58ZMNW", "97879273", "73550167928601"];
   function maskKnown(text) {
     var reveal = window.Store && Store.settings && Store.settings().revealSensitive;
     if (reveal || text == null) return text;
@@ -4921,10 +5797,13 @@ window.U = (function () {
     if (!doc) return null;
     var hosted = window.TRIP.hostedFiles && window.TRIP.hostedFiles[doc.id];
     if (window.SHARE_BUILD) return hosted ? window.TRIP.vaultBase + "/" + hosted : null;
+    /* email captures live inside this dashboard folder, not in the source folder */
+    if (doc.capture) return "extraction/email_captures/" + encodeURIComponent(doc.file);
     return "file:///" + (window.TRIP.sourceFolder + "\\" + doc.file).replace(/\\/g, "/").split("/").map(encodeURIComponent).join("/").replace(/%3A/g, ":");
   }
   function docKind(doc) {
     var f = (doc && doc.file || "").toLowerCase();
+    if (/\.html?$/.test(f)) return "EMAIL";
     if (/\.pdf$/.test(f)) return "PDF";
     if (/\.(jpe?g|png)$/.test(f)) return "IMAGE";
     if (/\.xlsx?$/.test(f)) return "EXCEL";
@@ -5508,7 +6387,8 @@ window.Steps = (function () {
     }
     return null;
   }
-  function samePlace(a, b) { return a === b || (a === "DMK" && b === "BKK") || (a === "BKK" && b === "DMK"); }
+  /* two Bangkok airports are one city; St. Augustine is the home side of Jacksonville's airport */
+  function samePlace(a, b) { return a === b || (a === "DMK" && b === "BKK") || (a === "BKK" && b === "DMK") || (a === "JAX" && b === "STA") || (a === "STA" && b === "JAX"); }
   function hotelArrivingOn(dateYmd, placeCode) {
     return (window.TRIP.hotels || []).filter(function (h) { return h.checkIn === dateYmd && samePlace(placeCode, h.place); })[0] || null;
   }
@@ -5701,14 +6581,40 @@ window.Steps = (function () {
       }
     });
 
-    /* ---- caravan and headline days ---- */
+    /* ---- caravan and headline days: the day as a window, plus Caravan's printed bag and coach times as moments ---- */
     (window.TRIP.days || []).forEach(function (d) {
       if (!d.caravanDay && !d.star) return;
+      if (d.travelDay) return; /* a ticketed flight day is carried by its flight steps */
       var tz = place(d.place).tz;
+      var bagsAt = d.bags ? localDate(d.date, d.bags, tz) : null;
+      var departAt = d.depart ? localDate(d.date, d.depart, tz) : null;
+      var opens = bagsAt ? minus(bagsAt, 60) : departAt ? minus(departAt, 90) : localDate(d.date, d.star ? "04:00" : "07:00", tz);
       push({
-        id: "dy-" + d.date, kind: "day", window: true, at: localDate(d.date, d.star ? "04:00" : "07:00", tz), until: localDate(d.date, "20:00", tz), day: d, place: d.place, tz: tz, group: "caravan", alert: !!d.star,
+        id: "dy-" + d.date, kind: "day", window: true, at: opens, until: localDate(d.date, "21:00", tz), day: d, place: d.place, tz: tz, group: "caravan", alert: !!d.star,
         title: (d.star ? "MACHU PICCHU DAY: " : "Caravan day " + d.caravanDay + ": ") + d.title,
         detail: d.sub + ". " + (d.segments || []).filter(function (s) { return s.kind !== "hotel"; }).map(function (s) { return s.text; }).join(" ") + (d.estimated ? " (day order estimated; operator programme pending)" : "")
+      });
+      if (bagsAt) push({
+        id: "bg-" + d.date, kind: "bags-out", at: minus(bagsAt, 30), until: bagsAt, day: d, place: d.place, tz: tz, group: "caravan", alert: true,
+        title: "Bags outside the room by " + d.bags + " (Caravan day " + d.caravanDay + ")",
+        detail: "One tagged bag per person goes with the coach crew; the day bag stays with you. Passport, medication, chargers and everything for the day in the day bag. The coach leaves at " + (d.depart || "the printed time") + "."
+      });
+      if (departAt) push({
+        id: "dc-" + d.date, kind: "coach", at: minus(departAt, 20), until: departAt, day: d, place: d.place, tz: tz, group: "caravan", alert: true,
+        title: (d.star ? "Machu Picchu: the coach leaves at " : "Caravan coach leaves at ") + d.depart + ": " + d.title,
+        detail: d.sub + ". In the lobby with the day bag ten minutes early. Caravan rotates seats, so sit in front of or behind the parents, not across the aisle."
+      });
+    });
+
+    /* ---- timed ground moments: drives, the car return, hotel-to-hotel moves (transport entries with a time) ---- */
+    (window.TRIP.transport || []).forEach(function (t) {
+      if (!t.time || !t.place || t.status === "done") return;
+      var tz = place(t.place).tz;
+      var at = localDate(t.date, t.time, tz);
+      push({
+        id: "gr-" + t.id, kind: "ground", at: at, until: plus(at, 90), transport: t, place: t.place, tz: tz, group: t.id, alert: true,
+        title: t.name,
+        detail: [t.window, t.mode].filter(Boolean).map(function (s) { return s.replace(/\.?\s*$/, "."); }).join(" ") + (t.notes && t.notes.length ? " " + t.notes[0] : "")
       });
     });
 
@@ -5788,6 +6694,13 @@ window.Steps = (function () {
     if (!pos.inFlight && w.day && w.day.place) hereCode = w.day.place;
     var firstLeg = Engine.activeFlights().slice().sort(function (x, y) { return T.parse(x.dep) - T.parse(y.dep); })[0];
     if (firstLeg && now < T.parse(firstLeg.dep)) hereCode = firstLeg.from; /* still at home before the first flight */
+    /* on a flight day you are still where the day's first flight leaves from until it leaves (the day record names the destination) */
+    if (!pos.inFlight) {
+      var todaysFirst = Engine.activeFlights().filter(function (f) {
+        var d = T.parse(f.dep); return d > now && T.dateInZone(d, place(f.from).tz) === T.dateInZone(now, place(f.from).tz) && !stageDone(f.id, "landed");
+      }).sort(function (x, y) { return T.parse(x.dep) - T.parse(y.dep); })[0];
+      if (todaysFirst) hereCode = todaysFirst.from;
+    }
     var hereTz = place(hereCode).tz;
     var ymdHere = T.dateInZone(now, hereTz);
     var rec = Engine.dayFor(ymdHere);
@@ -5855,7 +6768,7 @@ window.Steps = (function () {
     var count = 0;
     st.live.forEach(function (s) {
       if (!s.alert) return;
-      var lead = (s.kind === "leave" || s.kind === "to-gate" || s.kind === "hotel-checkout") ? 30 : 0;
+      var lead = (s.kind === "leave" || s.kind === "to-gate" || s.kind === "hotel-checkout" || s.kind === "ground" || s.kind === "bags-out" || s.kind === "coach") ? 30 : 0;
       (lead ? [lead, 0] : [0]).forEach(function (l) {
         var delta = minus(s.at, l) - st.now;
         if (delta <= 0 || delta > 12 * H) return;
@@ -6086,7 +6999,7 @@ window.Views.itinerary = function (root) {
 
   var KIND_ICON = {
     flight: I.plane, layover: I.clock, hotel: I.bed, home: I.home, caravan: I.mountain,
-    star: I.star, free: I.sun, transfer: I.car, work: I.work, split: I.split, warning: I.warn
+    star: I.star, free: I.sun, transfer: I.car, car: I.car, work: I.work, split: I.split, warning: I.warn
   };
   var PHASE_NAME = { outbound: "Outbound", florida: "Florida", "peru-caravan": "Peru caravan", lima: "Lima", "return": "Return", complete: "Home" };
 
@@ -6396,8 +7309,8 @@ window.Views = window.Views || {};
     { from: "UTH", to: "BKK", leg: "F0" },
     { from: "BKK", to: "DOH", leg: "F1" }, { from: "DOH", to: "MIA", leg: "F2" },
     { from: "MIA", to: "JAX", leg: "F3" }, { from: "JAX", to: "MIA", leg: "F4" },
-    { from: "MIA", to: "LIM", leg: "F5" }, { from: "LIM", to: "CUZ", leg: null },
-    { from: "CUZ", to: "LIM", leg: null }, { from: "LIM", to: "MIA", leg: "F6" },
+    { from: "MIA", to: "LIM", leg: "F5" }, { from: "LIM", to: "CUZ", leg: null, until: "2026-10-19" },
+    { from: "CUZ", to: "LIM", leg: null, until: "2026-10-23" }, { from: "LIM", to: "MIA", leg: "F6" },
     { from: "MIA", to: "DOH", leg: "F7" }, { from: "DOH", to: "BKK", leg: "F8" }
   ];
   var PARENTS = [
@@ -6420,10 +7333,10 @@ window.Views = window.Views || {};
     BKK: { arrive: "26 Sep 14:10 (into DMK)", depart: "28 Sep 02:30", stay: "2 nights at the Siam Mandarina · returns 31 Oct 06:40", hotel: "Siam Mandarina (free BKK shuttle)", extra: "Lands Don Mueang, departs Suvarnabhumi · QR837 out · QR838 back" },
     DOH: { arrive: "28 Sep 05:05 + 30 Oct 16:50", depart: "08:25 / 20:25", stay: "Transit only: 3 h 20 m + 3 h 35 m", hotel: "Al Mourjan lounge", extra: "QR837→QR777 · QR778→QR838" },
     MIA: { arrive: "28 Sep 16:40 + 28 Oct 20:35", depart: "29 Sep + 29 Oct", stay: "2 gateway nights", hotel: "Fairfield (Sep) · Airport Marriott (Oct)", extra: "US entry point, both directions" },
-    JAX: { arrive: "29 Sep 09:49", depart: "17 Oct 10:06", stay: "18 nights", hotel: "Parents' home", extra: "Work + family chapter" },
-    LIM: { arrive: "17 Oct 20:10", depart: "28 Oct 13:30", stay: "5 nights at base (+ caravan)", hotel: "Courtyard Miraflores (conf TBC)", extra: "Family base in Peru" },
-    CUZ: { arrive: "18 Oct (operator flight)", depart: "24 Oct", stay: "6 caravan nights (estimated)", hotel: "Caravan hotels", extra: "3,399 m · Sacred Valley · Machu Picchu" },
-    MAP: { arrive: "21 Oct, before dawn", depart: "same day", stay: "The main event", hotel: "sleeps in Aguas Calientes", extra: "2,430 m · passport required at gate" },
+    JAX: { arrive: "29 Sep 09:26 (AA4024)", depart: "17 Oct 10:06 (AA3955)", stay: "Florida chapter, 18 nights: St. Augustine 7 + Tampa 9 + St. Augustine 2", hotel: "Family home, St. Augustine · Ybor City Airbnb, Tampa (6-15 Oct)", extra: "Jeep from Enterprise St. Augustine 6-16 Oct · work + family · JAX is about an hour from the house" },
+    LIM: { arrive: "17 Oct 20:10", depart: "28 Oct 13:30", stay: "Caravan nights 17, 18, 23 Oct · JW Marriott 24-27 Oct · 27th NOT booked", hotel: "Courtyard Miraflores (Caravan) · JW Marriott Lima", extra: "Official taxi counter on arrival · the tour starts and ends here" },
+    CUZ: { arrive: "19 Oct (LATAM, on Caravan's ticket)", depart: "23 Oct (LATAM, on Caravan's ticket)", stay: "4 caravan nights: Urubamba 19-22, Cusco 22-23", hotel: "Rustica Hotel Urubamba · JW Marriott El Convento (oxygen rooms)", extra: "Cusco 3,399 m · Sacred Valley 2,871 m · Machu Picchu 21 Oct by train" },
+    MAP: { arrive: "21 Oct, coach 07:00 then the train", depart: "late-afternoon train back", stay: "The main event: a 2.5-hour guided visit, box lunch", hotel: "sleeps in Urubamba (Rustica)", extra: "2,430 m · original passport required at the gate" },
     VAP: { arrive: "4 Nov (parents)", depart: "coach to Santiago", stay: "Parents only", hotel: "—", extra: "L'Austral disembarkation" },
     SCL: { arrive: "4 Nov (parents)", depart: "6 Nov LA2696", stay: "Parents only · 2 nights", hotel: "Renaissance Santiago", extra: "Reference route" }
   };
@@ -6435,7 +7348,7 @@ window.Views = window.Views || {};
     var today = T.todayYmd("Asia/Bangkok");
 
     function nodeVisited(code) {
-      var firstDates = { UTH: "2026-09-26", BKK: "2026-09-26", DOH: "2026-09-28", MIA: "2026-09-28", JAX: "2026-09-29", LIM: "2026-10-17", CUZ: "2026-10-18", MAP: "2026-10-21", VAP: "2026-11-04", SCL: "2026-11-04" };
+      var firstDates = { UTH: "2026-09-26", BKK: "2026-09-26", DOH: "2026-09-28", MIA: "2026-09-28", JAX: "2026-09-29", LIM: "2026-10-17", CUZ: "2026-10-19", MAP: "2026-10-21", VAP: "2026-11-04", SCL: "2026-11-04" };
       return today >= (firstDates[code] || "2099-01-01");
     }
 
@@ -6450,7 +7363,7 @@ window.Views = window.Views || {};
       var s = "";
       ROUTE.forEach(function (r, i) {
         var a = P[r.from], b = P[r.to];
-        var done = r.leg ? (T.now() > T.parse(Engine.flightById(r.leg).arr)) : today > "2026-10-24";
+        var done = r.leg ? (T.now() > T.parse(Engine.flightById(r.leg).arr)) : today > (r.until || "2026-10-24");
         s += '<path class="route-line ' + (done ? "dim" : "animated") + '" id="rl-' + i + '" d="' + arcPath(a, b, r.from === "LIM" && r.to === "CUZ" ? 0.3 : null) + '"/>';
       });
       if (showParents) PARENTS.forEach(function (r, i) {
@@ -6623,7 +7536,8 @@ window.Views.journey = function (root) {
 
   function chapterCard(d, idx) {
     var p = Engine.placeOf(d.place);
-    var hotels = window.TRIP.hotels.filter(function (h) { return h.place === d.place || (d.id === "cusco" && h.id === "H4") || (d.id === "return" && h.id === "H5"); });
+    var places = d.places || [d.place];
+    var hotels = window.TRIP.hotels.filter(function (h) { return places.indexOf(h.place) >= 0 || (d.id === "return" && h.id === "H5"); });
     var flights = Engine.activeFlights().filter(function (f) { return f.from === d.place || f.to === d.place; });
     if (d.id === "return") flights = ["F6", "F7", "F8"].map(Engine.flightById);
     if (d.id === "bangkok") flights = ["F1", "F8"].map(Engine.flightById);
@@ -6903,7 +7817,7 @@ window.Views.documents = function (root) {
         (h.parking ? '<div class="row"><div class="k">parking</div><div class="v">' + U.esc(h.parking) + "</div></div>" : "") +
         (h.nightsNote ? '<div class="row"><div class="k">note</div><div class="v" style="color:var(--faint);font-size:.84rem">' + U.esc(h.nightsNote) + "</div></div>" : "") +
       "</div>" +
-      (h.notes && h.notes.length ? '<ul class="kf">' + h.notes.map(function (n) { return "<li>" + U.esc(n) + "</li>"; }).join("") + "</ul>" : "") +
+      (h.notes && h.notes.length ? '<ul class="kf">' + h.notes.map(function (n) { return "<li>" + U.esc(U.maskKnown(n)) + "</li>"; }).join("") + "</ul>" : "") +
     "</article>";
   }
 
@@ -6913,10 +7827,10 @@ window.Views.documents = function (root) {
       '<span class="pill ' + (c.state === "resolved" ? "ok" : c.state === "open" ? "danger" : "dim") + '">' + c.state + "</span>" +
       '<span class="pill dim">confidence: ' + U.esc(c.confidence) + "</span></div>" +
       "<h3>" + U.esc(c.title) + "</h3>" +
-      '<div class="what"><b style="color:var(--paper-dim)">Conflict:</b> ' + U.esc(c.conflict) + "</div>" +
-      '<div class="what" style="margin-top:8px"><b style="color:var(--paper-dim)">Chosen:</b> ' + U.esc(c.chosen) + "</div>" +
-      '<div class="what" style="margin-top:8px"><b style="color:var(--paper-dim)">Why:</b> ' + U.esc(c.why) + "</div>" +
-      (c.action ? '<div class="notebox warn" style="margin-top:10px">' + I.warn + " <b>Action:</b> " + U.esc(c.action) + "</div>" : "") +
+      '<div class="what"><b style="color:var(--paper-dim)">Conflict:</b> ' + U.esc(U.maskKnown(c.conflict)) + "</div>" +
+      '<div class="what" style="margin-top:8px"><b style="color:var(--paper-dim)">Chosen:</b> ' + U.esc(U.maskKnown(c.chosen)) + "</div>" +
+      '<div class="what" style="margin-top:8px"><b style="color:var(--paper-dim)">Why:</b> ' + U.esc(U.maskKnown(c.why)) + "</div>" +
+      (c.action ? '<div class="notebox warn" style="margin-top:10px">' + I.warn + " <b>Action:</b> " + U.esc(U.maskKnown(c.action)) + "</div>" : "") +
     "</article>";
   }
 
@@ -6930,7 +7844,7 @@ window.Views.documents = function (root) {
     '<button class="btn small" id="reveal-toggle">' + (reveal ? I.eyeOff + " Hide sensitive values" : I.eye + " Reveal sensitive values") + "</button></div>" +
 
     '<div class="notebox" style="margin-bottom:18px">' + I.doc +
-      " 16 travel documents in the read-only source folder (plus one stray html copy), classified by CONTENT (two 'Latam' files are actually American Airlines bookings). Newest additions, 22 Sep: the Thai Lion ticket, the Siam Mandarina booking, and the AA schedule-change screenshot. Booking references and confirmation numbers are masked until revealed. " +
+      " 19 travel documents in the read-only source folder (plus one stray html copy), classified by CONTENT (two 'Latam' files are actually American Airlines bookings), and 4 email captures taken from the inbox on 10 Oct (the Airbnb, the Enterprise Jeep, the JW Marriott Lima, a second Siam Mandarina room). Newest additions, 10 Oct: Caravan's reconfirmation, hotel list and day-by-day for the Peru tour. Booking references and confirmation numbers are masked until revealed. " +
       (window.SHARE_BUILD
         ? "Every document opens as a hosted copy from this page's own vault folder, and once loaded on a device it stays available offline; the originals remain untouched on Jack's PC."
         : "Extraction copies live inside this dashboard's <span class='mono'>extraction\\</span> folder; the originals were never modified.") +
@@ -6939,7 +7853,7 @@ window.Views.documents = function (root) {
     '<div class="grid g2">' + docs.map(docCard).join("") + "</div>" +
 
     '<div class="section-head" style="margin-top:40px"><h2>Every night, accounted for</h2><div class="rule"></div>' +
-    '<span style="color:var(--faint);font-size:.78rem">the five sleeping arrangements + parents’ reference stays</span></div>' +
+    '<span style="color:var(--faint);font-size:.78rem">every sleeping arrangement (the one unbooked night stays red) + parents’ reference stays</span></div>' +
     '<div class="grid g2">' + window.TRIP.hotels.map(hotelCard).join("") + "</div>" +
     '<div class="card pad" style="margin-top:18px"><div class="kicker dim">parents’ stays after the split · reference</div>' +
       '<div class="big-list">' + window.TRIP.parentsHotels.map(function (h) {
@@ -7358,10 +8272,47 @@ window.Views.wallet = function (root, params) {
     return { key: key, html: html };
   }
 
+  /* ---------------- other reservations: the car, the tour ---------------- */
+  function bookingCard(b) {
+    var key = new Date(b.from + "T16:00:00Z"); /* afternoon of the first day: after that day's flights, before the night's stay */
+    var tz = Engine.placeOf(b.place) ? Engine.placeOf(b.place).tz : "America/New_York";
+    var todayLocal = T.todayYmd(tz);
+    var live = todayLocal >= b.from && todayLocal <= b.to;
+    var tel = telHref(b.phone);
+    var isCar = b.kind === "car";
+    var html = '<article class="wcard booking ' + U.esc(b.kind) + (live ? " live" : "") + '" id="w-' + b.id + '" data-key="' + key.toISOString() + '">' +
+      '<div class="whead"><span class="wkick">' + (isCar ? I.car + " car rental" : I.mountain + " tour") + " · " + T.fmtYmd(b.from) + " → " + T.fmtYmd(b.to) + "</span>" +
+        (live ? '<span class="pill danger">in progress</span>' : '<span class="pill ok">' + (b.status === "confirmed" ? "confirmed · paid" : U.esc(b.status)) + "</span>") + "</div>" +
+      "<h3>" + U.esc(b.shortName || b.name) + "</h3>" +
+      (b.shortName && b.shortName !== b.name ? '<div class="wsub">' + U.esc(b.name) + "</div>" : "") +
+      '<div class="wrefs">' +
+        (b.pickup ? '<div class="wref"><span class="k">' + (isCar ? "pick-up" : "starts") + '</span><span class="v">' + U.esc(b.pickup) + "</span></div>" : "") +
+        (b.dropoff ? '<div class="wref"><span class="k">' + (isCar ? "return" : "ends") + '</span><span class="v">' + U.esc(b.dropoff) + "</span></div>" : "") +
+        (b.address ? '<div class="wref"><span class="k">' + (isCar ? "branch" : "meeting point") + '</span><span class="v">' + U.esc(b.address) + "</span></div>" : "") +
+        (b.phone ? '<div class="wref"><span class="k">phone</span><span class="v">' + U.esc(b.phone) + "</span></div>" : "") +
+        (b.vehicle ? '<div class="wref"><span class="k">vehicle</span><span class="v">' + U.esc(b.vehicle) + "</span></div>" : "") +
+        (b.renter ? '<div class="wref"><span class="k">' + (isCar ? "renter" : "party") + '</span><span class="v">' + U.esc(b.renter) + "</span></div>" : "") +
+        (b.confirmation ? '<div class="wref"><span class="k">' + (isCar ? "confirmation" : "booking id") + '</span><span class="v masked">' + sens(b.confirmation) + "</span></div>" : "") +
+        (b.agreement ? '<div class="wref"><span class="k">rental agreement</span><span class="v masked">' + sens(b.agreement) + "</span></div>" : "") +
+        (b.cost ? '<div class="wref"><span class="k">cost</span><span class="v">' + U.esc(b.cost) + "</span></div>" : "") +
+        (b.includes ? '<div class="wref"><span class="k">included</span><span class="v">' + U.esc(b.includes) + "</span></div>" : "") +
+        (b.excludes ? '<div class="wref"><span class="k">not included</span><span class="v">' + U.esc(b.excludes) + "</span></div>" : "") +
+      "</div>" +
+      notesBlock("notes", b.notes || []) +
+      '<div class="wbtns">' +
+        docButtons(b.sources) +
+        (b.address ? '<a class="btn small" href="' + mapsHref({ address: b.address }) + '" target="_blank" rel="noopener">' + I.pin + " Map</a>" : "") +
+        (tel ? '<a class="btn small" href="' + tel + '">' + I.phone + " Call</a>" : "") +
+      "</div>" +
+    "</article>";
+    return { key: key, html: html };
+  }
+
   /* ---------------- assemble ---------------- */
   var items = [];
   window.TRIP.journeys.forEach(function (j) { var c = journeyCard(j); if (c) items.push(c); });
   window.TRIP.hotels.forEach(function (h) { items.push(hotelCard(h)); });
+  (window.TRIP.bookings || []).forEach(function (b) { items.push(bookingCard(b)); });
   items.sort(function (a, b) { return a.key - b.key; });
 
   var activeLegs = Engine.activeFlights().length;
@@ -7373,6 +8324,13 @@ window.Views.wallet = function (root, params) {
     { who: "LATAM", tel: "+1 866 435 9526" },
     { who: "Marriott / Bonvoy", tel: "+1 800 228 9290" },
     { who: "Fairfield Miami Airport South", tel: "+1 786 456 2100" },
+    { who: "Enterprise St. Augustine (the Jeep)", tel: "+1 904 797 1697" },
+    { who: "Airbnb host, Ybor City (Colin)", tel: "+1 234 241 2845" },
+    { who: "Caravan Tours (tour emergencies; booking is on William's account)", tel: "+1 800 227 2826" },
+    { who: "Courtyard Lima Miraflores", tel: "+51 1 625 3838" },
+    { who: "Rustica Hotel Urubamba", tel: "+51 1 500 8686" },
+    { who: "JW Marriott El Convento Cusco", tel: "+51 84 582200" },
+    { who: "JW Marriott Lima", tel: "+51 1 217 7000" },
     { who: "Expedia support (Siam Mandarina booking)", tel: "+1 866 230 3837" },
     { who: "US Embassy Lima", tel: "+51 1 618 2000" },
     { who: "Emergency: USA 911 · Peru 105 · Thailand 191", tel: null }
@@ -7386,6 +8344,7 @@ window.Views.wallet = function (root, params) {
       '<div class="card wsummary">' +
         '<div class="wsum"><b>' + activeLegs + "</b><span>flight legs</span></div>" +
         '<div class="wsum"><b>' + window.TRIP.hotels.length + "</b><span>stays</span></div>" +
+        '<div class="wsum"><b>' + (window.TRIP.bookings || []).length + "</b><span>car + tour</span></div>" +
         '<div class="wsum"><b>' + allDocLinks.length + "</b><span>documents</span></div>" +
         '<div class="wsum" id="w-offline"><b>…</b><span>offline copy</span></div>' +
       "</div>" +
@@ -7508,12 +8467,14 @@ window.Views.now = function (root, params) {
   var KIND_ICON = {
     "checkin-opens": I.check, "leave": I.car, "at-airport": I.planeUp, "bagdrop-closes": I.bag, "connect": I.transfer,
     "to-gate": I.pin, "boarding": I.planeUp, "gate-closes": I.warn, "departs": I.plane, "lands": I.plane, "arrival": I.stamp,
-    "transfer": I.car, "hotel-prep": I.bed, "hotel-checkin": I.bed, "hotel-checkout": I.clock, "day": I.mountain
+    "transfer": I.car, "hotel-prep": I.bed, "hotel-checkin": I.bed, "hotel-checkout": I.clock, "day": I.mountain,
+    "bags-out": I.bag, "coach": I.car, "ground": I.car
   };
   var KIND_LABEL = {
     "checkin-opens": "check-in window", "leave": "leave now", "at-airport": "at the airport", "bagdrop-closes": "deadline", "connect": "connection",
     "to-gate": "to the gate", "boarding": "boarding", "gate-closes": "deadline", "departs": "departure", "lands": "landing", "arrival": "arrival",
-    "transfer": "transfer", "hotel-prep": "next stay", "hotel-checkin": "check-in", "hotel-checkout": "checkout", "day": "today"
+    "transfer": "transfer", "hotel-prep": "next stay", "hotel-checkin": "check-in", "hotel-checkout": "checkout", "day": "today",
+    "bags-out": "bags out", "coach": "coach departs", "ground": "on the road"
   };
   function stageLabel(id) { var s = Steps.STAGES.filter(function (x) { return x.id === id; })[0]; return s ? s.label : id; }
   function telOf(s) { if (!s) return null; var m = String(s).match(/\+?\d[\d\s().-]{6,}\d/); return m ? "tel:" + m[0].replace(/[^\d+]/g, "") : null; }
@@ -7711,7 +8672,7 @@ window.Views.now = function (root, params) {
         (hk.phone ? '<div class="wref"><span class="k">phone</span><span class="v">' + mk(hk.phone) + "</span></div>" : (hk.phoneNote ? '<div class="wref"><span class="k">phone</span><span class="v">' + mk(hk.phoneNote) + "</span></div>" : "")) +
         (h.confirmation ? '<div class="wref"><span class="k">confirmation</span><span class="v masked">' + (h.confirmation === "TBC" || h.confirmation === "via operator" ? U.esc(h.confirmation) : (reveal ? U.esc(h.confirmation) : U.esc(U.mask(h.confirmation)))) + "</span></div>" : "") +
         (hk.nameOnBooking ? '<div class="wref"><span class="k">name on booking</span><span class="v">' + mk(hk.nameOnBooking) + "</span></div>" : "") +
-        (hk.tips && hk.tips.length ? '<div class="wref"><span class="k">notes</span><span class="v">' + mk(hk.tips.join(" ")) + "</span></div>" : "") +
+        (hk.tips && hk.tips.length ? '<div class="wref"><span class="k">notes</span><span class="v">' + mk(hk.tips.map(function (t) { return typeof t === "string" ? t : (t && t.text) || ""; }).filter(Boolean).join(" ")) + "</span></div>" : "") +
       "</div>" +
       '<div class="wbtns">' +
         (h.status === "confirmed" ? docButton(h.sources, true) : "") +
