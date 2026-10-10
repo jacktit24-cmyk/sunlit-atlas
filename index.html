@@ -1032,6 +1032,38 @@ button, input, select { font: inherit; color: inherit; }
 .settingscard .wbtns { margin-top: 8px; }
 .practicalcard ul.kf li { font-size: .84rem; }
 
+/* ---- 10 Oct 2026: from-here-on day list on the Now screen, the "then" line, itinerary scope controls ---- */
+.nextcard .then { margin: 8px 0 2px; font-size: .86rem; color: var(--paper-dim); display: flex; gap: 8px; align-items: flex-start; }
+.nextcard .then span:last-child { flex: 1; }
+.nextcard .then .k { margin-top: 3px; }
+.nextcard .then .k { font-family: var(--ui); font-weight: 700; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+.nextcard .then .ic { width: 1em; height: 1em; flex: 0 0 auto; }
+.roadcard .rday { border-top: 1px dashed var(--line); padding: 8px 0; }
+.roadcard .rday:first-of-type { border-top: 0; }
+.roadcard .rday.today { background: rgba(194, 91, 58, .07); border-radius: 10px; padding: 10px 12px; margin: 0 -6px 4px; border-top: 0; }
+.roadcard summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: auto 1fr auto; gap: 2px 10px; align-items: baseline; }
+.roadcard summary::-webkit-details-marker { display: none; }
+.roadcard .rdate { font-family: var(--mono); font-size: .76rem; color: var(--faint); }
+.roadcard .rdn { font-family: var(--ui); font-weight: 700; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--terra); }
+.roadcard .rmark { font-family: var(--mono); color: var(--faint); font-size: .9rem; }
+.roadcard .rmark::before { content: "+"; }
+.roadcard details[open] .rmark::before { content: "−"; }
+.roadcard .rtitle { grid-column: 1 / -1; font-family: var(--disp); font-size: 1.04rem; line-height: 1.25; }
+.roadcard .rday.star .rtitle { color: var(--gold); }
+.roadcard .rtimes { grid-column: 1 / -1; font-family: var(--mono); font-size: .76rem; color: var(--warn); }
+.roadcard .rbody { padding: 8px 0 2px; }
+.roadcard .rsub { color: var(--faint); font-size: .82rem; margin-bottom: 6px; }
+.roadcard .rseg { display: flex; gap: 8px; align-items: flex-start; font-size: .86rem; padding: 3px 0; }
+.roadcard .rseg .ic { flex: 0 0 auto; width: 1.05em; height: 1.05em; margin-top: 3px; color: var(--terra); }
+.roadcard .rseg.k-flight .ic { color: var(--sky); }
+.roadcard .rseg.k-warning .ic { color: var(--danger); }
+.roadcard .rseg.k-star .ic { color: var(--gold); }
+.roadcard .rseg.k-hotel .ic { color: var(--green); }
+.roadcard .rsleep { font-size: .82rem; color: var(--paper-dim); margin-top: 6px; display: flex; gap: 6px; align-items: center; }
+.roadcard .rsleep .ic { width: 1em; height: 1em; flex: 0 0 auto; }
+.itin-scope { margin-top: -8px; }
+.itin-earlier { margin-bottom: 14px; }
+
 /* shared-view: commit to the sunlit theme regardless of viewer theme */
 :root { color-scheme: light; }
 </style>
@@ -6985,7 +7017,13 @@ window.Views.itinerary = function (root) {
   "use strict";
   var I = U.icons;
   var days = window.TRIP.days;
-  var todayBkk = T.todayYmd("Asia/Bangkok");
+  /* "today" is the local date of wherever the itinerary says you are (not Bangkok) */
+  var todayLocal = Engine.whereAmI().localDate;
+  var underway = todayLocal >= days[0].date && todayLocal <= days[days.length - 1].date;
+  /* once underway the timeline opens at today and runs forward; "Whole trip" restores the full list */
+  var fromToday = underway && !Store.settings().itinWholeTrip;
+  var scrolledOnce = false;
+  function dayEnd(d) { return d.span ? d.span.to : d.date; }
   var FILTERS = [
     { id: "all",     label: "Everything" },
     { id: "flight",  label: "Flights" },
@@ -7014,7 +7052,7 @@ window.Views.itinerary = function (root) {
         n: d.getUTCDate(),
         phase: rec ? rec.phase : "",
         star: rec && rec.star && rec.date === ymd,
-        today: ymd === todayBkk
+        today: ymd === todayLocal
       });
       d.setUTCDate(d.getUTCDate() + 1);
     }
@@ -7051,13 +7089,13 @@ window.Views.itinerary = function (root) {
   }
 
   function dayBlock(day) {
-    var isToday = day.date <= todayBkk && todayBkk <= (day.span ? day.span.to : day.date);
+    var isToday = day.date <= todayLocal && todayLocal <= dayEnd(day);
     var dateLabel = day.span
       ? T.fmtYmd(day.date) + " – " + T.fmtYmd(day.span.to)
       : T.fmtYmd(day.date, { weekday: "long", day: "numeric", month: "long" });
     var dn = day.dnLabel || (day.span ? day.span.label : "Day " + day.dayNo);
     if (!day.dnLabel && day.dayNo === 0) dn = "Day 0";
-    return '<div class="dayblock' + (isToday ? " today" : "") + (day.star ? " star" : "") + '">' +
+    return '<div class="dayblock' + (isToday ? " today" : "") + (day.star ? " star" : "") + '" data-d="' + day.date + '">' +
       '<div class="dayhead"><span class="dn">' + U.esc(dn) + '</span><span class="dt">' + dateLabel + "</span>" +
       "<h3>" + U.esc(day.title) + "</h3>" +
       '<span class="place-tag pill ' + (day.star ? "gold" : "dim") + '">' + U.esc(Engine.placeOf(day.place) ? Engine.placeOf(day.place).name : day.place) + "</span></div>" +
@@ -7070,6 +7108,10 @@ window.Views.itinerary = function (root) {
 
   function render() {
     var cells = calCells();
+    var all = days.filter(matches);
+    var remaining = days.filter(function (d) { return dayEnd(d) >= todayLocal; });
+    var hidden = fromToday ? all.filter(function (d) { return dayEnd(d) < todayLocal; }) : [];
+    var shown = fromToday ? all.filter(function (d) { return dayEnd(d) >= todayLocal; }) : all;
     root.innerHTML =
       '<div class="view">' +
       '<section class="section">' +
@@ -7092,7 +7134,17 @@ window.Views.itinerary = function (root) {
           return '<button class="btn small' + (f.id === active ? " active" : "") + '" data-f="' + f.id + '">' + U.esc(f.label) + "</button>";
         }).join("") + "</div>" +
 
-        '<div class="timeline">' + days.filter(matches).map(dayBlock).join("") + "</div>" +
+        (underway ?
+          '<div class="filterbar itin-scope">' +
+            '<button class="btn small' + (fromToday ? " active" : "") + '" id="scope-today">' + I.sun + " From today</button>" +
+            '<button class="btn small' + (!fromToday ? " active" : "") + '" id="scope-all">' + I.list + " Whole trip</button>" +
+            '<button class="btn small" id="jump-today">' + I.pin + " Jump to today</button>" +
+            '<span style="color:var(--faint);font-size:.78rem;align-self:center">' + U.esc(T.fmtYmd(todayLocal, { weekday: "long", day: "numeric", month: "long" })) + " where you are · " + remaining.length + " day" + (remaining.length === 1 ? "" : "s") + " left</span>" +
+          "</div>" : "") +
+
+        (fromToday && hidden.length ? '<button class="btn small ghost itin-earlier" id="show-earlier">' + I.clock + " " + hidden.length + " earlier day" + (hidden.length === 1 ? "" : "s") + " (" + T.fmtYmd(hidden[0].date) + " to " + T.fmtYmd(dayEnd(hidden[hidden.length - 1])) + ") folded away · show the whole trip</button>" : "") +
+
+        '<div class="timeline">' + shown.map(dayBlock).join("") + "</div>" +
 
         '<div class="card pad" style="margin-top:26px">' +
           '<div class="kicker dim">parents’ separate travel · reference only</div>' +
@@ -7105,21 +7157,36 @@ window.Views.itinerary = function (root) {
         '<p style="margin-top:20px"><button class="btn" id="print-itin">' + I.print + " Print master itinerary</button></p>" +
       "</section></div>";
 
-    root.querySelectorAll(".filterbar .btn").forEach(function (b) {
+    root.querySelectorAll(".filterbar .btn[data-f]").forEach(function (b) {
       b.addEventListener("click", function () { active = b.getAttribute("data-f"); render(); });
     });
+    function scrollToToday(smooth) {
+      var t = root.querySelector(".dayblock.today") || root.querySelector(".timeline .dayblock");
+      if (t) t.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
+    }
     root.querySelectorAll(".calcell").forEach(function (c) {
       c.addEventListener("click", function () {
         var rec = Engine.dayFor(c.getAttribute("data-d"));
         if (!rec) return;
-        active = "all"; render();
-        var blocks = root.querySelectorAll(".dayblock");
-        var idx = window.TRIP.days.indexOf(rec);
-        if (blocks[idx]) blocks[idx].scrollIntoView({ behavior: "smooth", block: "start" });
+        active = "all";
+        if (fromToday && dayEnd(rec) < todayLocal) { Store.setSetting("itinWholeTrip", true); fromToday = false; }
+        render();
+        var block = root.querySelector('.dayblock[data-d="' + rec.date + '"]');
+        if (block) block.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
+    var st = document.getElementById("scope-today");
+    if (st) st.addEventListener("click", function () { Store.setSetting("itinWholeTrip", false); fromToday = underway; render(); window.scrollTo(0, 0); });
+    var sa = document.getElementById("scope-all");
+    if (sa) sa.addEventListener("click", function () { Store.setSetting("itinWholeTrip", true); fromToday = false; render(); scrollToToday(true); });
+    var se = document.getElementById("show-earlier");
+    if (se) se.addEventListener("click", function () { Store.setSetting("itinWholeTrip", true); fromToday = false; render(); scrollToToday(true); });
+    var jt = document.getElementById("jump-today");
+    if (jt) jt.addEventListener("click", function () { scrollToToday(true); });
     var pr = document.getElementById("print-itin");
     if (pr) pr.addEventListener("click", function () { window.print(); });
+    /* whole-trip view while underway: land on today the first time */
+    if (underway && !fromToday && !scrolledOnce) { scrolledOnce = true; setTimeout(function () { scrollToToday(false); }, 60); }
   }
 
   render();
@@ -8532,6 +8599,9 @@ window.Views.now = function (root, params) {
     var n = st.next;
     if (!n) return '<div class="card nextcard"><div class="nk">' + I.home + '<span class="kicker">home</span></div><h2>The journey is complete.</h2><p class="det">Nothing left on the list. 36 days, 9 flights, one lost city.</p></div>';
     var c = cd(n.at, st.now);
+    /* "now, then next": the move that follows the headline, so the screen always shows one step beyond */
+    var then = st.upcoming.filter(function (s) { return s.id !== n.id && s.at > n.at; })[0];
+    var thenHtml = then ? '<div class="then"><span class="k">then</span>' + (KIND_ICON[then.kind] || I.pin) + "<span>" + U.esc(T.fmtDay(then.at, then.tz) + " " + T.fmtTime(then.at, then.tz) + " · " + then.title) + "</span></div>" : "";
     var openWindow = n.window && n.at <= st.now;
     var overdue = !n.window && c.past;
     var big = openWindow ? "in progress · until " + T.fmtTime(n.until, n.tz)
@@ -8548,6 +8618,7 @@ window.Views.now = function (root, params) {
       '<div class="cdbig" id="cd-next" data-at="' + n.at.toISOString() + '" data-open="' + (openWindow ? 1 : 0) + '" data-until="' + n.until.toISOString() + '">' + big + "</div>" +
       deadline +
       '<div class="when">' + U.esc(whenLine(n)) + (deviceLine(n) ? ' <span class="dev">· ' + U.esc(deviceLine(n)) + "</span>" : "") + "</div>" +
+      thenHtml +
       (n.detail ? '<p class="det">' + U.esc(reveal ? n.detail : U.maskKnown(n.detail)) + "</p>" : "") +
       '<div class="wbtns">' + actionsFor(n) + "</div>" +
     "</div>";
@@ -8644,6 +8715,40 @@ window.Views.now = function (root, params) {
       lastKey = key;
       return head + '<div class="urow"><span class="t">' + T.fmtTime(s.at, s.tz) + '</span><span class="ic-w">' + (KIND_ICON[s.kind] || I.pin) + '</span><span class="tx">' + U.esc(s.title) + '</span><span class="in" data-at="' + s.at.toISOString() + '">' + cdShort(cd(s.at, st.now)) + "</span></div>";
     }).join("") + "</div></div>";
+  }
+
+  /* ---- from here on: the rest of the journey, day by day, starting with today where you are ---- */
+  var DAY_ICON = {
+    flight: I.plane, layover: I.clock, hotel: I.bed, home: I.home, caravan: I.mountain, star: I.star, free: I.sun,
+    transfer: I.car, car: I.car, work: I.work, split: I.split, warning: I.warn
+  };
+  function roadAheadCard(st) {
+    var days = window.TRIP.days || [];
+    var ymd = T.dateInZone(st.now, st.here.tz);
+    var idx = -1;
+    for (var i = 0; i < days.length; i++) {
+      var end = days[i].span ? days[i].span.to : days[i].date;
+      if (ymd <= end) { idx = i; break; }
+    }
+    if (idx < 0) return "";
+    var rest = days.slice(idx);
+    var OPEN = 3;
+    return '<div class="card pad roadcard"><div class="kicker dim">from here on · ' + rest.length + " day" + (rest.length === 1 ? "" : "s") + " left, in order</div>" +
+      rest.map(function (d, i) {
+        var isToday = i === 0 && ymd >= d.date;
+        var dateLabel = d.span ? T.fmtYmd(d.date) + " – " + T.fmtYmd(d.span.to) : T.fmtYmd(d.date, { weekday: "short", day: "numeric", month: "short" });
+        var dn = d.dnLabel || (d.span ? d.span.label : "Day " + d.dayNo);
+        var times = [d.bags ? "bags out " + d.bags : "", d.depart ? "coach " + d.depart : ""].filter(Boolean).join(" · ");
+        var segs = (d.segments || []).map(function (s) {
+          return '<div class="rseg k-' + U.esc(s.kind) + '">' + (DAY_ICON[s.kind] || I.pin) + "<span>" + mk(s.text) + "</span></div>";
+        }).join("");
+        var sleep = d.sleep ? '<div class="rsleep">' + I.moon + "<span>Tonight: " + U.esc(d.sleep) + "</span>" + (d.estimated ? ' <span class="est">estimated</span>' : "") + "</div>" : "";
+        return '<details class="rday' + (isToday ? " today" : "") + (d.star ? " star" : "") + '"' + (i < OPEN ? " open" : "") + ">" +
+          '<summary><span class="rdate">' + U.esc(dateLabel) + '</span><span class="rdn">' + U.esc(dn) + (isToday ? " · today" : "") + '</span><span class="rmark"></span>' +
+          '<span class="rtitle">' + U.esc(d.title) + "</span>" + (times ? '<span class="rtimes">' + U.esc(times) + "</span>" : "") + "</summary>" +
+          '<div class="rbody"><div class="rsub">' + U.esc(d.sub) + "</div>" + segs + sleep + "</div></details>";
+      }).join("") +
+      '<p style="margin:12px 0 0"><a class="btn small" href="#/itinerary">' + I.list + " Full itinerary (opens at today)</a></p></div>";
   }
 
   function stayCard(st) {
@@ -8775,7 +8880,7 @@ window.Views.now = function (root, params) {
     var st = Steps.state();
     lastSig = signature(st);
     root.innerHTML = '<div class="view"><section class="section now">' +
-      nowBar(st) + nextCard(st) + openNowStrip(st) + legCard(st) + upcomingCard(st) + stayCard(st) + thinkAheadCard(st) + practicalCard(st) + settingsCard() +
+      nowBar(st) + nextCard(st) + openNowStrip(st) + legCard(st) + upcomingCard(st) + roadAheadCard(st) + stayCard(st) + thinkAheadCard(st) + practicalCard(st) + settingsCard() +
       '<p class="coords" style="margin-top:18px">countdowns are absolute instants · times shown in each place\'s local zone · timing rules are planning heuristics (3 h international, 2 h domestic) unless marked primary or official</p>' +
       "</section></div>";
 
